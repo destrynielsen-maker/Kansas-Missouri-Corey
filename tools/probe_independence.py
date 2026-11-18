@@ -93,6 +93,27 @@ def probe_documented_backend(session):
                 rows=payload.get("dataSetData") or []
                 print("FIELD_DEFS",[(i,f.get("title"),f.get("fieldType"),f.get("id")) for i,f in enumerate(fields) if isinstance(f,dict)])
                 print("ROW_WIDTHS",sorted({len(row) for row in rows if isinstance(row,list)}))
+                from datetime import datetime, date, timedelta
+                from collections import Counter
+                def cell(row,i):
+                    return row[i].get("value") if isinstance(row,list) and len(row)>i and isinstance(row[i],dict) else None
+                def dparse(s):
+                    if not s:return None
+                    for fmt in ("%m/%d/%Y","%Y-%m-%d"):
+                        try:return datetime.strptime(str(s).strip()[:10],fmt).date()
+                        except ValueError:pass
+                    return None
+                cutoff=date(2026,7,21)
+                recents=[row for row in rows if isinstance(row,list) and (dparse(cell(row,2)) or date(1900,1,1))>=cutoff]
+                dates=[dparse(cell(row,2)) for row in rows if isinstance(row,list) and dparse(cell(row,2))]
+                print("ISSUED_DATE_RANGE",min(dates) if dates else None,max(dates) if dates else None,
+                      "WITH_DATES",len(dates),"RECENT_120D",len(recents))
+                print("RECENT_TYPE_COUNTS",Counter(str(cell(row,3)) for row in recents).most_common(10))
+                print("RECENT_WORK_COUNTS",Counter(str(cell(row,4)) for row in recents).most_common(45))
+                print("RECENT_PERMIT_UNIQUENESS",len(set(str(cell(row,0)) for row in recents)), "rows",len(recents))
+                print("RECENT_BLANK_ADDRESS",sum(not cell(row,1) for row in recents))
+                print("RECENT_SAMPLE",[(str(cell(row,0)),str(cell(row,2)),str(cell(row,3)),str(cell(row,4))) for row in recents[:8]])
+
                 for field_idx,f in enumerate(fields):
                     if not isinstance(f,dict):continue
                     title=str(f.get("title") or "")

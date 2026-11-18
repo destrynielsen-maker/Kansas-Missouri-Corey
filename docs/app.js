@@ -4,9 +4,11 @@ const DATA_URL = "./data/permits.json";
 const COVERAGE_URL = "./data/coverage.json";
 const WORKFLOW_URL = "https://github.com/destrynielsen-maker/Kansas-Missouri-Corey/actions/workflows/refresh.yml";
 const els = {};
-const fields = ["search","state","city","category","days","score","sort","activity","followup"];
+const fields = ["search","state","city","category","days","score","sort","activity","followup","viewmode"];
 let snapshot = null;
 let filtered = [];
+let filteredPermits = [];
+let siteRowsById = new Map();
 
 function el(id){ return document.getElementById(id); }
 function text(id,value){ el(id).textContent = value; }
@@ -109,12 +111,56 @@ function otherDatesCell(row,item){
     span.className="activity-note";span.textContent=part;td.appendChild(span);
   }
 }
+
+function siteKey(item){
+  // The server refuses fuzzy matches. Without a vetted server site ID,
+  // do NOT merge different permits based on a guess in the browser.
+  return typeof item.site_group_id==="string" && item.site_group_id.startsWith("site-")
+    ? item.site_group_id : "permit:"+asString(item.id);
+}
+function groupSiteRows(rows){
+  const groups=new Map();
+  for(const row of rows){
+    const key=siteKey(row);
+    if(!groups.has(key))groups.set(key,[]);
+    groups.get(key).push(row);
+  }
+  return groups;
+}
+function siteMatchCell(row,item){
+  const td=cell(row,"");
+  const members=siteRowsById.get(siteKey(item))||[item];
+  if(item.site_group_basis==="unverified_address"){
+    td.textContent="Address unverified";
+    td.className="city";return;
+  }
+  const label=document.createElement("span");
+  label.className=members.length>1?"sitecount":"activity-muted";
+  label.textContent=members.length===1?"1 permit in filter":members.length+" permits at same address";
+  td.appendChild(label);
+  if(members.length>1){
+    const details=document.createElement("details");
+    details.className="sitedetails";
+    const summary=document.createElement("summary");
+    summary.textContent="Show matching permit numbers";
+    details.appendChild(summary);
+    const list=document.createElement("ul");
+    for(const member of members){
+      const li=document.createElement("li");
+      li.textContent=member.permit_number+(member.id===item.id?" (displayed)":"");
+      list.appendChild(li);
+    }
+    details.appendChild(list);
+    td.appendChild(details);
+  }
+}
+
 function renderTable(rows){
   const tbody=el("leadrows"); tbody.replaceChildren();
   if (!rows.length){
     const tr=document.createElement("tr");
     const td=cell(tr,snapshot && snapshot.generated_at?"No permits match these filters. Try a larger date window or a different city.":"No verified data snapshot yet. Run the GitHub refresh workflow to populate this dashboard.","empty");
-    td.colSpan=12; tbody.appendChild(tr); text("row-limit","");return;
+    td.colSpan=13; tbody.appendChild(tr); text("row-limit","");return;
   }
   const display=rows.slice(0,300);
   const frag=document.createDocumentFragment();
@@ -134,6 +180,7 @@ function renderTable(rows){
       project.className="project";project.textContent=item.project;project.title=item.project;
       idCell.appendChild(project);
     }
+    siteMatchCell(tr,item);
     cell(tr,item.address || "Address not published");
     cell(tr,item.jurisdiction || "—","city");
     const typecell=cell(tr,"");
@@ -175,7 +222,7 @@ function applyFilters(){
   const activity=el("activity").value;
   const followup=el("followup").value;
   const today=new Date();today.setHours(0,0,0,0);
-  filtered=(snapshot.permits||[]).filter(function(p){
+  filteredPermits=(snapshot.permits||[]).filter(function(p){
     if(state && p.state!==state) return false;
     if(city && p.jurisdiction!==city) return false;
     if(cat && p.category!==cat) return false;
@@ -188,20 +235,27 @@ function applyFilters(){
     return true;
   });
   const order=el("sort").value;
-  filtered.sort(function(a,b){
+  filteredPermits.sort(function(a,b){
     if(order==="newest") return asString(b.issued).localeCompare(asString(a.issued))||b.score-a.score;
     if(order==="value") return (b.valuation||0)-(a.valuation||0)||b.score-a.score;
     if(order==="activity") return asString(b.last_inspection_date||b.issued).localeCompare(asString(a.last_inspection_date||a.issued))||b.score-a.score;
     if(order==="followup") return asString(b.issued).localeCompare(asString(a.issued))||b.score-a.score;
     return b.score-a.score||asString(b.issued).localeCompare(asString(a.issued));
   });
-  text("resultcount",filtered.length.toLocaleString()+" qualifying permits • "+days+"-day view");
-  text("metric-total",filtered.length.toLocaleString());
+  siteRowsById=groupSiteRows(filteredPermits);
+  filtered=(el("viewmode").value==="site")
+    ? Array.from(siteRowsById.values()).map(function(group){return group[0];})
+    : filteredPermits.slice();
+  const viewName=el("viewmode").value==="site"?"site opportunities":"permit records";
+  text("resultcount",filtered.length.toLocaleString()+" "+viewName+" from "+
+       filteredPermits.length.toLocaleString()+" permits • "+days+"-day view");
+  text("metric-total",filteredPermits.length.toLocaleString());
+  text("metric-sites",siteRowsById.size.toLocaleString());
   text("metric-total-sub","Official permit records after filters");
-  text("metric-homes",filtered.filter(function(x){return x.category==="Single-family";}).length.toLocaleString());
-  text("metric-multis",filtered.filter(function(x){return x.category==="Multifamily";}).length.toLocaleString());
-  text("metric-priority",filtered.filter(function(x){return x.score>=75;}).length.toLocaleString());
-  text("metric-inspections",filtered.filter(function(x){return evidenceKind(x)==="inspection_recorded";}).length.toLocaleString());
+  text("metric-homes",filteredPermits.filter(function(x){return x.category==="Single-family";}).length.toLocaleString());
+  text("metric-multis",filteredPermits.filter(function(x){return x.category==="Multifamily";}).length.toLocaleString());
+  text("metric-priority",filteredPermits.filter(function(x){return x.score>=75;}).length.toLocaleString());
+  text("metric-inspections",filteredPermits.filter(function(x){return evidenceKind(x)==="inspection_recorded";}).length.toLocaleString());
   renderTable(filtered);el("export").disabled=!filtered.length;
 }
 function csvEsc(v){
@@ -213,16 +267,26 @@ function exportCsv(){
   if(!filtered.length)return;
   const columns=[
     ["Score","score"],["Issued","issued"],["State","state"],["Jurisdiction","jurisdiction"],["County","county"],
-    ["Permit number","permit_number"],["Project","project"],["Address","address"],["Category","category"],
+    ["Permit number","permit_number"],["Site group ID","site_group_id"],["Site match evidence","site_group_basis"],
+    ["Site permits - 120 day source","site_permit_count"],["Site permits in selected filters","_site_count"],
+    ["Related permit numbers in selected filters","_site_numbers"],["Project","project"],["Address","address"],["Category","category"],
     ["Permit type","permit_type"],["Work class","work_class"],["Status","status"],["Valuation","valuation"],
     ["Units","units"],["Square feet","square_feet"],["Application date","application_date"],["Last inspection","last_inspection_date"],["Expiration date","expiration_date"],["Activity evidence","inspection_evidence"],["Start date - verified only","start_date"],["Timeline warnings","timeline_warnings"],["Public permit / search","permit_url"],
     ["Link type","link_kind"],["Raw source row","source_url"]];
   columns.push(["Sales follow-up suggestion","_followup"]);
   const lines=[columns.map(function(x){return csvEsc(x[0]);}).join(",")];
-  for(const r of filtered)lines.push(columns.map(function(x){return csvEsc(x[1]==="_followup"?followupBand(daysSinceIssued(r.issued)).text:x[1]==="timeline_warnings"?(r.timeline_warnings||[]).join("; "):r[x[1]]);}).join(","));
+  for(const r of filtered)lines.push(columns.map(function(x){
+    const key=x[1], members=siteRowsById.get(siteKey(r))||[r];
+    const val=key==="_followup"?followupBand(daysSinceIssued(r.issued)).text
+      :key==="_site_count"?members.length
+      :key==="_site_numbers"?members.map(function(p){return p.permit_number;}).join("; ")
+      :key==="timeline_warnings"?(r.timeline_warnings||[]).join("; ")
+      :r[key];
+    return csvEsc(val);
+  }).join(","));
   const blob=new Blob(["\ufeff"+lines.join("\r\n")],{type:"text/csv;charset=utf-8"});
   const url=URL.createObjectURL(blob);
-  const a=document.createElement("a");a.href=url;a.download="kc-metro-permits-"+new Date().toISOString().slice(0,10)+".csv";
+  const a=document.createElement("a");a.href=url;a.download="kc-metro-"+el("viewmode").value+"-leads-"+new Date().toISOString().slice(0,10)+".csv";
   document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);
 }
 function renderCoverage(data){
@@ -235,8 +299,8 @@ function renderCoverage(data){
     const sub=document.createElement("small");sub.textContent=source.region;names.appendChild(sub);head.appendChild(names);
     const status=document.createElement("span");
     const live=statuses.get(source.key);
-    status.className="status "+(live?"good":source.mode==="automated"?"pending":"");
-    status.textContent=live?"Snapshot loaded":source.mode==="automated"?"Feed configured":"Portal only";
+    status.className="status "+(live?"good":(source.mode==="automated"||source.mode==="candidate")?"pending":"");
+    status.textContent=live?"Snapshot loaded":source.mode==="automated"?"Feed configured":source.mode==="candidate"?"API verification":"Public source only";
     head.appendChild(status);box.appendChild(head);
     const desc=document.createElement("p");
     desc.textContent=live ? (live.count+" recent records • latest issue "+(live.latest_issue||"unknown")) : source.note;
@@ -261,7 +325,7 @@ async function load(){
     snapshot=data;
     if(!data.generated_at){
       status.textContent="First validated ingestion has not run yet.";
-      for(const id of ["metric-total","metric-homes","metric-multis","metric-priority","metric-inspections"])text(id,"—");
+      for(const id of ["metric-total","metric-sites","metric-homes","metric-multis","metric-priority","metric-inspections"])text(id,"—");
       el("export").disabled=true;
     }else{
       const age=(Date.now()-new Date(data.generated_at).getTime())/3600000;
@@ -271,7 +335,7 @@ async function load(){
     setCityOptions();
     applyFilters();
   }catch(err){
-    snapshot=null;filtered=[];status.textContent="Snapshot unavailable — no live results claimed.";
+    snapshot=null;filtered=[];filteredPermits=[];siteRowsById=new Map();status.textContent="Snapshot unavailable — no live results claimed.";
     text("resultcount","Unable to load published snapshot; check GitHub Actions.");
     for(const id of ["metric-total","metric-homes","metric-multis","metric-priority"])text(id,"—");
     renderTable([]);el("export").disabled=true;

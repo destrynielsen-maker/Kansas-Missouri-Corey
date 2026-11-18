@@ -8,10 +8,10 @@ const root = path.resolve(__dirname,"..");
 const html = fs.readFileSync(path.join(root,"docs","index.html"),"utf8");
 const code = fs.readFileSync(path.join(root,"docs","app.js"),"utf8");
 
-for (const id of ["activity","followup","metric-inspections","leadrows","score","sort","days","export"]) {
+for (const id of ["activity","followup","viewmode","metric-inspections","metric-sites","leadrows","score","sort","days","export"]) {
   assert.ok(html.includes('id="'+id+'"'),"Missing dashboard control: "+id);
 }
-for (const header of ["Official activity","Other dates","Sales follow-up","Raw source row"]) {
+for (const header of ["Official activity","Other dates","Sales follow-up","Other permits at site","Raw source row"]) {
   assert.ok(html.includes(header),"Missing table column: "+header);
 }
 assert.ok(html.indexOf("<th>Permit record / search</th>") < html.indexOf("<th>Raw source row</th>"),
@@ -23,7 +23,7 @@ const sandbox = {
   setTimeout, clearTimeout, console, Date
 };
 vm.createContext(sandbox);
-vm.runInContext(code+"\nglobalThis.__tests={followupBand,evidenceKind,safeLink,csvEsc};",sandbox,{timeout:1000});
+vm.runInContext(code+"\nglobalThis.__tests={followupBand,evidenceKind,safeLink,csvEsc,groupSiteRows,siteKey};",sandbox,{timeout:1000});
 const t=sandbox.__tests;
 assert.equal(t.followupBand(0).key,"0-7");
 assert.equal(t.followupBand(7).text,"Contact now");
@@ -41,3 +41,14 @@ assert.equal(t.safeLink("https://example.org/permit/1"),"https://example.org/per
 assert.equal(t.csvEsc("=SUM(A1:A4)"),'"\'=SUM(A1:A4)"');
 assert.equal(t.csvEsc('abc"def'),'"abc""def"');
 console.log("Dashboard contract and timing behavior: PASS");
+
+
+const sameSite={id:"a",site_group_id:"site-abc",permit_number:"A",address:"123 Main"};
+const second={id:"b",site_group_id:"site-abc",permit_number:"B",address:"123 MAIN"};
+const distinct={id:"c",site_group_id:"site-other",permit_number:"C",address:"125 Main"};
+const missingId={id:"d",permit_number:"D",address:"123 MAIN"};
+const groups=t.groupSiteRows([sameSite,second,distinct,missingId]);
+assert.equal(groups.size,3,"Only server-confirmed same-address IDs may group");
+assert.equal(groups.get("site-abc").length,2);
+assert.notEqual(t.siteKey(missingId),t.siteKey(sameSite),"Never guess client-side matches");
+console.log("Source-backed site group selection: PASS");

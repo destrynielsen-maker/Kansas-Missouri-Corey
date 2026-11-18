@@ -2,6 +2,12 @@
 
 Public-source construction permit leads for the Kansas City metro, covering Missouri and Kansas.
 
+## Site-level prospecting
+
+The default dashboard view groups permits only when issuing jurisdiction and exact normalized street address match (case, whitespace, periods and commas ignored; unit numbers preserved). This is a **same-address cluster**, not proof of the same project, developer, customer, or builder. Select **Individual permits** to see every original agency row. The count and list of related permits reflect current filters, while the full 120-day site count is retained in CSV exports. Site view exports one representative highest-scored permit per matching address; permit view exports all qualifying permits.
+
+See [`docs/source-audit.md`](docs/source-audit.md) for the pending Kansas City, KS, Lenexa, Independence, and Shawnee integration gates. **Portal-only jurisdictions are not counted as live feeds.**
+
 ## First release
 
 The first data adapters target **Kansas City, MO** (Open Data KC), **Overland Park, KS** (city ArcGIS), **Olathe, KS** (city ArcGIS), and **Lee's Summit, MO** (city ArcGIS). Kansas City, KS and Lenexa have verified public search portals but are not bulk-imported yet.

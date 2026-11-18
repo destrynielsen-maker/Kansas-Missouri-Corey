@@ -18,15 +18,18 @@ PAGES = (
     "https://apps.indepmo.org/Apps/OpenData/BuildingPermits/Sort?head=Date+Issued",
 )
 ALLOWED = {"opendata.independencemo.gov", "apps.indepmo.org"}
-HINTS = re.compile(r"V1BUILDINGPERMITS|api/(?:v\d+/)?[a-z\-_/]+|apiBaseUrl|baseURL|dataset[s]?|download(?:url)?", re.I)
+HINTS = re.compile(r"V1BUILDINGPERMITS|/api/[a-z0-9\-_/?=&]+|https://[^\\\"\s]+/api|apiBaseUrl|NEXT_PUBLIC|fetch\\(|/dataset[s]?|export(?:csv|json)|download(?:url)?", re.I)
 
 
 class Assets(HTMLParser):
     def __init__(self):
         super().__init__()
         self.assets = []
+        self.links = []
     def handle_starttag(self, tag, attrs):
         props = dict(attrs)
+        if tag == "a" and props.get("href"):
+            self.links.append(props["href"])
         if tag == "script" and props.get("src"):
             self.assets.append(props["src"])
         if tag == "link" and props.get("rel") in ("modulepreload","preload") and props.get("href"):
@@ -56,24 +59,29 @@ def main():
             parser=Assets()
             parser.feed(r.text)
             assets=[urljoin(r.url,x) for x in parser.assets]
+            available_links=[urljoin(r.url,x) for x in parser.links]
+            matches=[x for x in available_links if re.search(r"(csv|json|api|download|BuildingPermits)",x,re.I)]
+            print("DOWNLOAD_LINKS",matches[:15])
+            date_strings=re.findall(r"\b(?:1[01]|[1-9])/\d{1,2}/2026\b",r.text)
+            print("HTML_DATE_SPAN",date_strings[:5],date_strings[-5:],"unique",len(set(date_strings)))
             assets=list(dict.fromkeys(x for x in assets if urlsplit(x).hostname in ALLOWED))
             print("PUBLIC_ASSETS",[(urlsplit(a).path) for a in assets[:14]])
             print("PAGE_HINTS",list(dict.fromkeys(m.group(0) for m in HINTS.finditer(r.text)))[:15])
             if "opendata.independencemo.gov" not in r.url:continue
-            for asset in assets[:5]:
+            for asset in [a for a in assets if a.endswith(".js")][:13]:
                 try:
                     result=safe_get(s,asset)
                     print("ASSET",result.status_code,urlsplit(result.url).path,"length",len(result.content))
-                    if result.status_code!=200 or len(result.content)>750_000:
+                    if result.status_code!=200 or len(result.content)>1_500_000:
                         continue
                     snippet=[]
-                    for match in list(HINTS.finditer(result.text))[:12]:
+                    for match in list(HINTS.finditer(result.text))[:45]:
                         start=max(0,match.start()-65)
                         end=min(len(result.text),match.end()+115)
                         context=result.text[start:end].replace("\n"," ")
                         context=re.sub(r"(?:Bearer|token|api[_-]?key)[\"']?\s*[:=]\s*[\"'][^\"']+", "[redacted]",context,flags=re.I)
                         snippet.append(context[:230])
-                    print("ASSET_HINTS",snippet[:12])
+                    print("ASSET_HINTS",snippet[:20])
                 except (requests.RequestException,ValueError) as e:
                     print("ASSET_ERROR",type(e).__name__,str(e)[:180])
         except (requests.RequestException,ValueError) as e:

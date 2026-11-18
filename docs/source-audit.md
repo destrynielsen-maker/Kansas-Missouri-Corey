@@ -6,7 +6,7 @@ This is a **source registry and integration backlog**, not a count of active new
 | City | Public evidence | Sales search | Integration decision |
 | --- | --- | --- | --- |
 | Kansas City, KS (Wyandotte) | Official Unified Government Accela public building permit search | https://aca-prod.accela.com/UG/Cap/CapHome.aspx?TabName=Home&module=Building | **Portal-only:** no validated row-level public API; do not harvest interactive search or pretend it is a bulk feed |
-| Independence, MO | Official Open Independence **Building Permits**, described by the city as “Data Set, API” for permits issued in the past year | https://apps.indepmo.org/apps/BuildingPermits | **Candidate:** confirm documented API endpoint, schema, row identifier, issuance date, and pagination before adding to automated ETL |
+| Independence, MO | City-managed Open Independence six-column public JSON API verified | https://apps.indepmo.org/comdev/SearchPermitStatus | **Automated**; strict issue-date and construction filters. Individual permit status/inspection fields unavailable. See [API evidence](independence-api.md). |
 | Lenexa, KS | Official public Accela search; monthly permit activity reports | https://aca-prod.accela.com/LENEXA/Default.aspx | **Portal/report:** verify whether any published monthly detail offers row-level IDs and dates before proposing an adapter |
 | Shawnee, KS | City building department directs users to Citizenserve for searches | https://www.citizenserve.com/shawnee | **Portal-only:** no validated bulk API |
 | Kansas City, MO | City's current city-issued permit dataset | https://compasskc.kcmo.org/ | **Active source:** qualified building permits loaded |

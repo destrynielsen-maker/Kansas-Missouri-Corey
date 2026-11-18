@@ -38,7 +38,7 @@ function linkCell(row,url,label,kind,permitNo){
     const a=document.createElement("a");
     a.href=target; a.target="_blank"; a.rel="noopener noreferrer"; a.textContent=label;
     a.className=kind==="source"?"source-link":"primary-permit";
-    a.title=kind==="source"?"Raw agency record in machine-readable format":kind==="search"?"Public portal search: enter permit number; not a direct record":"Agency-published direct record";
+    a.title=kind==="source"?"Official agency data; may open the full dataset, not a single permit record":kind==="search"?"Public portal search: enter permit number; not a direct record":"Agency-published direct record";
     c.appendChild(a);
   }else c.textContent="Not available";
   if(kind==="search" && permitNo){
@@ -193,7 +193,7 @@ function renderTable(rows){
     otherDatesCell(tr,item);
     followupCell(tr,item);
     linkCell(tr,item.permit_url,item.link_kind==="record"?"View permit ↗":"Search permit ↗",item.link_kind,item.permit_number);
-    linkCell(tr,item.source_url,"Raw source ↗","source");
+    linkCell(tr,item.source_url,item.source_url_scope==="dataset"?"Raw dataset ↗":"Raw source ↗","source");
     frag.appendChild(tr);
   }
   tbody.appendChild(frag);
@@ -272,7 +272,7 @@ function exportCsv(){
     ["Related permit numbers in selected filters","_site_numbers"],["Project","project"],["Address","address"],["Category","category"],
     ["Permit type","permit_type"],["Work class","work_class"],["Status","status"],["Valuation","valuation"],
     ["Units","units"],["Square feet","square_feet"],["Application date","application_date"],["Last inspection","last_inspection_date"],["Expiration date","expiration_date"],["Activity evidence","inspection_evidence"],["Start date - verified only","start_date"],["Timeline warnings","timeline_warnings"],["Public permit / search","permit_url"],
-    ["Link type","link_kind"],["Raw source row","source_url"]];
+    ["Link type","link_kind"],["Raw data scope","source_url_scope"],["Permit status evidence","status_source"],["Raw source data","source_url"]];
   columns.push(["Sales follow-up suggestion","_followup"]);
   const lines=[columns.map(function(x){return csvEsc(x[0]);}).join(",")];
   for(const r of filtered)lines.push(columns.map(function(x){
@@ -323,6 +323,7 @@ async function load(){
     const data=await response.json();
     if(!data || !Array.isArray(data.permits) || !Array.isArray(data.sources))throw new Error("Invalid snapshot structure");
     snapshot=data;
+    text("source-feed-count",data.generated_at?String(data.sources.length):"—");
     if(!data.generated_at){
       status.textContent="First validated ingestion has not run yet.";
       for(const id of ["metric-total","metric-sites","metric-homes","metric-multis","metric-priority","metric-inspections"])text(id,"—");
@@ -335,7 +336,7 @@ async function load(){
     setCityOptions();
     applyFilters();
   }catch(err){
-    snapshot=null;filtered=[];filteredPermits=[];siteRowsById=new Map();status.textContent="Snapshot unavailable — no live results claimed.";
+    snapshot=null;filtered=[];filteredPermits=[];siteRowsById=new Map();text("source-feed-count","—");status.textContent="Snapshot unavailable — no live results claimed.";
     text("resultcount","Unable to load published snapshot; check GitHub Actions.");
     for(const id of ["metric-total","metric-homes","metric-multis","metric-priority"])text(id,"—");
     renderTable([]);el("export").disabled=true;

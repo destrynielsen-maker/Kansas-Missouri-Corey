@@ -45,6 +45,13 @@ SOURCES = {
         "portal": "https://energov.olatheks.org/",
         "date_field": "ISSUEDATE", "number_field": "PERMITNUMBER",
     },
+    "independence": {
+        "name": "Independence, MO", "state": "MO", "county": "Jackson",
+        "kind": "independence_api",
+        "api": "https://apps.independencemo.gov/opendata/api/opendata/dataset?code=V1BUILDINGPERMITS",
+        "source": "https://opendata.independencemo.gov/dataset?code=V1BUILDINGPERMITS",
+        "portal": "https://apps.indepmo.org/comdev/SearchPermitStatus",
+    },
     "lees_summit": {
         "name": "Lee's Summit, MO", "state": "MO", "county": "",
         "kind": "arcgis",
@@ -97,7 +104,13 @@ def to_date(value) -> date | None:
     try:
         return date.fromisoformat(str(value)[:10])
     except (ValueError, TypeError):
-        return None
+        pass
+    for fmt in ("%m/%d/%Y", "%m/%d/%y"):
+        try:
+            return datetime.strptime(str(value).strip(), fmt).date()
+        except (ValueError, TypeError):
+            pass
+    return None
 
 
 def number(value) -> float | None:
@@ -174,6 +187,9 @@ def lead_score(category: str, issued: date, today: date, valuation: float | None
 
 def source_record_url(cfg: dict, permit_number: str) -> str:
     # A row-level machine-data reference, never mislabeled as the human permit page.
+    if cfg["kind"] == "independence_api":
+        # The open-data URL describes the whole data set, not one record.
+        return cfg["api"]
     if cfg["kind"] == "socrata":
         return cfg["api"] + "?" + urlencode({"permit_number": permit_number})
     field = cfg["number_field"]
@@ -282,6 +298,18 @@ def normalize(cfg_key: str, raw: dict, today: date, cutoff: date) -> dict | None
             valuation = number(attrs.get("Valuation"))
             units, sq_ft = number(attrs.get("NumberUnits")), number(attrs.get("SquareFeet"))
             direct_url = safe_url(attrs.get("More_Info"))
+        elif cfg_key == "independence":
+            permit_no = str(attrs.get("Permit Number") or "").strip()
+            issued = to_date(attrs.get("Date Issued"))
+            ptype = str(attrs.get("Type") or "").strip()
+            work = str(attrs.get("Construction Description") or "").strip()
+            if ptype not in ("Residential", "Commercial"):
+                return None
+            description = ""
+            address = str(attrs.get("Address") or "").strip()
+            status = "Status not published"
+            valuation = number(attrs.get("Construction Value"))
+            units, sq_ft, direct_url = None, None, None
         elif cfg_key == "olathe":
             permit_no = str(attrs.get("PERMITNUMBER") or "").strip()
             issued = to_date(attrs.get("ISSUEDATE"))
@@ -340,6 +368,8 @@ def normalize(cfg_key: str, raw: dict, today: date, cutoff: date) -> dict | None
         "link_kind": "record" if direct_url else "search",
         "source_url": url,
         "source_home": cfg["source"],
+        "source_url_scope": "dataset" if cfg_key == "independence" else "record",
+        "status_source": "dataset_labeled_active" if cfg_key == "independence" else "permit_field",
         **timeline,
     }
 
@@ -393,6 +423,49 @@ def fetch_arcgis(s: requests.Session, cfg: dict, cutoff: date, today: date) -> l
             return result
     raise RuntimeError("ArcGIS pagination safety cap reached; refusing partial publication")
 
+
+
+
+INDEPENDENCE_FIELDS = (
+    "Permit Number", "Address", "Date Issued", "Type",
+    "Construction Description", "Construction Value",
+)
+
+
+def fetch_independence(s: requests.Session, cfg: dict, today: date) -> tuple[list[dict], str]:
+    """Read only the city-published public bulk JSON and reject schema/stale changes."""
+    payload = fetch_json(s, cfg["api"], {})
+    if not isinstance(payload, dict) or payload.get("dataSetCode") != "V1BUILDINGPERMITS":
+        raise ValueError("Independence returned unexpected dataset identity")
+    if payload.get("dataSetName") != "Building Permits - Active":
+        raise ValueError("Independence dataset scope/name changed; manual review required")
+    stamp = str(payload.get("lastUpdated") or "").strip()
+    updated = to_date(stamp)
+    if updated is None or updated < today - timedelta(days=14) or updated > today + timedelta(days=2):
+        raise ValueError("Independence dataset refresh is stale, missing or future dated")
+    fields = payload.get("dataSetFields")
+    rows = payload.get("dataSetData")
+    if not isinstance(fields, list) or not isinstance(rows, list) or not 20 <= len(rows) <= 20000:
+        raise ValueError("Independence source rows/fields invalid or outside safety bounds")
+    titles = [f.get("title") for f in fields if isinstance(f, dict)]
+    if len(titles) != len(fields) or len(titles) != len(set(titles)):
+        raise ValueError("Independence dataset field titles missing or duplicated")
+    if set(INDEPENDENCE_FIELDS).difference(titles):
+        raise ValueError("Independence missing required fields for building leads")
+    output = []
+    for index, cells in enumerate(rows):
+        if not isinstance(cells, list) or len(cells) != len(fields):
+            raise ValueError(f"Independence row {index} field count changed")
+        item = {}
+        for field, cell in zip(fields, cells):
+            if not isinstance(cell, dict) or cell.get("title") != field["title"] or "value" not in cell:
+                raise ValueError(f"Independence row {index} field object changed")
+            value = cell["value"]
+            if value is not None and not isinstance(value, (str, int, float)):
+                raise ValueError(f"Independence row {index} has non-scalar value")
+            item[field["title"]] = value
+        output.append(item)
+    return output, stamp
 
 
 def canonical_site_address(address: str | None) -> str | None:
@@ -458,8 +531,15 @@ def build(days: int = 120, s: requests.Session | None = None, today: date | None
     errors = []
     for key, cfg in SOURCES.items():
         try:
-            rows = (fetch_socrata(s, cfg, cutoff, today) if cfg["kind"] == "socrata"
-                    else fetch_arcgis(s, cfg, cutoff, today))
+            source_updated = None
+            if cfg["kind"] == "socrata":
+                rows = fetch_socrata(s, cfg, cutoff, today)
+            elif cfg["kind"] == "arcgis":
+                rows = fetch_arcgis(s, cfg, cutoff, today)
+            elif cfg["kind"] == "independence_api":
+                rows, source_updated = fetch_independence(s, cfg, today)
+            else:
+                raise ValueError("Unknown agency feed type")
             if not rows:
                 raise RuntimeError("No records returned; cannot verify source health")
             imported = 0
@@ -475,6 +555,7 @@ def build(days: int = 120, s: requests.Session | None = None, today: date | None
                 "status": "ok", "raw_examined": len(rows),
                 "count": len([i for i in all_records.values() if i["jurisdiction"] == cfg["name"]]),
                 "latest_issue": newest, "source_url": cfg["source"], "portal_url": cfg["portal"],
+                "source_last_updated": source_updated,
             })
             print(cfg["name"] + ": " + str(imported) + " eligible permits from " + str(len(rows)) + " examined")
         except (requests.RequestException, ValueError, RuntimeError, KeyError, TypeError) as exc:

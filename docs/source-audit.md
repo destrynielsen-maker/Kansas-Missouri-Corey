@@ -31,6 +31,8 @@ Sources:
 
 **No fabricated permit-detail links.** When official data lacks direct record URLs, link to the public human-search page, show the permit number, and keep raw source URLs in a separate column.
 
+See the [draft public-records/CSV API request](wyandotte-permit-data-request.md) if obtaining a stable agency feed requires a manual request. This draft has not been submitted.
+
 ## Wyandotte source-health monitor
 
 - Public Unified Government ArcGIS directories: [root](https://gisweb.wycokck.org/arcgis/rest/services), [GISPUB](https://gisweb.wycokck.org/arcgis/rest/services/GISPUB), [UGMAPS](https://gisweb.wycokck.org/arcgis/rest/services/UGMAPS), and [GISPW](https://gisweb.wycokck.org/arcgis/rest/services/GISPW).

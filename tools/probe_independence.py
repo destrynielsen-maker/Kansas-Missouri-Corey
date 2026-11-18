@@ -18,7 +18,7 @@ PAGES = (
     "https://apps.indepmo.org/Apps/OpenData/BuildingPermits/Sort?head=Date+Issued",
 )
 ALLOWED = {"opendata.independencemo.gov", "apps.indepmo.org"}
-HINTS = re.compile(r"V1BUILDINGPERMITS|/api/[a-z0-9\-_/?=&]+|https://[^\\\"\s]+/api|apiBaseUrl|NEXT_PUBLIC|fetch\\(|/dataset[s]?|export(?:csv|json)|download(?:url)?", re.I)
+HINTS = re.compile(r"V1BUILDINGPERMITS|/api/[a-z0-9_/?=&.-]+|apiBaseUrl|NEXT_PUBLIC|fetch\(|/datasets?|export|download", re.I)
 
 
 class Assets(HTMLParser):

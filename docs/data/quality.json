@@ -1,0 +1,1129 @@
+{
+  "source_snapshot": "2026-11-18T16:29:12+00:00",
+  "total_records": 3303,
+  "by_category": {
+    "Other": 1825,
+    "Single-family": 908,
+    "Remodel": 240,
+    "Commercial": 176,
+    "Multifamily": 100,
+    "Addition": 54
+  },
+  "by_state": {
+    "KS": 1831,
+    "MO": 1472
+  },
+  "direct_record_count": 0,
+  "public_search_count": 3303,
+  "issues_to_review": [
+    "Kansas City, MO: >33% of records classified Other; check mapping",
+    "Overland Park, KS: >33% of records classified Other; check mapping"
+  ],
+  "jurisdictions": {
+    "Kansas City, MO": {
+      "count": 1350,
+      "earliest_issue": "2026-07-21",
+      "latest_issue": "2026-11-14",
+      "categories": {
+        "Single-family": 581,
+        "Other": 575,
+        "Commercial": 85,
+        "Multifamily": 77,
+        "Remodel": 17,
+        "Addition": 15
+      },
+      "statuses": {
+        "Issued": 1071,
+        "Closed": 245,
+        "Open-Active": 12,
+        "Hold": 11,
+        "Cancelled": 7,
+        "Issued - Subject To Conditions": 1,
+        "Ready For Issuance": 1,
+        "Suspended": 1,
+        "Voided-City": 1
+      },
+      "link_kinds": {
+        "search": 1350
+      },
+      "missing_address": 0,
+      "missing_valuation": 0,
+      "zero_valuation": 1349,
+      "top_types": [
+        {
+          "permit_type": "CPPU - Building (Residential)",
+          "work_class": "Single Family - Interior Remodel",
+          "count": 301
+        },
+        {
+          "permit_type": "CPPU - Building (Commercial)",
+          "work_class": "Renovation",
+          "count": 246
+        },
+        {
+          "permit_type": "CPPU - Building (Residential)",
+          "work_class": "Single Family - New",
+          "count": 228
+        },
+        {
+          "permit_type": "CPPU - Building (Residential)",
+          "work_class": "Deck",
+          "count": 126
+        },
+        {
+          "permit_type": "CPPU - Building (Residential)",
+          "work_class": "Other",
+          "count": 123
+        },
+        {
+          "permit_type": "CPPU - Building (Commercial)",
+          "work_class": "New",
+          "count": 83
+        },
+        {
+          "permit_type": "CPPU - Building (Residential)",
+          "work_class": "Single Family - Addition",
+          "count": 41
+        },
+        {
+          "permit_type": "CPPU - Building (Commercial)",
+          "work_class": "Other",
+          "count": 36
+        },
+        {
+          "permit_type": "CPPU - Building (Residential)",
+          "work_class": "Townhouse - New",
+          "count": 35
+        },
+        {
+          "permit_type": "CPPU - Building (Residential)",
+          "work_class": "Swimming Pool",
+          "count": 27
+        },
+        {
+          "permit_type": "CPPU - Building (Residential)",
+          "work_class": "Detached Accessory Structure",
+          "count": 24
+        },
+        {
+          "permit_type": "CPPU - Building (Residential)",
+          "work_class": "Covered Deck",
+          "count": 17
+        },
+        {
+          "permit_type": "CPPU - Building (Commercial)",
+          "work_class": "Change of Occupancy",
+          "count": 13
+        },
+        {
+          "permit_type": "CPPU - Building (Commercial)",
+          "work_class": "Site Improvement",
+          "count": 12
+        },
+        {
+          "permit_type": "CPPU - Building (Commercial)",
+          "work_class": "Addition",
+          "count": 12
+        },
+        {
+          "permit_type": "CPPU - Building (Commercial)",
+          "work_class": "Grading Only",
+          "count": 10
+        },
+        {
+          "permit_type": "CPPU - Building (Residential)",
+          "work_class": "Duplex - Interior Remodel",
+          "count": 9
+        },
+        {
+          "permit_type": "CPPU - Building (Commercial)",
+          "work_class": "Addition with Change of Occupancy",
+          "count": 3
+        },
+        {
+          "permit_type": "CPPU - Building (Residential)",
+          "work_class": "Townhouse - Interior Remodel",
+          "count": 1
+        },
+        {
+          "permit_type": "CPPU - Building (Residential)",
+          "work_class": "Duplex - Addition",
+          "count": 1
+        },
+        {
+          "permit_type": "CPPU - Building (Commercial)",
+          "work_class": "Communication Tower",
+          "count": 1
+        },
+        {
+          "permit_type": "CPPU - Building (Commercial)",
+          "work_class": "Fast Track Metal Stud",
+          "count": 1
+        }
+      ],
+      "samples_by_category": {
+        "Single-family": [
+          {
+            "permit": "CPBR-2026-02165",
+            "date": "2026-11-11",
+            "type": "CPPU - Building (Residential)",
+            "class": "Single Family - New",
+            "project": "City of KCMO Pre-Approved Housing Master Plan - 02, Tiny House ADA 500gsf",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "CPBR-2026-02399",
+            "date": "2026-11-11",
+            "type": "CPPU - Building (Residential)",
+            "class": "Single Family - Addition",
+            "project": "",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "CPBR-2026-02730",
+            "date": "2026-11-11",
+            "type": "CPPU - Building (Residential)",
+            "class": "Single Family - Interior Remodel",
+            "project": "",
+            "address_present": true,
+            "direct_record": false
+          }
+        ],
+        "Multifamily": [
+          {
+            "permit": "CPBR-2026-02603",
+            "date": "2026-10-20",
+            "type": "CPPU - Building (Residential)",
+            "class": "Townhouse - New",
+            "project": "Bristol North Townhouse 5 Unit",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "CPBR-2026-02604",
+            "date": "2026-10-20",
+            "type": "CPPU - Building (Residential)",
+            "class": "Townhouse - New",
+            "project": "Bristol North Townhouse 5 Unit",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "CPBR-2026-02584",
+            "date": "2026-10-21",
+            "type": "CPPU - Building (Residential)",
+            "class": "Townhouse - New",
+            "project": "Bristol North Townhouse 8 unit",
+            "address_present": true,
+            "direct_record": false
+          }
+        ],
+        "Commercial": [
+          {
+            "permit": "CPBC-2026-01142",
+            "date": "2026-11-11",
+            "type": "CPPU - Building (Commercial)",
+            "class": "New",
+            "project": "Promise Place",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "CPBC-2026-01143",
+            "date": "2026-11-11",
+            "type": "CPPU - Building (Commercial)",
+            "class": "New",
+            "project": "Promise Place",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "CPBC-2026-01144",
+            "date": "2026-11-11",
+            "type": "CPPU - Building (Commercial)",
+            "class": "New",
+            "project": "Promise Place",
+            "address_present": true,
+            "direct_record": false
+          }
+        ],
+        "Addition": [
+          {
+            "permit": "CPBC-2026-01070",
+            "date": "2026-10-26",
+            "type": "CPPU - Building (Commercial)",
+            "class": "Addition",
+            "project": "Edged Energy KC Building Addition",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "CPBC-2026-01107",
+            "date": "2026-10-28",
+            "type": "CPPU - Building (Commercial)",
+            "class": "Renovation",
+            "project": "MAERSK Logistics Centre IV Office Addition",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "CPBC-2026-01117",
+            "date": "2026-10-29",
+            "type": "CPPU - Building (Commercial)",
+            "class": "Addition with Change of Occupancy",
+            "project": "Scotts Kitchen Patio Addition",
+            "address_present": true,
+            "direct_record": false
+          }
+        ],
+        "Remodel": [
+          {
+            "permit": "CPBC-2026-01079",
+            "date": "2026-10-22",
+            "type": "CPPU - Building (Commercial)",
+            "class": "Renovation",
+            "project": "Frontier Investment Banking Tenant Finish",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "CPBC-2026-01032",
+            "date": "2026-10-27",
+            "type": "CPPU - Building (Commercial)",
+            "class": "Renovation",
+            "project": "Sephora Tenant Finish @ Zona Rosa",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "CPBC-2026-00887",
+            "date": "2026-09-10",
+            "type": "CPPU - Building (Commercial)",
+            "class": "Change of Occupancy",
+            "project": "Community America University Health Tenant Finish",
+            "address_present": true,
+            "direct_record": false
+          }
+        ],
+        "Other": [
+          {
+            "permit": "CPBC-2026-01132",
+            "date": "2026-11-11",
+            "type": "CPPU - Building (Commercial)",
+            "class": "Renovation",
+            "project": "QuikTrip 0233 On NW 90th Ice Machine",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "CPBC-2026-01153",
+            "date": "2026-11-11",
+            "type": "CPPU - Building (Commercial)",
+            "class": "Renovation",
+            "project": "Gensler KC Office TF",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "CPBR-2026-02799",
+            "date": "2026-11-11",
+            "type": "CPPU - Building (Residential)",
+            "class": "Deck",
+            "project": "",
+            "address_present": true,
+            "direct_record": false
+          }
+        ]
+      }
+    },
+    "Lee's Summit, MO": {
+      "count": 122,
+      "earliest_issue": "2026-07-22",
+      "latest_issue": "2026-11-16",
+      "categories": {
+        "Single-family": 87,
+        "Other": 16,
+        "Commercial": 8,
+        "Remodel": 8,
+        "Addition": 2,
+        "Multifamily": 1
+      },
+      "statuses": {
+        "Issued": 105,
+        "Permit(s) Issued ": 9,
+        "Temporary Occupancy": 4,
+        "In Plan Review": 1,
+        "Hold": 1,
+        "Approved": 1,
+        "Substantial Completion": 1
+      },
+      "link_kinds": {
+        "search": 122
+      },
+      "missing_address": 0,
+      "missing_valuation": 122,
+      "zero_valuation": 0,
+      "top_types": [
+        {
+          "permit_type": "NEW SINGLE FAMILY",
+          "work_class": "(empty)",
+          "count": 81
+        },
+        {
+          "permit_type": "CHANGE OF TENANT",
+          "work_class": "(empty)",
+          "count": 11
+        },
+        {
+          "permit_type": "NEW TENANT FINISH",
+          "work_class": "(empty)",
+          "count": 8
+        },
+        {
+          "permit_type": "NEW COMMERCIAL",
+          "work_class": "(empty)",
+          "count": 7
+        },
+        {
+          "permit_type": "NEW DUPLEX",
+          "work_class": "(empty)",
+          "count": 6
+        },
+        {
+          "permit_type": "DEVELOPMENT COMPLETE",
+          "work_class": "(empty)",
+          "count": 5
+        },
+        {
+          "permit_type": "ADDITION COMMERCIAL",
+          "work_class": "(empty)",
+          "count": 2
+        },
+        {
+          "permit_type": "NEW MULTI-FAMILY",
+          "work_class": "(empty)",
+          "count": 1
+        },
+        {
+          "permit_type": "NEW SHELL BUILDING",
+          "work_class": "(empty)",
+          "count": 1
+        }
+      ],
+      "samples_by_category": {
+        "Single-family": [
+          {
+            "permit": "PRRES20264937",
+            "date": "2026-11-13",
+            "type": "NEW SINGLE FAMILY",
+            "class": "",
+            "project": "",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "PRRES20265245",
+            "date": "2026-11-16",
+            "type": "NEW SINGLE FAMILY",
+            "class": "",
+            "project": "",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "PRRES20264169",
+            "date": "2026-10-20",
+            "type": "NEW SINGLE FAMILY",
+            "class": "",
+            "project": "",
+            "address_present": true,
+            "direct_record": false
+          }
+        ],
+        "Multifamily": [
+          {
+            "permit": "PRCOM20255577",
+            "date": "2026-09-01",
+            "type": "NEW MULTI-FAMILY",
+            "class": "",
+            "project": "",
+            "address_present": true,
+            "direct_record": false
+          }
+        ],
+        "Commercial": [
+          {
+            "permit": "PRCOM20261230",
+            "date": "2026-11-04",
+            "type": "NEW COMMERCIAL",
+            "class": "",
+            "project": "",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "PRCOM20252284",
+            "date": "2026-08-24",
+            "type": "NEW COMMERCIAL",
+            "class": "",
+            "project": "",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "PRCOM20261770",
+            "date": "2026-08-27",
+            "type": "NEW COMMERCIAL",
+            "class": "",
+            "project": "",
+            "address_present": true,
+            "direct_record": false
+          }
+        ],
+        "Addition": [
+          {
+            "permit": "PRCOM20263175",
+            "date": "2026-09-15",
+            "type": "ADDITION COMMERCIAL",
+            "class": "",
+            "project": "",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "PRCOM20261505",
+            "date": "2026-07-28",
+            "type": "ADDITION COMMERCIAL",
+            "class": "",
+            "project": "",
+            "address_present": true,
+            "direct_record": false
+          }
+        ],
+        "Remodel": [
+          {
+            "permit": "PRCOM20264370",
+            "date": "2026-10-20",
+            "type": "NEW TENANT FINISH",
+            "class": "",
+            "project": "",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "PRCOM20264434",
+            "date": "2026-11-03",
+            "type": "NEW TENANT FINISH",
+            "class": "",
+            "project": "",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "PRCOM20263080",
+            "date": "2026-09-03",
+            "type": "NEW TENANT FINISH",
+            "class": "",
+            "project": "",
+            "address_present": true,
+            "direct_record": false
+          }
+        ],
+        "Other": [
+          {
+            "permit": "PRCOM20264909",
+            "date": "2026-11-16",
+            "type": "CHANGE OF TENANT",
+            "class": "",
+            "project": "",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "PRCOM20264540",
+            "date": "2026-10-19",
+            "type": "CHANGE OF TENANT",
+            "class": "",
+            "project": "",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "PRCOM20264226",
+            "date": "2026-10-22",
+            "type": "CHANGE OF TENANT",
+            "class": "",
+            "project": "",
+            "address_present": true,
+            "direct_record": false
+          }
+        ]
+      }
+    },
+    "Olathe, KS": {
+      "count": 227,
+      "earliest_issue": "2026-07-22",
+      "latest_issue": "2026-11-17",
+      "categories": {
+        "Single-family": 165,
+        "Other": 29,
+        "Multifamily": 13,
+        "Remodel": 11,
+        "Commercial": 9
+      },
+      "statuses": {
+        "Issued": 227
+      },
+      "link_kinds": {
+        "search": 227
+      },
+      "missing_address": 1,
+      "missing_valuation": 0,
+      "zero_valuation": 16,
+      "top_types": [
+        {
+          "permit_type": "Building - Residential",
+          "work_class": "Single Family",
+          "count": 162
+        },
+        {
+          "permit_type": "Building - Commercial",
+          "work_class": "Accessory Structure (Commercial)",
+          "count": 14
+        },
+        {
+          "permit_type": "Building - Commercial",
+          "work_class": "Tenant Finish",
+          "count": 11
+        },
+        {
+          "permit_type": "Land Disturbance Permit",
+          "work_class": "Land Disturbance",
+          "count": 10
+        },
+        {
+          "permit_type": "Building - Commercial",
+          "work_class": "New Multi Family",
+          "count": 7
+        },
+        {
+          "permit_type": "Building - Commercial",
+          "work_class": "New Commercial",
+          "count": 4
+        },
+        {
+          "permit_type": "Land Disturbance Permit",
+          "work_class": "Grading Only",
+          "count": 4
+        },
+        {
+          "permit_type": "Building - Residential",
+          "work_class": "Duplex",
+          "count": 3
+        },
+        {
+          "permit_type": "Building - Commercial",
+          "work_class": "Footing/Foundation",
+          "count": 3
+        },
+        {
+          "permit_type": "Building - Demolition",
+          "work_class": "Residential",
+          "count": 3
+        },
+        {
+          "permit_type": "Building - Commercial",
+          "work_class": "Building Shell",
+          "count": 2
+        },
+        {
+          "permit_type": "Building - Commercial",
+          "work_class": "New Warehouse / Industrial",
+          "count": 2
+        },
+        {
+          "permit_type": "Building - Demolition",
+          "work_class": "Commercial",
+          "count": 2
+        }
+      ],
+      "samples_by_category": {
+        "Single-family": [
+          {
+            "permit": "BR26-1367",
+            "date": "2026-10-27",
+            "type": "Building - Residential",
+            "class": "Single Family",
+            "project": "SFR",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "BR26-1326",
+            "date": "2026-11-13",
+            "type": "Building - Residential",
+            "class": "Single Family",
+            "project": "SFR",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "BR26-1352",
+            "date": "2026-11-13",
+            "type": "Building - Residential",
+            "class": "Single Family",
+            "project": "SFR",
+            "address_present": true,
+            "direct_record": false
+          }
+        ],
+        "Multifamily": [
+          {
+            "permit": "BC26-0058",
+            "date": "2026-09-10",
+            "type": "Building - Commercial",
+            "class": "New Multi Family",
+            "project": "NEW CONSTRUCTION - BELONGKC ",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "BC26-0091",
+            "date": "2026-09-30",
+            "type": "Building - Commercial",
+            "class": "New Multi Family",
+            "project": "NEW CONSTRUCTION - CORPORATE RIDGE APARTMENTS - BUILDING 2",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "BC26-0092",
+            "date": "2026-09-30",
+            "type": "Building - Commercial",
+            "class": "New Multi Family",
+            "project": "NEW CONSTRUCTION - CORPORATE RIDGE APARTMENTS - BUILDING 3",
+            "address_present": true,
+            "direct_record": false
+          }
+        ],
+        "Commercial": [
+          {
+            "permit": "BC26-0167",
+            "date": "2026-11-13",
+            "type": "Building - Commercial",
+            "class": "Building Shell",
+            "project": "SHELL - LONE ELM COMMERCE CENTER - BUILDING 6",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "BC26-0193",
+            "date": "2026-11-05",
+            "type": "Building - Commercial",
+            "class": "New Commercial",
+            "project": "NEW COMMERCIAL - BROGDEN COFFEE & CAR WASH",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "BC26-0113",
+            "date": "2026-09-29",
+            "type": "Building - Commercial",
+            "class": "New Commercial",
+            "project": "NEW CONSTRUCTION - HOMEWOOD SUITES HOTEL",
+            "address_present": true,
+            "direct_record": false
+          }
+        ],
+        "Addition": [],
+        "Remodel": [
+          {
+            "permit": "BC26-0200",
+            "date": "2026-11-06",
+            "type": "Building - Commercial",
+            "class": "Tenant Finish",
+            "project": "TENANT FINISH - HALO COLLECTIVE CARE",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "BC26-0270",
+            "date": "2026-11-09",
+            "type": "Building - Commercial",
+            "class": "Tenant Finish",
+            "project": "TENANT FINISH - HALO RIDGE CLINIC",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "BC26-0202",
+            "date": "2026-09-29",
+            "type": "Building - Commercial",
+            "class": "Tenant Finish",
+            "project": "TENANT FINISH - FAITH TECHNOLOGIES",
+            "address_present": true,
+            "direct_record": false
+          }
+        ],
+        "Other": [
+          {
+            "permit": "BC26-0174",
+            "date": "2026-08-25",
+            "type": "Building - Commercial",
+            "class": "Footing/Foundation",
+            "project": "FOOTING & FOUNDATION ONLY - FAITH TECHNOLOGIES - MECHANICAL BUILDING 1",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "BC26-0175",
+            "date": "2026-08-27",
+            "type": "Building - Commercial",
+            "class": "Footing/Foundation",
+            "project": "FOOTING & FOUNDATION ONLY - FAITH TECHNOLOGIES - MECHANICAL BUILDING 2 ",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "BC26-0126",
+            "date": "2026-09-04",
+            "type": "Building - Commercial",
+            "class": "Footing/Foundation",
+            "project": "FOOTING AND FOUNDATION ONLY - LINEAGE COLD STORAGE FACILITY",
+            "address_present": true,
+            "direct_record": false
+          }
+        ]
+      }
+    },
+    "Overland Park, KS": {
+      "count": 1604,
+      "earliest_issue": "2026-07-21",
+      "latest_issue": "2026-11-17",
+      "categories": {
+        "Other": 1205,
+        "Remodel": 204,
+        "Single-family": 75,
+        "Commercial": 74,
+        "Addition": 37,
+        "Multifamily": 9
+      },
+      "statuses": {
+        "Issued": 1082,
+        "Complete/Finaled": 521,
+        "TCO": 1
+      },
+      "link_kinds": {
+        "search": 1604
+      },
+      "missing_address": 0,
+      "missing_valuation": 0,
+      "zero_valuation": 0,
+      "top_types": [
+        {
+          "permit_type": "Building (Mech/Elec/Plumb)",
+          "work_class": "Furnace/AC",
+          "count": 389
+        },
+        {
+          "permit_type": "Building (Mech/Elec/Plumb)",
+          "work_class": "Electrical Service",
+          "count": 216
+        },
+        {
+          "permit_type": "Building (Residential)",
+          "work_class": "Fence/Wall",
+          "count": 206
+        },
+        {
+          "permit_type": "Building (Residential)",
+          "work_class": "Deck",
+          "count": 150
+        },
+        {
+          "permit_type": "Building (Residential)",
+          "work_class": "Remodel",
+          "count": 120
+        },
+        {
+          "permit_type": "Building (Mech/Elec/Plumb)",
+          "work_class": "Water Heater",
+          "count": 102
+        },
+        {
+          "permit_type": "Building (Commercial)",
+          "work_class": "Tenant Finish/Remodel",
+          "count": 86
+        },
+        {
+          "permit_type": "Building (Residential)",
+          "work_class": "New Single Family",
+          "count": 75
+        },
+        {
+          "permit_type": "Building (Residential)",
+          "work_class": "Repair",
+          "count": 59
+        },
+        {
+          "permit_type": "Building (Residential)",
+          "work_class": "Pool/Spa",
+          "count": 28
+        },
+        {
+          "permit_type": "Building (Mech/Elec/Plumb)",
+          "work_class": "Miscellaneous Electrical",
+          "count": 23
+        },
+        {
+          "permit_type": "Building (Residential)",
+          "work_class": "Addition",
+          "count": 21
+        },
+        {
+          "permit_type": "Building (Residential)",
+          "work_class": "Accessory Structure",
+          "count": 17
+        },
+        {
+          "permit_type": "Building (Mech/Elec/Plumb)",
+          "work_class": "Generator",
+          "count": 15
+        },
+        {
+          "permit_type": "Building (Mech/Elec/Plumb)",
+          "work_class": "Gas Line",
+          "count": 12
+        },
+        {
+          "permit_type": "Building (Mech/Elec/Plumb)",
+          "work_class": "Fire Alarm",
+          "count": 9
+        },
+        {
+          "permit_type": "Building (Commercial)",
+          "work_class": "Demolition",
+          "count": 9
+        },
+        {
+          "permit_type": "Building (Mech/Elec/Plumb)",
+          "work_class": "Solar Panel",
+          "count": 8
+        },
+        {
+          "permit_type": "Building (Commercial)",
+          "work_class": "Miscellaneous Structure",
+          "count": 7
+        },
+        {
+          "permit_type": "Building (Residential)",
+          "work_class": "Addition + Remodel",
+          "count": 6
+        },
+        {
+          "permit_type": "Building (Mech/Elec/Plumb)",
+          "work_class": "Fire Suppression",
+          "count": 6
+        },
+        {
+          "permit_type": "Building (Commercial)",
+          "work_class": "Fence/Wall",
+          "count": 6
+        },
+        {
+          "permit_type": "Building (Residential)",
+          "work_class": "Demolition",
+          "count": 5
+        },
+        {
+          "permit_type": "Building (Mech/Elec/Plumb)",
+          "work_class": "Miscellaneous Mechanical",
+          "count": 5
+        },
+        {
+          "permit_type": "Building (Commercial)",
+          "work_class": "Repair",
+          "count": 4
+        }
+      ],
+      "samples_by_category": {
+        "Single-family": [
+          {
+            "permit": "BLD-R-2026-01851",
+            "date": "2026-11-03",
+            "type": "Building (Residential)",
+            "class": "New Single Family",
+            "project": "SFR, Covered Porch and Unf Basement  (2024 IRC)",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "BLD-R-2026-02074",
+            "date": "2026-11-11",
+            "type": "Building (Residential)",
+            "class": "New Single Family",
+            "project": "SFR, Covered Poch and Unf Basement (2024 IRC)",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "BLD-R-2026-01895",
+            "date": "2026-11-12",
+            "type": "Building (Residential)",
+            "class": "New Single Family",
+            "project": "SFR, Covered Porch and Finished Basement (2024 IRC)",
+            "address_present": true,
+            "direct_record": false
+          }
+        ],
+        "Multifamily": [
+          {
+            "permit": "BLD-C-2025-00575",
+            "date": "2026-09-25",
+            "type": "Building (Commercial)",
+            "class": "New Multi Family",
+            "project": "Friends of JCDS Multi Family (FOOTINGS ONLY)",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "BLD-C-2026-00537",
+            "date": "2026-10-29",
+            "type": "Building (Commercial)",
+            "class": "Repair",
+            "project": "Creekside Apartments Carport Repairs (2024 IBC)",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "BLD-R-2026-01629",
+            "date": "2026-08-18",
+            "type": "Building (Residential)",
+            "class": "New Townhouse",
+            "project": "Townhome, Finished Basement, Screened Deck (2018 IRC)",
+            "address_present": true,
+            "direct_record": false
+          }
+        ],
+        "Commercial": [
+          {
+            "permit": "BLD-C-2026-00156",
+            "date": "2026-08-25",
+            "type": "Building (Commercial)",
+            "class": "New Restaurant",
+            "project": "The Capital Grille (2018 IBC)",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "BLD-C-2026-00289",
+            "date": "2026-09-02",
+            "type": "Building (Commercial)",
+            "class": "New Retail",
+            "project": "Expedition 309 Shell Building",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "BLD-C-2026-00229",
+            "date": "2026-10-05",
+            "type": "Building (Commercial)",
+            "class": "New Restaurant",
+            "project": "Yard House (2018 IBC)",
+            "address_present": true,
+            "direct_record": false
+          }
+        ],
+        "Addition": [
+          {
+            "permit": "BLD-C-2026-00017",
+            "date": "2026-11-02",
+            "type": "Building (Commercial)",
+            "class": "Addition + Remodel",
+            "project": "Children's Mercy-5-Story MOB Addition (Shell), Lobby Expansion, and Parking Deck (2018 IBC)",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "BLD-C-2026-00258",
+            "date": "2026-11-10",
+            "type": "Building (Commercial)",
+            "class": "Addition + Remodel",
+            "project": "Jewish Community Center-Aquatic Expansion (2018)",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "BLD-R-2026-01029",
+            "date": "2026-10-23",
+            "type": "Building (Residential)",
+            "class": "Addition",
+            "project": "House Expansion & Renovation",
+            "address_present": true,
+            "direct_record": false
+          }
+        ],
+        "Remodel": [
+          {
+            "permit": "BLD-C-2026-00453",
+            "date": "2026-11-05",
+            "type": "Building (Commercial)",
+            "class": "Tenant Finish/Remodel",
+            "project": "Travelers Insurance-(2024 IBC)",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "BLD-C-2026-00083",
+            "date": "2026-11-11",
+            "type": "Building (Commercial)",
+            "class": "Tenant Finish/Remodel",
+            "project": " Evergreen Flooring fire pump room \n",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "BLD-C-2026-00408",
+            "date": "2026-11-11",
+            "type": "Building (Commercial)",
+            "class": "Tenant Finish/Remodel",
+            "project": "Bubble StoreFront ( 2024 IBC)",
+            "address_present": true,
+            "direct_record": false
+          }
+        ],
+        "Other": [
+          {
+            "permit": "BLD-C-2026-00153",
+            "date": "2026-11-09",
+            "type": "Building (Commercial)",
+            "class": "Miscellaneous Structure",
+            "project": "Bluhawk 3B Parking Garage - Three story stand alone (2018)",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "BLD-C-2026-00210",
+            "date": "2026-08-20",
+            "type": "Building (Commercial)",
+            "class": "Miscellaneous Structure",
+            "project": "Costco Fuel Facility",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "BLD-M-2026-01528",
+            "date": "2026-09-03",
+            "type": "Building (Mech/Elec/Plumb)",
+            "class": "Generator",
+            "project": "University of KS - Marillac Building - Generator Installation (2024 IBC)",
+            "address_present": true,
+            "direct_record": false
+          }
+        ]
+      }
+    }
+  }
+}

@@ -42,8 +42,8 @@
       "name": "Kansas City, KS",
       "region": "Wyandotte County",
       "mode": "portal",
-      "note": "Public Accela building permit search verified (search by record number or date). No validated, public machine-readable bulk feed; not imported.",
-      "source_url": "https://aca-prod.accela.com/UG/Cap/CapHome.aspx?TabName=Home&module=Building",
+      "note": "Official Unified Government Accela building-permit search. Four public GIS catalogs are monitored weekly for permit-related service names; no validated bulk permit feed is imported. A public GIS source name alone never proves an importable permit dataset.",
+      "source_url": "https://gisweb.wycokck.org/arcgis/rest/services/GISPUB",
       "portal_url": "https://aca-prod.accela.com/UG/Cap/CapHome.aspx?TabName=Home&module=Building"
     },
     {

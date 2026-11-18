@@ -3,7 +3,7 @@ name: Publish construction lead dashboard
 on:
   workflow_dispatch:
   workflow_run:
-    workflows: ["Refresh permit data"]
+    workflows: ["Refresh permit data", "Check Wyandotte public data catalogs"]
     types: [completed]
     branches: [main]
   push:

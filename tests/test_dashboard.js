@@ -55,3 +55,7 @@ console.log("Source-backed site group selection: PASS");
 
 assert.ok(code.includes("Raw dataset ↗"),"Bulk source data should be explicitly labeled");
 assert.ok(code.includes("source_url_scope"),"Source scope should survive exports");
+
+assert.ok(code.includes("SOURCE_MONITOR_URL"),"Wyandotte public-source health should be loaded optionally");
+assert.ok(code.includes("No permit-named API found"),"Source health result should be explicitly labeled");
+assert.ok(code.includes("renderCoverage(info,monitor)"),"Coverage cards should receive public-source monitoring data");

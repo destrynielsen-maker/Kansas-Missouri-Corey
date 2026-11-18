@@ -422,9 +422,11 @@ def annotate_site_groups(records: list[dict]) -> dict:
     grouped = defaultdict(list)
     for record in records:
         address = canonical_site_address(record.get("address"))
-        locality = (record.get("state") or "").strip() + "|" + (record.get("jurisdiction") or "").strip()
-        if not locality or locality.startswith("|"):
+        state = (record.get("state") or "").strip()
+        jurisdiction = (record.get("jurisdiction") or "").strip()
+        if not state or not jurisdiction:
             raise ValueError("Cannot group a permit without its jurisdiction and state")
+        locality = state + "|" + jurisdiction
         basis = "same_normalized_address" if address else "unverified_address"
         key = locality + "|address|" + address if address else locality + "|permit|" + str(record["id"])
         record["site_group_id"] = "site-" + sha256(key.encode("utf-8")).hexdigest()[:20]

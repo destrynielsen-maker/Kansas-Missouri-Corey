@@ -11,7 +11,9 @@
       "builder": "Meyer Brothers Building Co.",
       "evidence_type": "planning_drawing",
       "evidence_url": "https://olatheks.legistar.com/View.ashx?GUID=7053800E-BF1E-4E53-B170-09DA06E3D706&ID=15378919&M=F",
-      "qualification": "Named on a planning drawing marked NOT FOR CONSTRUCTION; permit contractor not independently confirmed."
+      "qualification": "Named on a planning drawing marked NOT FOR CONSTRUCTION; permit contractor not independently confirmed.",
+      "project_group": "Lone Elm Commerce Center — Building 6",
+      "community": "Lone Elm Commerce Center"
     },
     {
       "id": "overland_park:BLD-R-2026-01791",
@@ -21,7 +23,9 @@
       "builder": "Rodrock Homes",
       "evidence_type": "exact_address_listing",
       "evidence_url": "https://www.rodrock.com/homes/overland-park-ks/sundance-ridge/17701-adair-street",
-      "qualification": "Builder named on a home listing for the exact address; permit contractor not independently confirmed."
+      "qualification": "Builder named on a home listing for the exact address; permit contractor not independently confirmed.",
+      "community": "Sundance Ridge",
+      "developer": "Rodrock Development (community developer, not permit GC)"
     },
     {
       "id": "overland_park:BLD-R-2026-01875",
@@ -31,7 +35,8 @@
       "builder": "Barnhouse Homes",
       "evidence_type": "exact_address_listing",
       "evidence_url": "https://www.redfin.com/KS/Overland-Park/9503-176th-Ter-66221/home/196007917",
-      "qualification": "Builder named in an exact-address property listing; permit contractor not independently confirmed."
+      "qualification": "Builder named in an exact-address property listing; permit contractor not independently confirmed.",
+      "community": "Wild Horse (developer not verified)"
     },
     {
       "id": "overland_park:BLD-R-2026-02000",
@@ -41,7 +46,9 @@
       "builder": "Pryor West Homes",
       "evidence_type": "exact_address_listing",
       "evidence_url": "https://www.rodrock.com/communities/overland-park-ks/sundance-ridge",
-      "qualification": "Community listing attributed the exact lot to Pryor West; permit contractor not independently confirmed."
+      "qualification": "Community listing attributed the exact lot to Pryor West; permit contractor not independently confirmed.",
+      "community": "Sundance Ridge",
+      "developer": "Rodrock Development (community developer, not permit GC)"
     },
     {
       "id": "olathe:BR26-1352",
@@ -51,7 +58,9 @@
       "builder": "Rodrock Homes",
       "evidence_type": "exact_address_listing",
       "evidence_url": "https://www.rodrock.com/homes/olathe-ks/forest-view/12239-s-solomon-road",
-      "qualification": "Builder named on an exact-address home listing; permit contractor not independently confirmed."
+      "qualification": "Builder named on an exact-address home listing; permit contractor not independently confirmed.",
+      "community": "Forest View",
+      "developer": "Rodrock Development (community developer, not permit GC)"
     },
     {
       "id": "overland_park:BLD-R-2026-01895",
@@ -61,7 +70,9 @@
       "builder": "Don Julian Builders",
       "evidence_type": "exact_address_listing",
       "evidence_url": "https://www.rodrock.com/homes/overland-park-ks/sundance-ridge/17548-fairway-street",
-      "qualification": "Builder named on an exact-address home listing; permit contractor not independently confirmed."
+      "qualification": "Builder named on an exact-address home listing; permit contractor not independently confirmed.",
+      "community": "Sundance Ridge",
+      "developer": "Rodrock Development (community developer, not permit GC)"
     },
     {
       "id": "overland_park:BLD-R-2026-02074",
@@ -71,7 +82,8 @@
       "builder": "Bickimer Homes",
       "evidence_type": "exact_address_listing",
       "evidence_url": "https://www.realtor.com/realestateandhomes-detail/11700-W-181st-St_Overland-Park_KS_66013_M96905-56835",
-      "qualification": "Builder named by an exact-address property listing, not the city permit applicant."
+      "qualification": "Builder named by an exact-address property listing, not the city permit applicant.",
+      "community": "Woodmyre (developer not verified)"
     },
     {
       "id": "kcmo:CPBC-2026-01142",
@@ -81,7 +93,11 @@
       "builder": "Vecino Construction",
       "evidence_type": "project_gc_announcement",
       "evidence_url": "https://vecino.net/uncategorized/promise-place-breaks-ground-delivering-more-affordability-for-kcmo/",
-      "qualification": "Developer announcement names the general contractor for Promise Place overall; individual permit contractor not independently confirmed."
+      "qualification": "Developer announcement names the general contractor for Promise Place overall; individual permit contractor not independently confirmed.",
+      "project_group": "Promise Place — Ivanhoe",
+      "developer": "The Nash Group and Vecino Group (co-developers; announcement)",
+      "community": "Promise Place",
+      "announcement_date": "2026-10-08"
     },
     {
       "id": "kcmo:CPBC-2026-01143",
@@ -91,7 +107,11 @@
       "builder": "Vecino Construction",
       "evidence_type": "project_gc_announcement",
       "evidence_url": "https://vecino.net/uncategorized/promise-place-breaks-ground-delivering-more-affordability-for-kcmo/",
-      "qualification": "Developer announcement names the general contractor for Promise Place overall; individual permit contractor not independently confirmed."
+      "qualification": "Developer announcement names the general contractor for Promise Place overall; individual permit contractor not independently confirmed.",
+      "project_group": "Promise Place — Ivanhoe",
+      "developer": "The Nash Group and Vecino Group (co-developers; announcement)",
+      "community": "Promise Place",
+      "announcement_date": "2026-10-08"
     },
     {
       "id": "kcmo:CPBC-2026-01144",
@@ -101,7 +121,11 @@
       "builder": "Vecino Construction",
       "evidence_type": "project_gc_announcement",
       "evidence_url": "https://vecino.net/uncategorized/promise-place-breaks-ground-delivering-more-affordability-for-kcmo/",
-      "qualification": "Developer announcement names the general contractor for Promise Place overall; individual permit contractor not independently confirmed."
+      "qualification": "Developer announcement names the general contractor for Promise Place overall; individual permit contractor not independently confirmed.",
+      "project_group": "Promise Place — Ivanhoe",
+      "developer": "The Nash Group and Vecino Group (co-developers; announcement)",
+      "community": "Promise Place",
+      "announcement_date": "2026-10-08"
     },
     {
       "id": "kcmo:CPBC-2026-01145",
@@ -111,7 +135,11 @@
       "builder": "Vecino Construction",
       "evidence_type": "project_gc_announcement",
       "evidence_url": "https://vecino.net/uncategorized/promise-place-breaks-ground-delivering-more-affordability-for-kcmo/",
-      "qualification": "Developer announcement names the general contractor for Promise Place overall; individual permit contractor not independently confirmed."
+      "qualification": "Developer announcement names the general contractor for Promise Place overall; individual permit contractor not independently confirmed.",
+      "project_group": "Promise Place — Ivanhoe",
+      "developer": "The Nash Group and Vecino Group (co-developers; announcement)",
+      "community": "Promise Place",
+      "announcement_date": "2026-10-08"
     },
     {
       "id": "kcmo:CPBC-2026-01146",
@@ -121,7 +149,11 @@
       "builder": "Vecino Construction",
       "evidence_type": "project_gc_announcement",
       "evidence_url": "https://vecino.net/uncategorized/promise-place-breaks-ground-delivering-more-affordability-for-kcmo/",
-      "qualification": "Developer announcement names the general contractor for Promise Place overall; individual permit contractor not independently confirmed."
+      "qualification": "Developer announcement names the general contractor for Promise Place overall; individual permit contractor not independently confirmed.",
+      "project_group": "Promise Place — Ivanhoe",
+      "developer": "The Nash Group and Vecino Group (co-developers; announcement)",
+      "community": "Promise Place",
+      "announcement_date": "2026-10-08"
     },
     {
       "id": "kcmo:CPBC-2026-01147",
@@ -131,7 +163,11 @@
       "builder": "Vecino Construction",
       "evidence_type": "project_gc_announcement",
       "evidence_url": "https://vecino.net/uncategorized/promise-place-breaks-ground-delivering-more-affordability-for-kcmo/",
-      "qualification": "Developer announcement names the general contractor for Promise Place overall; individual permit contractor not independently confirmed."
+      "qualification": "Developer announcement names the general contractor for Promise Place overall; individual permit contractor not independently confirmed.",
+      "project_group": "Promise Place — Ivanhoe",
+      "developer": "The Nash Group and Vecino Group (co-developers; announcement)",
+      "community": "Promise Place",
+      "announcement_date": "2026-10-08"
     },
     {
       "id": "kcmo:CPBC-2026-01148",
@@ -141,7 +177,11 @@
       "builder": "Vecino Construction",
       "evidence_type": "project_gc_announcement",
       "evidence_url": "https://vecino.net/uncategorized/promise-place-breaks-ground-delivering-more-affordability-for-kcmo/",
-      "qualification": "Developer announcement names the general contractor for Promise Place overall; individual permit contractor not independently confirmed."
+      "qualification": "Developer announcement names the general contractor for Promise Place overall; individual permit contractor not independently confirmed.",
+      "project_group": "Promise Place — Ivanhoe",
+      "developer": "The Nash Group and Vecino Group (co-developers; announcement)",
+      "community": "Promise Place",
+      "announcement_date": "2026-10-08"
     },
     {
       "id": "kcmo:CPBC-2026-01149",
@@ -151,7 +191,11 @@
       "builder": "Vecino Construction",
       "evidence_type": "project_gc_announcement",
       "evidence_url": "https://vecino.net/uncategorized/promise-place-breaks-ground-delivering-more-affordability-for-kcmo/",
-      "qualification": "Developer announcement names the general contractor for Promise Place overall; individual permit contractor not independently confirmed."
+      "qualification": "Developer announcement names the general contractor for Promise Place overall; individual permit contractor not independently confirmed.",
+      "project_group": "Promise Place — Ivanhoe",
+      "developer": "The Nash Group and Vecino Group (co-developers; announcement)",
+      "community": "Promise Place",
+      "announcement_date": "2026-10-08"
     }
   ]
 }

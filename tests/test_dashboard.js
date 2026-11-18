@@ -8,10 +8,10 @@ const root = path.resolve(__dirname,"..");
 const html = fs.readFileSync(path.join(root,"docs","index.html"),"utf8");
 const code = fs.readFileSync(path.join(root,"docs","app.js"),"utf8");
 
-for (const id of ["activity","followup","viewmode","metric-inspections","metric-sites","leadrows","score","sort","days","export"]) {
+for (const id of ["activity","followup","viewmode","source-feed-count","metric-inspections","metric-sites","leadrows","score","sort","days","export"]) {
   assert.ok(html.includes('id="'+id+'"'),"Missing dashboard control: "+id);
 }
-for (const header of ["Official activity","Other dates","Sales follow-up","Other permits at site","Raw source row"]) {
+for (const header of ["Official activity","Other dates","Sales follow-up","Other permits at site","Raw source data"]) {
   assert.ok(html.includes(header),"Missing table column: "+header);
 }
 assert.ok(html.indexOf("<th>Permit record / search</th>") < html.indexOf("<th>Raw source row</th>"),
@@ -52,3 +52,6 @@ assert.equal(groups.size,3,"Only server-confirmed same-address IDs may group");
 assert.equal(groups.get("site-abc").length,2);
 assert.notEqual(t.siteKey(missingId),t.siteKey(sameSite),"Never guess client-side matches");
 console.log("Source-backed site group selection: PASS");
+
+assert.ok(code.includes("Raw dataset ↗"),"Bulk source data should be explicitly labeled");
+assert.ok(code.includes("source_url_scope"),"Source scope should survive exports");

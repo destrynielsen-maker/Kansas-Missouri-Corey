@@ -39,7 +39,7 @@ jobs:
         run: |
           node --check docs/app.js
           node tests/test_dashboard.js
-      - name: Load and validate all four official feeds
+      - name: Load and validate all five official feeds
         run: python src/ingest.py --days 120
       - name: Audit and summarize lead quality
         run: python src/audit_snapshot.py

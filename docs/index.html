@@ -26,7 +26,7 @@
       </div>
       <div class="hero-card" aria-label="Service coverage">
         <div class="section-kicker">COVERAGE • FIRST RELEASE</div>
-        <strong>4</strong><span>automated city feeds configured</span>
+        <strong id="source-feed-count">—</strong><span>municipal feeds in verified snapshot</span>
         <div class="state-badges"><span>MISSOURI</span><span>KANSAS</span></div>
         <p>More jurisdictions are tracked in the source registry below.</p>
       </div>
@@ -60,7 +60,7 @@
       </div>
       <div class="resultbar"><span id="resultcount">Waiting for an official data snapshot.</span><span>Construction starts are unverified; follow-up timing is based on days since permit issuance.</span></div>
       <div class="tablewrap">
-        <table><thead><tr><th>Score</th><th>Issued</th><th>Permit / project</th><th>Other permits at site</th><th>Site address</th><th>Jurisdiction</th><th>Building type</th><th>Valuation</th><th>Official activity</th><th>Other dates</th><th>Sales follow-up</th><th>Permit record / search</th><th>Raw source row</th></tr></thead><tbody id="leadrows"><tr><td colspan="13" class="empty">No live snapshot published yet. The first verified ingestion run will populate this view.</td></tr></tbody></table>
+        <table><thead><tr><th>Score</th><th>Issued</th><th>Permit / project</th><th>Other permits at site</th><th>Site address</th><th>Jurisdiction</th><th>Building type</th><th>Valuation</th><th>Official activity</th><th>Other dates</th><th>Sales follow-up</th><th>Permit record / search</th><th>Raw source data</th></tr></thead><tbody id="leadrows"><tr><td colspan="13" class="empty">No live snapshot published yet. The first verified ingestion run will populate this view.</td></tr></tbody></table>
       </div>
       <div class="tablefoot"><span id="row-limit"></span><span>Issue and inspection dates come from official records. Follow-up recommendations are not construction stages.</span></div>
       <div class="timeline-legend"><strong>Site grouping:</strong> Records are grouped only when their issuing city and normalized street address match. This is a sales convenience, not proof they belong to one construction project, builder, or customer. Site view shows the highest-scored matching permit, with other numbers expandable. The counts apply to your current filters; exports reflect the selected view.</div>

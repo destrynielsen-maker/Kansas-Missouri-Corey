@@ -59,10 +59,10 @@
       "key": "independence",
       "name": "Independence, MO",
       "region": "Jackson County",
-      "mode": "candidate",
-      "note": "Official Open Independence publishes Building Permits as Data Set, API (last-year scope). API schema and pagination not yet validated; no rows imported.",
+      "mode": "automated",
+      "note": "Official Open Independence API validated November 18, 2026. Municipal data provides permit number, address, issue date, type, work description, and value; no individual status or inspection date. Filters strictly for new buildings and additions.",
       "source_url": "https://opendata.independencemo.gov/dataset?code=V1BUILDINGPERMITS",
-      "portal_url": "https://apps.indepmo.org/apps/BuildingPermits"
+      "portal_url": "https://apps.indepmo.org/comdev/SearchPermitStatus"
     },
     {
       "key": "shawnee",

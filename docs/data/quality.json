@@ -1,6 +1,11 @@
 {
-  "source_snapshot": "2026-11-18T17:44:11+00:00",
+  "source_snapshot": "2026-11-18T18:05:09+00:00",
   "total_records": 776,
+  "site_stats": {
+    "unique_sites": 757,
+    "multiple_permit_sites": 7,
+    "permits_on_multiple_permit_sites": 26
+  },
   "by_category": {
     "Single-family": 541,
     "Commercial": 102,
@@ -16,6 +21,9 @@
   "issues_to_review": [],
   "jurisdictions": {
     "Kansas City, MO": {
+      "unique_sites": 372,
+      "multiple_permit_sites": 7,
+      "permits_on_multiple_permit_sites": 26,
       "inspection_evidence": {
         "date_not_reported": 210,
         "inspection_recorded": 181
@@ -201,6 +209,9 @@
       }
     },
     "Lee's Summit, MO": {
+      "unique_sites": 90,
+      "multiple_permit_sites": 0,
+      "permits_on_multiple_permit_sites": 0,
       "inspection_evidence": {
         "field_not_published": 90
       },
@@ -350,6 +361,9 @@
       }
     },
     "Olathe, KS": {
+      "unique_sites": 183,
+      "multiple_permit_sites": 0,
+      "permits_on_multiple_permit_sites": 0,
       "inspection_evidence": {
         "field_not_published": 183
       },
@@ -508,6 +522,9 @@
       }
     },
     "Overland Park, KS": {
+      "unique_sites": 112,
+      "multiple_permit_sites": 0,
+      "permits_on_multiple_permit_sites": 0,
       "inspection_evidence": {
         "inspection_recorded": 89,
         "date_not_reported": 23

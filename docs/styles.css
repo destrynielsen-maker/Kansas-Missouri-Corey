@@ -42,3 +42,10 @@ table{min-width:1450px}
 .planning-row:hover{background:#fcfdfd}
 @media(max-width:900px){.planning-filters{grid-template-columns:1fr 1fr}.planning-filters label:first-child{grid-column:span 2}}
 @media(max-width:650px){.planning-filters{grid-template-columns:1fr}.planning-filters label:first-child{grid-column:span 1}}
+
+/* Builder/GC independent research, evidence-labelled as non-permit-verified */
+.builder-name{color:#153b52;font-weight:800;display:block;max-width:240px}
+.builder-missing{color:#7b8997;font-weight:650;white-space:nowrap}
+.builder-evidence{display:inline-block;font-size:11px;color:#087d84;margin-top:5px;text-decoration:underline;font-weight:700}
+.permitno a{text-decoration:underline;text-underline-offset:3px}
+table{min-width:1630px}

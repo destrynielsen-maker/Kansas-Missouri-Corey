@@ -8,10 +8,10 @@ const root = path.resolve(__dirname,"..");
 const html = fs.readFileSync(path.join(root,"docs","index.html"),"utf8");
 const code = fs.readFileSync(path.join(root,"docs","app.js"),"utf8");
 
-for (const id of ["activity","followup","viewmode","source-feed-count","metric-inspections","metric-sites","lenexa-planning","lenexa-search","lenexa-status","lenexa-category","lenexa-reviewed","lenexa-rows","export-lenexa","leadrows","score","sort","days","export"]) {
+for (const id of ["activity","followup","viewmode","source-feed-count","metric-inspections","metric-sites","lenexa-planning","lenexa-search","lenexa-status","lenexa-category","lenexa-reviewed","lenexa-rows","export-lenexa","leadrows","builderstatus","score","sort","days","export"]) {
   assert.ok(html.includes('id="'+id+'"'),"Missing dashboard control: "+id);
 }
-for (const header of ["Official activity","Other dates","Sales follow-up","Other permits at site","Raw source data"]) {
+for (const header of ["Official activity","Other dates","Sales follow-up","Other permits at site","Builder / GC","Raw source data"]) {
   assert.ok(html.includes(header),"Missing table column: "+header);
 }
 assert.ok(html.indexOf("<th>Permit record / search</th>") < html.indexOf("<th>Raw source data</th>"),
@@ -23,7 +23,7 @@ const sandbox = {
   setTimeout, clearTimeout, console, Date
 };
 vm.createContext(sandbox);
-vm.runInContext(code+"\nglobalThis.__tests={followupBand,evidenceKind,safeLink,csvEsc,groupSiteRows,siteKey,validateLenexaPlanning};",sandbox,{timeout:1000});
+vm.runInContext(code+"\nglobalThis.__tests={followupBand,evidenceKind,safeLink,csvEsc,groupSiteRows,siteKey,validateLenexaPlanning,builderForPermit,normalizedBuilderAddress,builderBasisLabel,salesDetailUrl};",sandbox,{timeout:1000});
 const t=sandbox.__tests;
 assert.equal(t.followupBand(0).key,"0-7");
 assert.equal(t.followupBand(7).text,"Contact now");
@@ -71,3 +71,16 @@ assert.equal(t.validateLenexaPlanning(bogus),false,"Planning data cannot claim l
 assert.ok(code.includes("loadLenexaPlanning()"),"Planning pipeline should load separately");
 assert.ok(code.includes("STALE — recheck official source"),"Stale manual reviews must be highlighted");
 console.log("Lenexa planning source separation and freshness: PASS");
+
+const builderOverlay=JSON.parse(fs.readFileSync(path.join(root,"docs","data","builders.json"),"utf8"));
+assert.equal(builderOverlay.entries.length,15,"Initial researched builder matches must remain intact");
+assert.equal(new Set(builderOverlay.entries.map(x=>x.id)).size,15,"Builder IDs must be unique");
+assert.equal(new Set(builderOverlay.entries.map(x=>x.builder)).size,7,"Builder-company attribution should be stable");
+assert.equal(t.normalizedBuilderAddress(" 123 Main St. "),t.normalizedBuilderAddress("123 MAIN ST"));
+assert.ok(t.salesDetailUrl({id:"kcmo:CPBC-2026-01142"}).includes("permit.html?id=kcmo%3A"));
+assert.equal(t.builderBasisLabel({evidence_type:"project_gc_announcement"}),"GC in project announcement");
+const knownIds=new Set(JSON.parse(fs.readFileSync(path.join(root,"docs","data","permits.json"),"utf8")).permits.map(x=>x.id));
+for(const item of builderOverlay.entries)assert.ok(knownIds.has(item.id),"Builder research must be matched to a real source permit: "+item.id);
+assert.ok(code.includes("builderStatus"),"Builder sourced/missing filter is functional");
+assert.ok(code.includes("builderCell(tr,item)"),"Builder column must be actually rendered");
+console.log("Builder and formatted detail navigation: PASS");

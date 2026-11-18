@@ -6,11 +6,11 @@ Public-source construction permit leads for the Kansas City metro, covering Miss
 
 The default dashboard view groups permits only when issuing jurisdiction and exact normalized street address match (case, whitespace, periods and commas ignored; unit numbers preserved). This is a **same-address cluster**, not proof of the same project, developer, customer, or builder. Select **Individual permits** to see every original agency row. The count and list of related permits reflect current filters, while the full 120-day site count is retained in CSV exports. Site view exports one representative highest-scored permit per matching address; permit view exports all qualifying permits.
 
-See [`docs/source-audit.md`](docs/source-audit.md) for the pending Kansas City, KS, Lenexa, Independence, and Shawnee integration gates. **Portal-only jurisdictions are not counted as live feeds.**
+See [`docs/source-audit.md`](docs/source-audit.md) for the pending Kansas City, KS, Lenexa and Shawnee integrations, and [Independence API evidence](docs/independence-api.md) for the verified fifth feed. **Portal-only jurisdictions are not counted as live feeds.**
 
-## First release
+## Current coverage
 
-The first data adapters target **Kansas City, MO** (Open Data KC), **Overland Park, KS** (city ArcGIS), **Olathe, KS** (city ArcGIS), and **Lee's Summit, MO** (city ArcGIS). Kansas City, KS and Lenexa have verified public search portals but are not bulk-imported yet.
+Five live adapters cover **Kansas City, MO** (Socrata), **Overland Park, KS**, **Olathe, KS**, **Lee's Summit, MO** (municipal ArcGIS), and **Independence, MO** (city-operated Open Independence JSON API). Kansas City, KS and Lenexa remain public-search-only until their official bulk datasets can be verified. Independence's dataset is titled Active, but individual permit statuses, inspection dates, and construction starts are not published.
 
 The dashboard prioritizes new construction and additions, lets a salesperson filter/search/export leads, and shows the **public permit/detail lookup before the underlying machine-readable source**. If a source does not publish a verified direct record URL, the primary link is clearly labeled **Search permit**, with the permit number next to it; we do not fabricate deep links.
 
@@ -40,7 +40,7 @@ After setup, manually use **Actions → Publish construction lead dashboard → 
 
 ## Technical rules
 
-- Four independent official adapters, paginated HTTP requests, bounded timeouts and retries.
+- Five independent official adapters: paginated Socrata and ArcGIS feeds plus a schema-validated bounded municipal JSON dataset for Independence; freshness checks, timeouts and retries.
 - Only recent building-related permits, with date and valuation sanity checks and deduplication.
 - A failed or empty mandatory source prevents publishing a misleading empty dataset.
 - No private credentials in browser code or repository; no scraping gated portals.
@@ -55,5 +55,6 @@ See `docs/data/coverage.json` for verified portals and staged jurisdictions. For
 - Overland Park, KS: https://maps.opkansas.org/mapping/rest/services/MixedInfo/Building_Permit_Report/MapServer/0
 - Olathe, KS: https://arcgis.olatheks.org/arcgis/rest/services/Planning/Development/MapServer/0
 - Lee's Summit, MO: https://maps.cityofls.net/arcgis/rest/services/Development_Public/MapServer/29
+- Independence, MO: https://opendata.independencemo.gov/dataset?code=V1BUILDINGPERMITS
 
 Not affiliated with any of these municipalities.

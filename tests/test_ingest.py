@@ -57,6 +57,48 @@ class IngestionTests(unittest.TestCase):
     def test_missing_date_not_a_lead(self):
         self.assertIsNone(ingest.normalize("lees_summit", {"attributes": {"PermitNumber": "1"}}, TODAY, CUTOFF))
 
+    def test_priority_classification_does_not_count_remodels(self):
+        self.assertEqual(ingest.classify("CPPU - Building (Residential)", "Single Family - Interior Remodel"), "Remodel")
+        self.assertEqual(ingest.classify("CPPU - Building (Residential)", "Single Family - Addition"), "Addition")
+        self.assertEqual(ingest.classify("CPPU - Building (Commercial)", "Renovation", "NEW OFFICE TF"), "Remodel")
+        self.assertEqual(ingest.classify("CPPU - Building (Commercial)", "New"), "Commercial")
+
+    def test_priority_classification_structural_builds(self):
+        self.assertEqual(ingest.classify("Building (Residential)", "New Single Family"), "Single-family")
+        self.assertEqual(ingest.classify("Building - Residential", "Single Family", "SFR"), "Single-family")
+        self.assertEqual(ingest.classify("CPPU - Building (Residential)", "Townhouse - New"), "Multifamily")
+        self.assertEqual(ingest.classify("Building - Commercial", "New Multi Family"), "Multifamily")
+        self.assertEqual(ingest.classify("NEW DUPLEX", ""), "Multifamily")
+        self.assertEqual(ingest.classify("Building (Commercial)", "New Restaurant"), "Commercial")
+        self.assertEqual(ingest.classify("NEW SHELL BUILDING", ""), "Commercial")
+
+    def test_non_building_permits_excluded(self):
+        for ptype, work in [
+            ("Building (Mech/Elec/Plumb)", "Furnace/AC"),
+            ("Building (Mech/Elec/Plumb)", "Electrical Service"),
+            ("Building (Residential)", "Fence/Wall"),
+            ("Building (Residential)", "Deck"),
+            ("Building - Demolition", "Residential"),
+            ("Land Disturbance Permit", "Grading Only"),
+            ("Building (Commercial)", "Tenant Finish/Remodel"),
+            ("CHANGE OF TENANT", ""),
+            ("NEW TENANT FINISH", ""),
+        ]:
+            self.assertIn(ingest.classify(ptype, work), ("Other", "Remodel"), (ptype, work))
+
+    def test_closed_permit_excluded(self):
+        base={"permit_number":"CPBR-2026-0001", "issue_date":"2026-10-30",
+              "permit_type":"CPPU - Building (Residential)", "work_class":"Single Family - New",
+              "main_address_line1":"101 Main"}
+        for status in ["Closed","Cancelled","Hold","Complete/Finaled","Suspended"]:
+            self.assertIsNone(ingest.normalize("kcmo",{**base,"permit_status":status},TODAY,CUTOFF))
+
+    def test_relevance_filter_excludes_residential_remodel(self):
+        base={"permit_number":"CPBR-2026-0001", "issue_date":"2026-10-30",
+              "permit_type":"CPPU - Building (Residential)", "work_class":"Single Family - Interior Remodel",
+              "main_address_line1":"101 Main","permit_status":"Issued"}
+        self.assertIsNone(ingest.normalize("kcmo",base,TODAY,CUTOFF))
+
 
 if __name__ == "__main__":
     unittest.main()

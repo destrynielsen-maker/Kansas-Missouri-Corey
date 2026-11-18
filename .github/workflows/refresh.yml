@@ -40,6 +40,7 @@ jobs:
       - name: Audit and summarize lead quality
         run: python src/audit_snapshot.py
       - name: Commit dated snapshot and audit only after successful validation
+        if: github.ref == 'refs/heads/main'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"

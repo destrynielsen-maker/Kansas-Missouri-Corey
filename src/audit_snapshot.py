@@ -54,6 +54,33 @@ def summarize(snapshot: dict) -> dict:
             raise ValueError("Unrecognized permit link kind")
         if not isinstance(p.get("score"), int) or not 0 <= p["score"] <= 100:
             raise ValueError("Invalid score")
+    site_groups = defaultdict(list)
+    for p in permits:
+        site_id = p.get("site_group_id")
+        if not isinstance(site_id, str) or not site_id.startswith("site-"):
+            raise ValueError("Missing stable site group identifier")
+        site_groups[site_id].append(p)
+        if p.get("site_group_basis") not in ("same_normalized_address", "unverified_address"):
+            raise ValueError("Missing or invalid site grouping evidence")
+    for group_id, rows in site_groups.items():
+        if len({(p["jurisdiction"], p.get("state")) for p in rows}) != 1:
+            raise ValueError("Site group joins different jurisdictions")
+        for p in rows:
+            if p.get("site_permit_count") != len(rows):
+                raise ValueError("Site permit count does not match group members")
+            if not isinstance(p.get("site_related_permits"), list) or sorted(p["site_related_permits"]) != sorted(r["permit_number"] for r in rows):
+                raise ValueError("Site related permit numbers do not match group")
+            if p["site_group_basis"] == "same_normalized_address" and not p.get("address"):
+                raise ValueError("Grouped a record with no site address")
+        if len(rows) > 1 and "unverified_address" in (p["site_group_basis"] for p in rows):
+            raise ValueError("Unverified site address was combined with other records")
+    computed_site_stats = {
+        "unique_sites": len(site_groups),
+        "multiple_permit_sites": sum(len(rows) > 1 for rows in site_groups.values()),
+        "permits_on_multiple_permit_sites": sum(len(rows) for rows in site_groups.values() if len(rows) > 1),
+    }
+    if snapshot.get("site_stats") != computed_site_stats:
+        raise ValueError("Published site statistics differ from source rows")
     results = {}
     for city, rows in sorted(by_city.items()):
         cat = Counter(p.get("category") or "Unknown" for p in rows)
@@ -85,7 +112,11 @@ def summarize(snapshot: dict) -> dict:
             "finaled_date": sum(bool(p.get("finaled_date")) for p in rows),
             "warnings": sum(bool(p.get("timeline_warnings")) for p in rows),
         }
+        site_members = Counter(p["site_group_id"] for p in rows)
         results[city] = {
+            "unique_sites": len(site_members),
+            "multiple_permit_sites": sum(n > 1 for n in site_members.values()),
+            "permits_on_multiple_permit_sites": sum(n for n in site_members.values() if n > 1),
             "inspection_evidence": dict(signals),
             "timeline_dates": timeline_dates,
             "count": len(rows), "earliest_issue": min(p["issued"] for p in rows),
@@ -104,6 +135,7 @@ def summarize(snapshot: dict) -> dict:
     return {
         "source_snapshot": snapshot["generated_at"],
         "total_records": len(permits),
+        "site_stats": computed_site_stats,
         "by_category": dict(Counter(p.get("category") or "Unknown" for p in permits).most_common()),
         "by_state": dict(Counter(p.get("state") or "Unknown" for p in permits).most_common()),
         "direct_record_count": sum(p.get("link_kind") == "record" for p in permits),

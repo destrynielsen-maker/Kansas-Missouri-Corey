@@ -33,7 +33,8 @@
     </section>
 
     <section class="metrics" aria-label="Snapshot overview">
-      <div class="metric"><span>Leads in selected window</span><strong id="metric-total">—</strong><small id="metric-total-sub">Awaiting refresh</small></div>
+      <div class="metric"><span>Permit records in filter</span><strong id="metric-total">—</strong><small id="metric-total-sub">Awaiting refresh</small></div>
+      <div class="metric"><span>Distinct site addresses</span><strong id="metric-sites">—</strong><small>Same-address groups; not confirmed projects</small></div>
       <div class="metric"><span>Single-family builds</span><strong id="metric-homes">—</strong><small>New-home opportunities</small></div>
       <div class="metric"><span>Multifamily projects</span><strong id="metric-multis">—</strong><small>Attached / apartment permits</small></div>
       <div class="metric"><span>High-priority leads</span><strong id="metric-priority">—</strong><small>Opportunity score 75+</small></div>
@@ -47,6 +48,7 @@
       </div>
       <div class="filterbar">
         <label class="search-field">Search <input type="search" id="search" placeholder="Address, permit number, project, city…" autocomplete="off"></label>
+        <label>Results view <select id="viewmode"><option value="site" selected>Site opportunities</option><option value="permit">Individual permits</option></select></label>
         <label>State <select id="state"><option value="">Both states</option><option value="MO">Missouri</option><option value="KS">Kansas</option></select></label>
         <label>City <select id="city"><option value="">All cities</option></select></label>
         <label>Type <select id="category"><option value="">All building types</option><option>Single-family</option><option>Multifamily</option><option>Commercial</option><option>Addition</option><option>Remodel</option><option>Other</option></select></label>
@@ -58,9 +60,10 @@
       </div>
       <div class="resultbar"><span id="resultcount">Waiting for an official data snapshot.</span><span>Construction starts are unverified; follow-up timing is based on days since permit issuance.</span></div>
       <div class="tablewrap">
-        <table><thead><tr><th>Score</th><th>Issued</th><th>Permit / project</th><th>Site address</th><th>Jurisdiction</th><th>Building type</th><th>Valuation</th><th>Official activity</th><th>Other dates</th><th>Sales follow-up</th><th>Permit record / search</th><th>Raw source row</th></tr></thead><tbody id="leadrows"><tr><td colspan="12" class="empty">No live snapshot published yet. The first verified ingestion run will populate this view.</td></tr></tbody></table>
+        <table><thead><tr><th>Score</th><th>Issued</th><th>Permit / project</th><th>Other permits at site</th><th>Site address</th><th>Jurisdiction</th><th>Building type</th><th>Valuation</th><th>Official activity</th><th>Other dates</th><th>Sales follow-up</th><th>Permit record / search</th><th>Raw source row</th></tr></thead><tbody id="leadrows"><tr><td colspan="13" class="empty">No live snapshot published yet. The first verified ingestion run will populate this view.</td></tr></tbody></table>
       </div>
       <div class="tablefoot"><span id="row-limit"></span><span>Issue and inspection dates come from official records. Follow-up recommendations are not construction stages.</span></div>
+      <div class="timeline-legend"><strong>Site grouping:</strong> Records are grouped only when their issuing city and normalized street address match. This is a sales convenience, not proof they belong to one construction project, builder, or customer. Site view shows the highest-scored matching permit, with other numbers expandable. The counts apply to your current filters; exports reflect the selected view.</div>
       <div class="timeline-legend"><strong>How timing works:</strong> "Inspection recorded" means the city published a last-inspection date; it does not prove construction started, reached a specific phase, or remains active. "No inspection date" means the field exists but is blank. "Not published" means this data feed has no inspection date field. Dates shown under "Other dates" are agency-reported application and expiration dates, never estimated starts.</div>
     </section>
 

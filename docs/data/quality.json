@@ -1,5 +1,5 @@
 {
-  "source_snapshot": "2026-11-18T17:30:21+00:00",
+  "source_snapshot": "2026-11-18T17:44:11+00:00",
   "total_records": 776,
   "by_category": {
     "Single-family": 541,
@@ -16,6 +16,17 @@
   "issues_to_review": [],
   "jurisdictions": {
     "Kansas City, MO": {
+      "inspection_evidence": {
+        "date_not_reported": 210,
+        "inspection_recorded": 181
+      },
+      "timeline_dates": {
+        "application_date": 391,
+        "last_inspection_date": 181,
+        "expiration_date": 0,
+        "finaled_date": 0,
+        "warnings": 0
+      },
       "count": 391,
       "earliest_issue": "2026-07-21",
       "latest_issue": "2026-11-13",
@@ -190,6 +201,16 @@
       }
     },
     "Lee's Summit, MO": {
+      "inspection_evidence": {
+        "field_not_published": 90
+      },
+      "timeline_dates": {
+        "application_date": 0,
+        "last_inspection_date": 0,
+        "expiration_date": 90,
+        "finaled_date": 0,
+        "warnings": 0
+      },
       "count": 90,
       "earliest_issue": "2026-07-22",
       "latest_issue": "2026-11-16",
@@ -329,6 +350,16 @@
       }
     },
     "Olathe, KS": {
+      "inspection_evidence": {
+        "field_not_published": 183
+      },
+      "timeline_dates": {
+        "application_date": 0,
+        "last_inspection_date": 0,
+        "expiration_date": 0,
+        "finaled_date": 0,
+        "warnings": 0
+      },
       "count": 183,
       "earliest_issue": "2026-07-22",
       "latest_issue": "2026-11-13",
@@ -477,6 +508,17 @@
       }
     },
     "Overland Park, KS": {
+      "inspection_evidence": {
+        "inspection_recorded": 89,
+        "date_not_reported": 23
+      },
+      "timeline_dates": {
+        "application_date": 112,
+        "last_inspection_date": 89,
+        "expiration_date": 112,
+        "finaled_date": 0,
+        "warnings": 0
+      },
       "count": 112,
       "earliest_issue": "2026-07-22",
       "latest_issue": "2026-11-16",

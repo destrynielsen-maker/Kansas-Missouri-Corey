@@ -37,11 +37,13 @@ jobs:
         run: python -m unittest discover -s tests -v
       - name: Load and validate all four official feeds
         run: python src/ingest.py --days 120
-      - name: Commit dated snapshot only after successful validation
+      - name: Audit and summarize lead quality
+        run: python src/audit_snapshot.py
+      - name: Commit dated snapshot and audit only after successful validation
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add docs/data/permits.json
+          git add docs/data/permits.json docs/data/quality.json
           if git diff --staged --quiet; then
             echo "No snapshot change"
           else

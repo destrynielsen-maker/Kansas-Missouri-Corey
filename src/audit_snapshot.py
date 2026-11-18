@@ -44,6 +44,12 @@ def summarize(snapshot: dict) -> dict:
             parsed = urlparse(u)
             if parsed.scheme != "https" or not parsed.netloc:
                 raise ValueError(f"Invalid {url_field} for {p.get('id')}")
+        if p.get("start_date") is not None or p.get("start_date_source") not in (None, "not_published"):
+            raise ValueError("Unverified construction start date was published")
+        if p.get("inspection_evidence") == "inspection_recorded" and not p.get("last_inspection_date"):
+            raise ValueError("Inspection evidence has no documented inspection date")
+        if p.get("last_inspection_date") and p.get("inspection_evidence") != "inspection_recorded":
+            raise ValueError("Inspection date lacks an inspection-record evidence label")
         if p.get("link_kind") not in ("search", "record"):
             raise ValueError("Unrecognized permit link kind")
         if not isinstance(p.get("score"), int) or not 0 <= p["score"] <= 100:
@@ -71,7 +77,17 @@ def summarize(snapshot: dict) -> dict:
                  "direct_record": p.get("link_kind") == "record"}
                 for p in matching[:3]
             ]
+        signals = Counter(p.get("inspection_evidence") or "not_measured" for p in rows)
+        timeline_dates = {
+            "application_date": sum(bool(p.get("application_date")) for p in rows),
+            "last_inspection_date": sum(bool(p.get("last_inspection_date")) for p in rows),
+            "expiration_date": sum(bool(p.get("expiration_date")) for p in rows),
+            "finaled_date": sum(bool(p.get("finaled_date")) for p in rows),
+            "warnings": sum(bool(p.get("timeline_warnings")) for p in rows),
+        }
         results[city] = {
+            "inspection_evidence": dict(signals),
+            "timeline_dates": timeline_dates,
             "count": len(rows), "earliest_issue": min(p["issued"] for p in rows),
             "latest_issue": max(p["issued"] for p in rows),
             "categories": dict(cat.most_common()), "statuses": dict(statuses.most_common(10)),

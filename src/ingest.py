@@ -184,6 +184,76 @@ def source_record_url(cfg: dict, permit_number: str) -> str:
     })
 
 
+
+def milestone_date(value, issued: date, today: date, label: str, warnings: list[str], *,
+                   allow_future: bool = False, before_issue: bool = False) -> str | None:
+    """Only accept a bounded, chronologically credible date; preserve evidence warnings."""
+    d = to_date(value)
+    if d is None:
+        return None
+    if d.year < 1980 or (not allow_future and d > today + timedelta(days=2)):
+        warnings.append(label + "_invalid_or_future")
+        return None
+    if before_issue:
+        if d > issued:
+            warnings.append(label + "_after_issue")
+            return None
+    elif d < issued:
+        warnings.append(label + "_before_issue")
+        return None
+    return d.isoformat()
+
+
+def extract_timeline(cfg_key: str, raw: dict, issued: date, today: date) -> dict:
+    """Official agency dates only, NOT estimated start dates or fabricated build stages.
+
+    Sources with no inspection field are distinguished from sources with a blank field.
+    A last-inspection date signals an inspection RECORD, not construction progress.
+    """
+    warnings: list[str] = []
+    if cfg_key == "kcmo":
+        row = raw
+        applied_raw = row.get("application_date")
+        inspected_raw = row.get("last_inspection_date")
+        expiry_raw = row.get("expiration_date")
+        final_raw = row.get("finaled_date")
+        inspection_supported = True
+    elif cfg_key == "overland_park":
+        row = raw.get("attributes", raw)
+        applied_raw = row.get("ApplyDate")
+        inspected_raw = row.get("LastInspectionDate")
+        expiry_raw = row.get("ExpireDate")
+        final_raw = row.get("FinalizedDate")
+        inspection_supported = True
+    elif cfg_key == "lees_summit":
+        row = raw.get("attributes", raw)
+        applied_raw = None
+        inspected_raw = None
+        expiry_raw = row.get("dateExpiration")
+        final_raw = None
+        inspection_supported = False
+    else:
+        applied_raw = inspected_raw = expiry_raw = final_raw = None
+        inspection_supported = False
+    applied = milestone_date(applied_raw, issued, today, "application", warnings, before_issue=True)
+    inspected = milestone_date(inspected_raw, issued, today, "inspection", warnings)
+    expires = milestone_date(expiry_raw, issued, today, "expiration", warnings, allow_future=True)
+    finalized = milestone_date(final_raw, issued, today, "finaled", warnings)
+    evidence = ("inspection_recorded" if inspected else
+                "date_not_reported" if inspection_supported else "field_not_published")
+    return {
+        "application_date": applied,
+        "last_inspection_date": inspected,
+        "expiration_date": expires,
+        "finaled_date": finalized,
+        "start_date": None,
+        "start_date_source": "not_published",
+        "inspection_evidence": evidence,
+        "timeline_warnings": warnings,
+        "timeline_source": SOURCES[cfg_key]["source"],
+    }
+
+
 def normalize(cfg_key: str, raw: dict, today: date, cutoff: date) -> dict | None:
     cfg = SOURCES[cfg_key]
     if cfg_key == "kcmo":
@@ -238,6 +308,9 @@ def normalize(cfg_key: str, raw: dict, today: date, cutoff: date) -> dict | None
                  r"expired|suspended|hold|temporary occupancy|substantial completion|in plan review|"
                  r"ready for issuance)\b", status, re.IGNORECASE):
         return None
+    timeline = extract_timeline(cfg_key, raw, issued, today)
+    if timeline["finaled_date"] is not None:
+        return None  # Published completion overrides a stale issued status.
     category = classify(ptype, work, description)
     # This is a NEW BUILD + structural addition lead list, not a general permit dump.
     if category not in ("Single-family", "Multifamily", "Commercial", "Addition"):
@@ -267,6 +340,7 @@ def normalize(cfg_key: str, raw: dict, today: date, cutoff: date) -> dict | None
         "link_kind": "record" if direct_url else "search",
         "source_url": url,
         "source_home": cfg["source"],
+        **timeline,
     }
 
 

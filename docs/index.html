@@ -37,6 +37,7 @@
       <div class="metric"><span>Single-family builds</span><strong id="metric-homes">—</strong><small>New-home opportunities</small></div>
       <div class="metric"><span>Multifamily projects</span><strong id="metric-multis">—</strong><small>Attached / apartment permits</small></div>
       <div class="metric"><span>High-priority leads</span><strong id="metric-priority">—</strong><small>Opportunity score 75+</small></div>
+      <div class="metric"><span>Inspection dates reported</span><strong id="metric-inspections">—</strong><small>Inspection evidence; not a verified start</small></div>
     </section>
 
     <section class="panel" id="leads">
@@ -51,13 +52,16 @@
         <label>Type <select id="category"><option value="">All building types</option><option>Single-family</option><option>Multifamily</option><option>Commercial</option><option>Addition</option><option>Remodel</option><option>Other</option></select></label>
         <label>Issued <select id="days"><option value="7">Last 7 days</option><option value="30">Last 30 days</option><option value="90" selected>Last 90 days</option><option value="120">Last 120 days</option></select></label>
         <label>Score <select id="score"><option value="0">Any score</option><option value="50">50+</option><option value="75">75+</option><option value="90">90+</option></select></label>
-        <label>Sort <select id="sort"><option value="score">Highest opportunity</option><option value="newest">Newest issued</option><option value="value">Highest valuation</option></select></label>
+        <label>Official activity <select id="activity"><option value="">Any evidence</option><option value="inspection_recorded">Inspection date on file</option><option value="date_not_reported">No inspection date</option><option value="field_not_published">Agency doesn't publish</option></select></label>
+        <label>Follow-up <select id="followup"><option value="">Any age</option><option value="0-7">New (0–7 days)</option><option value="8-30">Recent (8–30 days)</option><option value="31-90">Established (31–90 days)</option><option value="91+">Older (91+ days)</option></select></label>
+        <label>Sort <select id="sort"><option value="score">Highest opportunity</option><option value="newest">Newest issued</option><option value="value">Highest valuation</option><option value="activity">Latest official activity</option><option value="followup">Newest follow-up opportunities</option></select></label>
       </div>
-      <div class="resultbar"><span id="resultcount">Waiting for an official data snapshot.</span><span>Score estimates lead relevance, not permit approval or project start.</span></div>
+      <div class="resultbar"><span id="resultcount">Waiting for an official data snapshot.</span><span>Construction starts are unverified; follow-up timing is based on days since permit issuance.</span></div>
       <div class="tablewrap">
-        <table><thead><tr><th>Score</th><th>Issued</th><th>Permit / project</th><th>Site address</th><th>Jurisdiction</th><th>Building type</th><th>Valuation</th><th>Permit record / search</th><th>Raw source row</th></tr></thead><tbody id="leadrows"><tr><td colspan="9" class="empty">No live snapshot published yet. The first verified ingestion run will populate this view.</td></tr></tbody></table>
+        <table><thead><tr><th>Score</th><th>Issued</th><th>Permit / project</th><th>Site address</th><th>Jurisdiction</th><th>Building type</th><th>Valuation</th><th>Official activity</th><th>Other dates</th><th>Sales follow-up</th><th>Permit record / search</th><th>Raw source row</th></tr></thead><tbody id="leadrows"><tr><td colspan="12" class="empty">No live snapshot published yet. The first verified ingestion run will populate this view.</td></tr></tbody></table>
       </div>
-      <div class="tablefoot"><span id="row-limit"></span><span>Dates are municipal issue dates. Some sources do not publish contractor or direct-record links.</span></div>
+      <div class="tablefoot"><span id="row-limit"></span><span>Issue and inspection dates come from official records. Follow-up recommendations are not construction stages.</span></div>
+      <div class="timeline-legend"><strong>How timing works:</strong> "Inspection recorded" means the city published a last-inspection date; it does not prove construction started, reached a specific phase, or remains active. "No inspection date" means the field exists but is blank. "Not published" means this data feed has no inspection date field. Dates shown under "Other dates" are agency-reported application and expiration dates, never estimated starts.</div>
     </section>
 
     <section class="panel secondary" id="coverage">

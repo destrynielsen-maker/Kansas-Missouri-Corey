@@ -50,10 +50,11 @@
       "key": "lenexa",
       "name": "Lenexa, KS",
       "region": "Johnson County",
-      "mode": "portal",
-      "note": "Public Accela building permit search and official monthly building permit reports; monthly reports are not a validated row-level API.",
-      "source_url": "https://aca-prod.accela.com/LENEXA/Welcome.aspx",
-      "portal_url": "https://aca-prod.accela.com/LENEXA/Welcome.aspx"
+      "mode": "planning",
+      "note": "11 manually reviewed Lenexa pending planning applications (one on hold), not issued permits; official monthly permit reports are summary data; no validated Lenexa permit-level bulk feed.",
+      "source_url": "https://www.lenexa.com/Government/Boards-Commissions/Planning-Commission",
+      "portal_url": "https://aca-prod.accela.com/LENEXA/Default.aspx",
+      "reports_url": "https://www.lenexa.com/Business-Development/Design-Construction/Building-Permit-Reports"
     },
     {
       "key": "independence",

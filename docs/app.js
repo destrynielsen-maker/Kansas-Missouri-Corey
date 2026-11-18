@@ -4,7 +4,7 @@ const DATA_URL = "./data/permits.json";
 const COVERAGE_URL = "./data/coverage.json";
 const WORKFLOW_URL = "https://github.com/destrynielsen-maker/Kansas-Missouri-Corey/actions/workflows/refresh.yml";
 const els = {};
-const fields = ["search","state","city","category","days","score","sort"];
+const fields = ["search","state","city","category","days","score","sort","activity","followup"];
 let snapshot = null;
 let filtered = [];
 
@@ -51,12 +51,70 @@ function linkCell(row,url,label,kind,permitNo){
   }
   row.appendChild(c);
 }
+function daysSinceIssued(issued){
+  const date=dateLocal(issued);
+  if(!date)return null;
+  const now=new Date();now.setHours(0,0,0,0);
+  return Math.max(0,Math.floor((now-date)/86400000));
+}
+function followupBand(age){
+  if(age==null)return {key:"unknown",text:"Date unavailable",className:"later"};
+  if(age<=7)return {key:"0-7",text:"Contact now",className:""};
+  if(age<=30)return {key:"8-30",text:"Contact this week",className:""};
+  if(age<=90)return {key:"31-90",text:"Follow up",className:"middle"};
+  return {key:"91+",text:"Older prospect",className:"later"};
+}
+function evidenceKind(item){
+  if(item.inspection_evidence==="inspection_recorded" && item.last_inspection_date)return "inspection_recorded";
+  if(item.inspection_evidence==="date_not_reported")return "date_not_reported";
+  return "field_not_published";
+}
+function followupCell(row,item){
+  const td=cell(row,"");
+  const badge=document.createElement("span");
+  const bucket=followupBand(daysSinceIssued(item.issued));
+  badge.className="followup-tag "+bucket.className;
+  badge.textContent=bucket.text;td.appendChild(badge);
+  const note=document.createElement("span");
+  note.className="activity-note";
+  const age=daysSinceIssued(item.issued);
+  note.textContent=age===null?"Issue date unknown":age+" day"+(age===1?"":"s")+" since issued";
+  td.appendChild(note);
+}
+function officialActivityCell(row,item){
+  const td=cell(row,"");
+  const label=document.createElement("span");
+  const note=document.createElement("span");
+  note.className="activity-note";
+  if(evidenceKind(item)==="inspection_recorded"){
+    label.className="activity-label";label.textContent="Inspection recorded";
+    note.textContent="Last: "+item.last_inspection_date;
+  }else if(evidenceKind(item)==="date_not_reported"){
+    label.className="activity-muted";label.textContent="No inspection date";
+    note.textContent="Agency field is blank";
+  }else{
+    label.className="activity-muted";label.textContent="Not published";
+    note.textContent="No inspection field in source";
+  }
+  td.appendChild(label);td.appendChild(note);
+}
+function otherDatesCell(row,item){
+  const td=cell(row,"");
+  const parts=[];
+  if(item.application_date)parts.push("Applied "+item.application_date);
+  if(item.expiration_date)parts.push("Expires "+item.expiration_date);
+  if(!parts.length){td.textContent="Not published";td.className="city";return;}
+  for(const part of parts){
+    const span=document.createElement("span");
+    span.className="activity-note";span.textContent=part;td.appendChild(span);
+  }
+}
 function renderTable(rows){
   const tbody=el("leadrows"); tbody.replaceChildren();
   if (!rows.length){
     const tr=document.createElement("tr");
     const td=cell(tr,snapshot && snapshot.generated_at?"No permits match these filters. Try a larger date window or a different city.":"No verified data snapshot yet. Run the GitHub refresh workflow to populate this dashboard.","empty");
-    td.colSpan=9; tbody.appendChild(tr); text("row-limit","");return;
+    td.colSpan=12; tbody.appendChild(tr); text("row-limit","");return;
   }
   const display=rows.slice(0,300);
   const frag=document.createDocumentFragment();
@@ -84,6 +142,9 @@ function renderTable(rows){
     pill.textContent=item.category||"Other";
     typecell.appendChild(pill);
     cell(tr,money(item.valuation));
+    officialActivityCell(tr,item);
+    otherDatesCell(tr,item);
+    followupCell(tr,item);
     linkCell(tr,item.permit_url,item.link_kind==="record"?"View permit ↗":"Search permit ↗",item.link_kind,item.permit_number);
     linkCell(tr,item.source_url,"Raw source ↗","source");
     frag.appendChild(tr);
@@ -111,12 +172,16 @@ function applyFilters(){
   const cat=el("category").value;
   const days=Number(el("days").value);
   const score=Number(el("score").value);
+  const activity=el("activity").value;
+  const followup=el("followup").value;
   const today=new Date();today.setHours(0,0,0,0);
   filtered=(snapshot.permits||[]).filter(function(p){
     if(state && p.state!==state) return false;
     if(city && p.jurisdiction!==city) return false;
     if(cat && p.category!==cat) return false;
     if((p.score||0)<score) return false;
+    if(activity && evidenceKind(p)!==activity)return false;
+    if(followup && followupBand(daysSinceIssued(p.issued)).key!==followup)return false;
     const d=dateLocal(p.issued);
     if(!d || Math.floor((today-d)/86400000)>days) return false;
     if(q && ![p.permit_number,p.address,p.jurisdiction,p.project,p.work_class,p.permit_type,p.county].some(function(x){return asString(x).toLowerCase().includes(q);}))return false;
@@ -126,6 +191,8 @@ function applyFilters(){
   filtered.sort(function(a,b){
     if(order==="newest") return asString(b.issued).localeCompare(asString(a.issued))||b.score-a.score;
     if(order==="value") return (b.valuation||0)-(a.valuation||0)||b.score-a.score;
+    if(order==="activity") return asString(b.last_inspection_date||b.issued).localeCompare(asString(a.last_inspection_date||a.issued))||b.score-a.score;
+    if(order==="followup") return asString(b.issued).localeCompare(asString(a.issued))||b.score-a.score;
     return b.score-a.score||asString(b.issued).localeCompare(asString(a.issued));
   });
   text("resultcount",filtered.length.toLocaleString()+" qualifying permits • "+days+"-day view");
@@ -134,6 +201,7 @@ function applyFilters(){
   text("metric-homes",filtered.filter(function(x){return x.category==="Single-family";}).length.toLocaleString());
   text("metric-multis",filtered.filter(function(x){return x.category==="Multifamily";}).length.toLocaleString());
   text("metric-priority",filtered.filter(function(x){return x.score>=75;}).length.toLocaleString());
+  text("metric-inspections",filtered.filter(function(x){return evidenceKind(x)==="inspection_recorded";}).length.toLocaleString());
   renderTable(filtered);el("export").disabled=!filtered.length;
 }
 function csvEsc(v){
@@ -147,10 +215,11 @@ function exportCsv(){
     ["Score","score"],["Issued","issued"],["State","state"],["Jurisdiction","jurisdiction"],["County","county"],
     ["Permit number","permit_number"],["Project","project"],["Address","address"],["Category","category"],
     ["Permit type","permit_type"],["Work class","work_class"],["Status","status"],["Valuation","valuation"],
-    ["Units","units"],["Square feet","square_feet"],["Public permit / search","permit_url"],
+    ["Units","units"],["Square feet","square_feet"],["Application date","application_date"],["Last inspection","last_inspection_date"],["Expiration date","expiration_date"],["Activity evidence","inspection_evidence"],["Start date - verified only","start_date"],["Timeline warnings","timeline_warnings"],["Public permit / search","permit_url"],
     ["Link type","link_kind"],["Raw source row","source_url"]];
+  columns.push(["Sales follow-up suggestion","_followup"]);
   const lines=[columns.map(function(x){return csvEsc(x[0]);}).join(",")];
-  for(const r of filtered)lines.push(columns.map(function(x){return csvEsc(r[x[1]]);}).join(","));
+  for(const r of filtered)lines.push(columns.map(function(x){return csvEsc(x[1]==="_followup"?followupBand(daysSinceIssued(r.issued)).text:x[1]==="timeline_warnings"?(r.timeline_warnings||[]).join("; "):r[x[1]]);}).join(","));
   const blob=new Blob(["\ufeff"+lines.join("\r\n")],{type:"text/csv;charset=utf-8"});
   const url=URL.createObjectURL(blob);
   const a=document.createElement("a");a.href=url;a.download="kc-metro-permits-"+new Date().toISOString().slice(0,10)+".csv";
@@ -192,7 +261,7 @@ async function load(){
     snapshot=data;
     if(!data.generated_at){
       status.textContent="First validated ingestion has not run yet.";
-      for(const id of ["metric-total","metric-homes","metric-multis","metric-priority"])text(id,"—");
+      for(const id of ["metric-total","metric-homes","metric-multis","metric-priority","metric-inspections"])text(id,"—");
       el("export").disabled=true;
     }else{
       const age=(Date.now()-new Date(data.generated_at).getTime())/3600000;

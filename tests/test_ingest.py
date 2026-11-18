@@ -153,5 +153,36 @@ class IngestionTests(unittest.TestCase):
         self.assertIn("application_after_issue",timing["timeline_warnings"])
 
 
+    def test_overland_park_uses_published_parcel_fee_ward_not_builder(self):
+        raw={"attributes":{
+            "CaseNumber":"BLD-R-2026-00001","IssueDate":1790812800000,
+            "PermitType":"Building (Residential)","WorkClass":"New Single Family",
+            "PermitStatus":"Issued","MainAddressLine1":"101 Example St",
+            "MainParcelNumber":"NP123-45","TotalFeeAmount":2100.22,"WARD":3,
+            "AssignedTo":"Permit Office Staff"
+        }}
+        item=ingest.normalize("overland_park",raw,TODAY,CUTOFF)
+        self.assertEqual(item["parcel_number"],"NP123-45")
+        self.assertEqual(item["permit_fee"],2100.22)
+        self.assertEqual(item["ward"],"3")
+        self.assertNotIn("builder",item)
+        self.assertNotIn("contractor",item)
+
+    def test_olathe_ward_is_not_a_builder(self):
+        raw={"attributes":{"PERMITNUMBER":"BR26-01","ISSUEDATE":1790812800000,
+             "PermitType":"Building - Residential","PermitWorkclass":"Single Family",
+             "ADDRESS":"123 Test Lane","WARD":"2"}}
+        item=ingest.normalize("olathe",raw,TODAY,CUTOFF)
+        self.assertEqual(item["ward"],"2")
+        self.assertIsNone(item["parcel_number"])
+
+    def test_lee_summit_internal_record_id_is_not_a_public_deep_link(self):
+        raw={"attributes":{"PermitNumber":"PRRES2026001","dateissued":1790812800000,
+             "PermitType":"NEW SINGLE FAMILY","Location":"100 First Lane","RecordID":91823}}
+        item=ingest.normalize("lees_summit",raw,TODAY,CUTOFF)
+        self.assertEqual(item["agency_record_id"],"91823")
+        self.assertEqual(item["link_kind"],"search")
+
+
 if __name__ == "__main__":
     unittest.main()

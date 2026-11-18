@@ -272,6 +272,7 @@ def extract_timeline(cfg_key: str, raw: dict, issued: date, today: date) -> dict
 
 def normalize(cfg_key: str, raw: dict, today: date, cutoff: date) -> dict | None:
     cfg = SOURCES[cfg_key]
+    parcel_number, permit_fee, ward, agency_record_id = None, None, None, None
     if cfg_key == "kcmo":
         permit_no = str(raw.get("permit_number") or "").strip()
         issued = to_date(raw.get("issue_date"))
@@ -298,6 +299,9 @@ def normalize(cfg_key: str, raw: dict, today: date, cutoff: date) -> dict | None
             valuation = number(attrs.get("Valuation"))
             units, sq_ft = number(attrs.get("NumberUnits")), number(attrs.get("SquareFeet"))
             direct_url = safe_url(attrs.get("More_Info"))
+            parcel_number = str(attrs.get("MainParcelNumber") or "").strip() or None
+            permit_fee = number(attrs.get("TotalFeeAmount"))
+            ward = str(attrs.get("WARD") or "").strip() or None
         elif cfg_key == "independence":
             permit_no = str(attrs.get("Permit Number") or "").strip()
             issued = to_date(attrs.get("Date Issued"))
@@ -319,6 +323,7 @@ def normalize(cfg_key: str, raw: dict, today: date, cutoff: date) -> dict | None
             status = str(attrs.get("PermitStatus") or "")
             valuation = number(attrs.get("VALUE"))
             units, sq_ft, direct_url = None, None, None
+            ward = str(attrs.get("WARD") or "").strip() or None
         else:
             permit_no = str(attrs.get("PermitNumber") or "").strip()
             issued = to_date(attrs.get("dateissued"))
@@ -328,6 +333,7 @@ def normalize(cfg_key: str, raw: dict, today: date, cutoff: date) -> dict | None
             status = str(attrs.get("Status") or "")
             valuation = None
             units, sq_ft, direct_url = None, None, None
+            agency_record_id = str(attrs.get("RecordID") or "").strip() or None
         county = cfg["county"]
 
     if not permit_no or not issued or issued < cutoff or issued > today + timedelta(days=2):
@@ -363,6 +369,10 @@ def normalize(cfg_key: str, raw: dict, today: date, cutoff: date) -> dict | None
         "valuation": valuation,
         "units": int(units) if units is not None else None,
         "square_feet": int(sq_ft) if sq_ft is not None else None,
+        "parcel_number": parcel_number,
+        "permit_fee": permit_fee,
+        "ward": ward,
+        "agency_record_id": agency_record_id,
         "score": lead_score(category, issued, today, valuation),
         "permit_url": direct_url or cfg["portal"],
         "link_kind": "record" if direct_url else "search",

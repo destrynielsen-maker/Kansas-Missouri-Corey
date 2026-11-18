@@ -76,6 +76,29 @@
         <article class="coverage-card"><strong>Suggested sales timing</strong><p>Contact windows are based solely on days since issuance. They are not predicted groundbreakings, construction schedules or completion dates.</p></article>
       </div>
     </section>
+    <section class="panel secondary" id="lenexa-planning">
+      <div class="panelhead">
+        <div><div class="section-kicker">EARLY-STAGE SALES OPPORTUNITIES — NOT ISSUED PERMITS</div>
+          <h2>Lenexa planning pipeline</h2>
+          <p>Projects listed in the City's pending Planning Commission applications. These are leads to investigate, not permits, approved projects, or confirmed construction starts.</p>
+        </div>
+        <div class="buttons">
+          <a class="subtle" href="https://www.lenexa.com/Government/Boards-Commissions/Planning-Commission" target="_blank" rel="noopener noreferrer">City planning list ↗</a>
+          <button class="darkbtn" type="button" id="export-lenexa" disabled>Export planning CSV ↓</button>
+        </div>
+      </div>
+      <div class="resultbar"><span id="lenexa-count">Loading planning records…</span><span id="lenexa-reviewed">Manual source review date pending.</span></div>
+      <div class="filterbar planning-filters">
+        <label>Search project / address <input id="lenexa-search" type="search" placeholder="Name, proposed work, location…" autocomplete="off"></label>
+        <label>Planning status <select id="lenexa-status"><option value="Pending" selected>Pending applications</option><option value="">All including on hold</option><option value="On hold">On hold only</option></select></label>
+        <label>Type <select id="lenexa-category"><option value="">All development types</option></select></label>
+      </div>
+      <div class="tablewrap">
+        <table class="planning-table"><thead><tr><th>Project</th><th>Location</th><th>Type</th><th>Proposed work</th><th>Planning stage</th><th>Application status</th><th>Public city sources</th></tr></thead>
+        <tbody id="lenexa-rows"><tr><td colspan="7" class="empty">No planning snapshot loaded.</td></tr></tbody></table>
+      </div>
+      <div class="timeline-legend">Planning applications are manually reviewed, not live-permit data. No permit number, issue date, start date, builder assignment, or construction status is verified by this list. Application status may change after the stated review date. The Lenexa permit portal is provided for independent follow-up.</div>
+    </section>
     <section class="panel secondary" id="coverage">
       <div class="panelhead"><div><div class="section-kicker">SOURCE REGISTRY</div><h2>Jurisdiction coverage</h2><p>Official agency links and live-feed readiness. Kansas City, KS has a public permit search but no verified bulk feed; its public GIS catalogs are checked separately.</p></div></div>
       <div id="coverage-grid" class="coverage-grid"></div>

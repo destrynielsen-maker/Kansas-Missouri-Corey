@@ -8,7 +8,7 @@ const root = path.resolve(__dirname,"..");
 const html = fs.readFileSync(path.join(root,"docs","index.html"),"utf8");
 const code = fs.readFileSync(path.join(root,"docs","app.js"),"utf8");
 
-for (const id of ["activity","followup","viewmode","source-feed-count","metric-inspections","metric-sites","leadrows","score","sort","days","export"]) {
+for (const id of ["activity","followup","viewmode","source-feed-count","metric-inspections","metric-sites","lenexa-planning","lenexa-search","lenexa-status","lenexa-category","lenexa-reviewed","lenexa-rows","export-lenexa","leadrows","score","sort","days","export"]) {
   assert.ok(html.includes('id="'+id+'"'),"Missing dashboard control: "+id);
 }
 for (const header of ["Official activity","Other dates","Sales follow-up","Other permits at site","Raw source data"]) {
@@ -23,7 +23,7 @@ const sandbox = {
   setTimeout, clearTimeout, console, Date
 };
 vm.createContext(sandbox);
-vm.runInContext(code+"\nglobalThis.__tests={followupBand,evidenceKind,safeLink,csvEsc,groupSiteRows,siteKey};",sandbox,{timeout:1000});
+vm.runInContext(code+"\nglobalThis.__tests={followupBand,evidenceKind,safeLink,csvEsc,groupSiteRows,siteKey,validateLenexaPlanning};",sandbox,{timeout:1000});
 const t=sandbox.__tests;
 assert.equal(t.followupBand(0).key,"0-7");
 assert.equal(t.followupBand(7).text,"Contact now");
@@ -59,3 +59,15 @@ assert.ok(code.includes("source_url_scope"),"Source scope should survive exports
 assert.ok(code.includes("SOURCE_MONITOR_URL"),"Wyandotte public-source health should be loaded optionally");
 assert.ok(code.includes("No permit-named API found"),"Source health result should be explicitly labeled");
 assert.ok(code.includes("renderCoverage(info,monitor)"),"Coverage cards should receive public-source monitoring data");
+
+const planning=JSON.parse(fs.readFileSync(path.join(root,"docs","data","lenexa_planning.json"),"utf8"));
+assert.equal(t.validateLenexaPlanning(planning),true,"City planning snapshot needs clear provenance and no permit IDs");
+const bogus=JSON.parse(JSON.stringify(planning));
+bogus.opportunities[0].permit_number="INVENTED";
+assert.equal(t.validateLenexaPlanning(bogus),false,"Never invent a permit number for planning leads");
+bogus.opportunities[0].permit_number=null;
+bogus.verified_permit_feed=true;
+assert.equal(t.validateLenexaPlanning(bogus),false,"Planning data cannot claim live permit coverage");
+assert.ok(code.includes("loadLenexaPlanning()"),"Planning pipeline should load separately");
+assert.ok(code.includes("STALE — recheck official source"),"Stale manual reviews must be highlighted");
+console.log("Lenexa planning source separation and freshness: PASS");

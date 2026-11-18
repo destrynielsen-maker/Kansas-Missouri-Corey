@@ -2,6 +2,8 @@
 
 const DATA_URL = "./data/permits.json";
 const COVERAGE_URL = "./data/coverage.json";
+const LENEXA_PLANNING_URL = "./data/lenexa_planning.json";
+const LENEXA_PORTAL_URL = "https://aca-prod.accela.com/LENEXA/Default.aspx";
 const SOURCE_MONITOR_URL = "./data/source_health.json";
 const WORKFLOW_URL = "https://github.com/destrynielsen-maker/Kansas-Missouri-Corey/actions/workflows/refresh.yml";
 const els = {};
@@ -10,6 +12,8 @@ let snapshot = null;
 let filtered = [];
 let filteredPermits = [];
 let siteRowsById = new Map();
+let lenexaPlanning = null;
+let lenexaFiltered = [];
 
 function el(id){ return document.getElementById(id); }
 function text(id,value){ el(id).textContent = value; }
@@ -301,7 +305,7 @@ function renderCoverage(data, monitor=null){
     const status=document.createElement("span");
     const live=statuses.get(source.key);
     status.className="status "+(live?"good":(source.mode==="automated"||source.mode==="candidate")?"pending":"");
-    status.textContent=live?"Snapshot loaded":source.mode==="automated"?"Feed configured":source.mode==="candidate"?"API verification":"Public source only";
+    status.textContent=live?"Snapshot loaded":source.mode==="automated"?"Feed configured":source.mode==="candidate"?"API verification":source.mode==="planning"?"Planning leads · not permits":"Public source only";
     head.appendChild(status);box.appendChild(head);
     const desc=document.createElement("p");
     desc.textContent=live ? (live.count+" recent records • latest issue "+(live.latest_issue||"unknown")) : source.note;
@@ -321,7 +325,7 @@ function renderCoverage(data, monitor=null){
       box.appendChild(m);
     }
     const links=document.createElement("div");links.className="coverage-links";
-    for(const item of [["Official data",source.source_url],["Public search",source.portal_url]]){
+    for(const item of [["Official data",source.source_url],["Public search",source.portal_url],["Monthly reports",source.reports_url]]){
       const url=safeLink(item[1]);if(!url)continue;
       const a=document.createElement("a");a.href=url;a.target="_blank";a.rel="noopener noreferrer";a.textContent=item[0]+" ↗";
       links.appendChild(a);
@@ -371,6 +375,118 @@ async function load(){
     text("coverage-grid","Source registry could not be loaded.");
   }
 }
+
+function validateLenexaPlanning(data){
+  if(!data || data.verified_permit_feed!==false || data.permit_records_in_dataset!==0) return false;
+  if(data.jurisdiction!=="Lenexa, KS" || !/^\d{4}-\d{2}-\d{2}$/.test(data.reviewed_on||""))return false;
+  if(data.source_url!=="https://www.lenexa.com/Government/Boards-Commissions/Planning-Commission")return false;
+  if(!Array.isArray(data.opportunities)||!data.opportunities.length||data.opportunities.length>150)return false;
+  const ids=new Set();
+  for(const o of data.opportunities){
+    if(!o || typeof o.id!=="string" || !o.id.startsWith("lenexa-plan-")||ids.has(o.id))return false;
+    ids.add(o.id);
+    for(const key of ["project","location","category","planning_stage","proposed_work"]){
+      if(typeof o[key]!=="string" || !o[key].trim())return false;
+    }
+    if(!["Pending","On hold"].includes(o.application_status))return false;
+    if(!["address","approximate"].includes(o.location_precision))return false;
+    if(o.permit_number!==null || o.permit_issue_date!==null || o.construction_start!==null)return false;
+    if(o.source_url!==data.source_url)return false;
+  }
+  return true;
+}
+function planningRowLink(td,label,url){
+  const target=safeLink(url);
+  if(!target)return;
+  const a=document.createElement("a");
+  a.textContent=label;a.href=target;a.target="_blank";a.rel="noopener noreferrer";
+  td.appendChild(a);
+}
+function renderLenexaPlanning(){
+  const tbody=el("lenexa-rows");tbody.replaceChildren();
+  if(!lenexaPlanning){
+    const row=document.createElement("tr"),empty=cell(row,"Planning snapshot unavailable. See the official City Planning Commission list.","empty");
+    empty.colSpan=7;tbody.appendChild(row);
+    text("lenexa-count","Planning records unavailable");
+    el("export-lenexa").disabled=true;return;
+  }
+  const q=el("lenexa-search").value.trim().toLowerCase();
+  const state=el("lenexa-status").value,cat=el("lenexa-category").value;
+  lenexaFiltered=lenexaPlanning.opportunities.filter(function(item){
+    if(state && item.application_status!==state)return false;
+    if(cat && item.category!==cat)return false;
+    return !q || [item.project,item.location,item.proposed_work,item.planning_stage,item.category].some(function(x){return x.toLowerCase().includes(q);});
+  });
+  const frag=document.createDocumentFragment();
+  for(const item of lenexaFiltered){
+    const tr=document.createElement("tr");tr.className="planning-row";
+    cell(tr,item.project,"planning-name");
+    const loc=cell(tr,item.location,"planning-location");
+    if(item.location_precision==="approximate"){
+      const small=document.createElement("span");small.className="activity-note";
+      small.textContent="Approximate location; not a verified street address";
+      loc.appendChild(small);
+    }
+    cell(tr,item.category);
+    cell(tr,item.proposed_work,"planning-detail");
+    cell(tr,item.planning_stage,"city");
+    cell(tr,item.application_status,"planning-status"+(item.application_status==="On hold"?" hold":""));
+    const links=cell(tr,"","planning-links");
+    planningRowLink(links,"City planning application list ↗",item.source_url);
+    planningRowLink(links,"Search Lenexa permits ↗",LENEXA_PORTAL_URL);
+    frag.appendChild(tr);
+  }
+  if(!lenexaFiltered.length){
+    const tr=document.createElement("tr"),td=cell(tr,"No planning applications match these filters.","empty");td.colSpan=7;frag.appendChild(tr);
+  }
+  tbody.appendChild(frag);
+  text("lenexa-count",lenexaFiltered.length+" displayed of "+lenexaPlanning.opportunities.length+
+       " planning entries (excluded from issued-permit totals)");
+  el("export-lenexa").disabled=!lenexaFiltered.length;
+}
+async function loadLenexaPlanning(){
+  try{
+    const result=await fetch(LENEXA_PLANNING_URL+"?v="+Date.now(),{cache:"no-store"});
+    if(!result.ok)throw new Error("Planning snapshot unavailable");
+    const d=await result.json();
+    if(!validateLenexaPlanning(d))throw new Error("Planning data contract invalid");
+    lenexaPlanning=d;
+    const review=dateLocal(d.reviewed_on);
+    const today=new Date();today.setHours(0,0,0,0);
+    const age=review?Math.floor((today-review)/86400000):99999;
+    text("lenexa-reviewed","City list reviewed "+d.reviewed_on+" • manually verified"+
+         (age>30?" • STALE — recheck official source":" • check current city listing before outreach"));
+    const select=el("lenexa-category");select.replaceChildren();
+    const first=document.createElement("option");first.value="";first.textContent="All development types";select.appendChild(first);
+    for(const name of Array.from(new Set(d.opportunities.map(function(x){return x.category;}))).sort()){
+      const option=document.createElement("option");option.value=name;option.textContent=name;select.appendChild(option);
+    }
+    renderLenexaPlanning();
+  }catch(e){
+    lenexaPlanning=null;lenexaFiltered=[];
+    text("lenexa-reviewed","Manual planning snapshot could not be loaded; verify city source.");
+    renderLenexaPlanning();
+  }
+}
+function exportLenexaPlanning(){
+  if(!lenexaPlanning||!lenexaFiltered.length)return;
+  const fields=[
+    ["Review date","_reviewed_on"],["Project","project"],["Location","location"],
+    ["Location precision","location_precision"],["Category","category"],
+    ["Planning stage","planning_stage"],["Application status at review","application_status"],
+    ["Proposed work","proposed_work"],["Source","source_url"],
+    ["Permit number (unverified)","permit_number"],["Permit issue date (unverified)","permit_issue_date"]
+  ];
+  const lines=[fields.map(function(f){return csvEsc(f[0]);}).join(",")];
+  for(const item of lenexaFiltered){
+    lines.push(fields.map(function(f){return csvEsc(f[1]==="_reviewed_on"?lenexaPlanning.reviewed_on:item[f[1]]);}).join(","));
+  }
+  const blob=new Blob(["\ufeff"+lines.join("\r\n")],{type:"text/csv;charset=utf-8"});
+  const url=URL.createObjectURL(blob),a=document.createElement("a");
+  a.href=url;a.download="lenexa-planning-prospects-"+lenexaPlanning.reviewed_on+".csv";
+  document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);
+}
+
 document.addEventListener("DOMContentLoaded",function(){
   for(const id of fields){
     el(id).addEventListener(id==="search"?"input":"change",function(){
@@ -380,5 +496,10 @@ document.addEventListener("DOMContentLoaded",function(){
   }
   el("reload").addEventListener("click",load);
   el("export").addEventListener("click",exportCsv);
+  for(const id of ["lenexa-search","lenexa-status","lenexa-category"]){
+    el(id).addEventListener(id==="lenexa-search"?"input":"change",renderLenexaPlanning);
+  }
+  el("export-lenexa").addEventListener("click",exportLenexaPlanning);
   load();
+  loadLenexaPlanning();
 });

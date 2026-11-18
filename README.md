@@ -8,6 +8,10 @@ The default dashboard view groups permits only when issuing jurisdiction and exa
 
 See [`docs/source-audit.md`](docs/source-audit.md) for pending Kansas City, KS, Lenexa and Shawnee integrations. Wyandotte’s four official public GIS catalog directories are now checked weekly without harvesting permit data; and [Independence API evidence](docs/independence-api.md) for the verified fifth feed. **Portal-only jurisdictions are not counted as live feeds.**
 
+## Lenexa planning-stage leads (separate from permit counts)
+
+Lenexa is **not** an automated issued-permit source. The City Planning Commission publishes pending applications with proposed projects, locations and planning stages. A manually reviewed, clearly dated JSON snapshot (`docs/data/lenexa_planning.json`) powers a separate **Lenexa planning pipeline** table with status/type/search filters and CSV export. There are 11 listed opportunities in the 2026-11-18 review, including one application on hold. These are **not issued permits** and never affect the five-city permit metrics. See [`docs/lenexa-source-audit.md`](docs/lenexa-source-audit.md) and the unsent [`Lenexa public-data request`](docs/lenexa-data-request.md). The manually reviewed list is flagged as stale after 30 days.
+
 ## Current coverage
 
 Five live adapters cover **Kansas City, MO** (Socrata), **Overland Park, KS**, **Olathe, KS**, **Lee's Summit, MO** (municipal ArcGIS), and **Independence, MO** (city-operated Open Independence JSON API). Kansas City, KS and Lenexa remain public-search-only until their official bulk datasets can be verified. Independence's dataset is titled Active, but individual permit statuses, inspection dates, and construction starts are not published.

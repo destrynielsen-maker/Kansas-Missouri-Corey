@@ -6,16 +6,17 @@ from pathlib import Path
 
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/"src"))
 import audit_snapshot
+import ingest
 
 
 class SourceEvidenceTests(unittest.TestCase):
     def sample(self):
-        return {
+        snap = {
             "generated_at":"2026-11-18T12:00:00+00:00",
             "count":1,
             "sources":[{"name":"Kansas City, MO"}],
             "permits":[{
-                "id":"kcmo:P001","permit_number":"P001","issued":"2026-11-18",
+                "id":"kcmo:P001","permit_number":"P001","issued":"2026-11-18","address":"123 Main St",
                 "jurisdiction":"Kansas City, MO","state":"MO",
                 "category":"Single-family","status":"Issued","score":85,
                 "permit_url":"https://compasskc.kcmo.org/",
@@ -25,6 +26,8 @@ class SourceEvidenceTests(unittest.TestCase):
                 "start_date_source":"not_published",
             }],
         }
+        snap["site_stats"] = ingest.annotate_site_groups(snap["permits"])
+        return snap
 
     def test_valid_unknown_start_retained(self):
         out=audit_snapshot.summarize(self.sample())

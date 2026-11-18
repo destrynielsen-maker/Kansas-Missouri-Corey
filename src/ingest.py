@@ -394,6 +394,59 @@ def fetch_arcgis(s: requests.Session, cfg: dict, cutoff: date, today: date) -> l
     raise RuntimeError("ArcGIS pagination safety cap reached; refusing partial publication")
 
 
+
+def canonical_site_address(address: str | None) -> str | None:
+    """Conservative same-address match; preserve unit/lot numbers.
+
+    Only cosmetic case, whitespace and period/comma differences are normalized.
+    Never group by subdivision, ZIP, project name, or fuzzy street similarity.
+    """
+    if not isinstance(address, str):
+        return None
+    clean = re.sub(r"\s+", " ", re.sub(r"[.,]", "", address).strip()).upper()
+    if clean in ("", "UNKNOWN", "NOT PROVIDED", "ADDRESS NOT PUBLISHED", "TBD", "N/A", "NA"):
+        return None
+    return clean
+
+
+def annotate_site_groups(records: list[dict]) -> dict:
+    """Annotate a snapshot with probable SAME-SITE permit clusters.
+
+    Matching a street address within an issuing jurisdiction is NOT proof that
+    records describe one construction project, development, or customer.
+    Empty addresses always remain individual permit records.
+    """
+    from collections import defaultdict
+    from hashlib import sha256
+
+    grouped = defaultdict(list)
+    for record in records:
+        address = canonical_site_address(record.get("address"))
+        locality = (record.get("state") or "").strip() + "|" + (record.get("jurisdiction") or "").strip()
+        if not locality or locality.startswith("|"):
+            raise ValueError("Cannot group a permit without its jurisdiction and state")
+        basis = "same_normalized_address" if address else "unverified_address"
+        key = locality + "|address|" + address if address else locality + "|permit|" + str(record["id"])
+        record["site_group_id"] = "site-" + sha256(key.encode("utf-8")).hexdigest()[:20]
+        record["site_group_basis"] = basis
+        grouped[key].append(record)
+
+    for members in grouped.values():
+        ordered = sorted(members, key=lambda r: (r.get("issued") or "", r.get("permit_number") or ""), reverse=True)
+        permits = [r["permit_number"] for r in ordered]
+        categories = sorted({r.get("category") for r in members if r.get("category")})
+        for record in members:
+            record["site_permit_count"] = len(members)
+            record["site_related_permits"] = permits
+            record["site_categories"] = categories
+
+    return {
+        "unique_sites": len(grouped),
+        "multiple_permit_sites": sum(len(members) > 1 for members in grouped.values()),
+        "permits_on_multiple_permit_sites": sum(len(members) for members in grouped.values() if len(members) > 1),
+    }
+
+
 def build(days: int = 120, s: requests.Session | None = None, today: date | None = None) -> dict:
     today = today or datetime.now(timezone.utc).date()
     cutoff = today - timedelta(days=days)
@@ -429,9 +482,10 @@ def build(days: int = 120, s: requests.Session | None = None, today: date | None
     if not all_records:
         raise RuntimeError("All sources returned zero eligible permits; refusing blank snapshot")
     records = sorted(all_records.values(), key=lambda r: (-r["score"], r["issued"], r["id"]), reverse=False)
+    site_stats = annotate_site_groups(records)
     return {
         "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
-        "window_days": days, "count": len(records),
+        "window_days": days, "count": len(records), "site_stats": site_stats,
         "sources": diagnostics, "permits": records,
     }
 

@@ -1,25 +1,215 @@
 {
-  "source_snapshot": "2026-11-18T18:05:09+00:00",
-  "total_records": 776,
+  "source_snapshot": "2026-11-18T18:52:50+00:00",
+  "total_records": 814,
   "site_stats": {
-    "unique_sites": 757,
+    "unique_sites": 795,
     "multiple_permit_sites": 7,
     "permits_on_multiple_permit_sites": 26
   },
   "by_category": {
-    "Single-family": 541,
-    "Commercial": 102,
-    "Addition": 77,
-    "Multifamily": 56
+    "Single-family": 560,
+    "Commercial": 108,
+    "Addition": 87,
+    "Multifamily": 59
   },
   "by_state": {
-    "MO": 481,
+    "MO": 519,
     "KS": 295
   },
   "direct_record_count": 0,
-  "public_search_count": 776,
+  "public_search_count": 814,
   "issues_to_review": [],
   "jurisdictions": {
+    "Independence, MO": {
+      "unique_sites": 38,
+      "multiple_permit_sites": 0,
+      "permits_on_multiple_permit_sites": 0,
+      "inspection_evidence": {
+        "field_not_published": 38
+      },
+      "timeline_dates": {
+        "application_date": 0,
+        "last_inspection_date": 0,
+        "expiration_date": 0,
+        "finaled_date": 0,
+        "warnings": 0
+      },
+      "count": 38,
+      "earliest_issue": "2026-07-22",
+      "latest_issue": "2026-11-17",
+      "categories": {
+        "Single-family": 19,
+        "Addition": 10,
+        "Commercial": 6,
+        "Multifamily": 3
+      },
+      "statuses": {
+        "Status not published": 38
+      },
+      "link_kinds": {
+        "search": 38
+      },
+      "missing_address": 0,
+      "missing_valuation": 0,
+      "zero_valuation": 0,
+      "top_types": [
+        {
+          "permit_type": "Residential",
+          "work_class": "Single Family New Construction",
+          "count": 19
+        },
+        {
+          "permit_type": "Residential",
+          "work_class": "Addition",
+          "count": 8
+        },
+        {
+          "permit_type": "Commercial",
+          "work_class": "New Building w/o Health",
+          "count": 4
+        },
+        {
+          "permit_type": "Commercial",
+          "work_class": "New Building w/ Health",
+          "count": 2
+        },
+        {
+          "permit_type": "Residential",
+          "work_class": "Duplex",
+          "count": 2
+        },
+        {
+          "permit_type": "Commercial",
+          "work_class": "Addition w/o Health",
+          "count": 2
+        },
+        {
+          "permit_type": "Commercial",
+          "work_class": "Multi-Family",
+          "count": 1
+        }
+      ],
+      "samples_by_category": {
+        "Single-family": [
+          {
+            "permit": "2026-04515",
+            "date": "2026-11-17",
+            "type": "Residential",
+            "class": "Single Family New Construction",
+            "project": "",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "2026-03089",
+            "date": "2026-08-20",
+            "type": "Residential",
+            "class": "Single Family New Construction",
+            "project": "",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "2026-02988",
+            "date": "2026-08-28",
+            "type": "Residential",
+            "class": "Single Family New Construction",
+            "project": "",
+            "address_present": true,
+            "direct_record": false
+          }
+        ],
+        "Multifamily": [
+          {
+            "permit": "2026-01693",
+            "date": "2026-10-07",
+            "type": "Commercial",
+            "class": "Multi-Family",
+            "project": "",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "2026-01761",
+            "date": "2026-07-22",
+            "type": "Residential",
+            "class": "Duplex",
+            "project": "",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "2026-01759",
+            "date": "2026-07-27",
+            "type": "Residential",
+            "class": "Duplex",
+            "project": "",
+            "address_present": true,
+            "direct_record": false
+          }
+        ],
+        "Commercial": [
+          {
+            "permit": "2026-02544",
+            "date": "2026-11-03",
+            "type": "Commercial",
+            "class": "New Building w/o Health",
+            "project": "",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "2026-02126",
+            "date": "2026-09-01",
+            "type": "Commercial",
+            "class": "New Building w/o Health",
+            "project": "",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "2026-02541",
+            "date": "2026-10-05",
+            "type": "Commercial",
+            "class": "New Building w/o Health",
+            "project": "",
+            "address_present": true,
+            "direct_record": false
+          }
+        ],
+        "Addition": [
+          {
+            "permit": "2026-04764",
+            "date": "2026-11-12",
+            "type": "Residential",
+            "class": "Addition",
+            "project": "",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "2026-04188",
+            "date": "2026-11-04",
+            "type": "Residential",
+            "class": "Addition",
+            "project": "",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "2026-04191",
+            "date": "2026-11-09",
+            "type": "Residential",
+            "class": "Addition",
+            "project": "",
+            "address_present": true,
+            "direct_record": false
+          }
+        ],
+        "Remodel": [],
+        "Other": []
+      }
+    },
     "Kansas City, MO": {
       "unique_sites": 372,
       "multiple_permit_sites": 7,

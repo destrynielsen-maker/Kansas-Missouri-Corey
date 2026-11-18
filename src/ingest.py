@@ -56,9 +56,10 @@ SOURCES = {
 }
 
 SKIP_TYPES = re.compile(
-    r"\b(electrical|plumbing|mechanical|water heater|furnace|hvac|"
+    r"\b(electrical|plumbing|mechanical|mech|elec|plumb|water heater|furnace|hvac|"
     r"solar|sign|fence|demolition|roofing|fire alarm|gas service|"
-    r"sewer|excavation|water main|sprinkler)\b", re.IGNORECASE
+    r"sewer|excavation|water main|sprinkler|land disturbance|site improvement|"
+    r"grading only|pool|spa|generator)\b", re.IGNORECASE
 )
 
 
@@ -119,21 +120,49 @@ def safe_url(value) -> str | None:
 
 
 def classify(ptype: str, work: str, description: str = "") -> str:
-    s = " ".join([ptype, work, description]).lower().replace("-", " ")
-    if re.search(r"\b(multi ?family|apartments?|3 or 4 family|townhome|townhouse)\b", s):
-        return "Multifamily"
-    if re.search(r"\b(single ?family|duplex|new residential|new dwelling)\b", s):
-        return "Single-family"
-    if "addition" in s or "expand" in s:
+    """Conservatively select structural construction, never type-match 'family' inside remodels.
+
+    Work class is authoritative when specific; a project name cannot turn a tenant
+    finish or mechanical repair into new construction.
+    """
+    kind = (ptype or "").lower().replace("-", " ")
+    wc = (work or "").lower().replace("-", " ")
+    project = (description or "").lower().replace("-", " ")
+    combined = kind + " " + wc
+    if SKIP_TYPES.search(combined):
+        return "Other"
+    # More specific non-structural work. Exclude these BEFORE searching for 'new'.
+    if re.search(r"\b(deck|covered deck|porch|fence|wall|pool|accessory structure|"
+                 r"detached accessory|carport repair|water heater|gas line|"
+                 r"solar|repair|miscellaneous structure|change of tenant|change of occupancy)\b", wc):
+        return "Other"
+    if re.search(r"\b(addition|expansion|expand)\b", wc):
         return "Addition"
-    if re.search(r"\b(remodel|renovat|tenant finish|interior alteration|alteration)\b", s):
+    if re.search(r"\b(remodel|renovat\w*|tenant finish|interior alteration|alteration)\b", wc):
         return "Remodel"
-    if re.search(r"\b(new commercial|new warehouse|new industrial|new shell|building shell|commercial new)\b", s):
+    # Where work class is only 'New' or a 'Building Shell' it is interpreted with type.
+    is_new = bool(re.search(r"\bnew\b", wc) or re.search(r"\bnew\b", kind))
+    dwelling = bool(re.search(r"\b(single family|singlefamily|sfr|one family)\b", combined))
+    attached = bool(re.search(r"\b(multi family|multifamily|apartment|townhome|townhouse|duplex|two family)\b", combined))
+    if attached and (is_new or re.search(r"^(duplex|multi family|townhouse|townhome)$", wc)):
+        return "Multifamily"
+    if dwelling and (is_new or wc.strip() == "single family"):
+        return "Single-family"
+    if re.search(r"\b(residential)\b", kind) and is_new and not attached:
+        return "Single-family"
+    commercial = bool(re.search(r"\b(commercial|industrial|warehouse|business|new shell building)\b", kind))
+    if is_new and commercial:
         return "Commercial"
-    if re.search(r"\bnew\b", s) and ("commercial" in s or "building" in s):
+    if commercial and re.search(r"\b(building shell|shell building)\b", wc):
+        return "Commercial"
+    if commercial and re.search(r"\b(footing|foundation)\b", wc) and re.search(
+        r"\b(new construction|new building|building \d+|facility|commerce center)\b", project
+    ):
+        return "Commercial"
+    # Some municipalities encode the use in their work class rather than permit type.
+    if re.search(r"\b(new restaurant|new retail|new warehouse|new shell building|new commercial)\b", wc):
         return "Commercial"
     return "Other"
-
 
 def lead_score(category: str, issued: date, today: date, valuation: float | None) -> int:
     base = {"Single-family": 65, "Multifamily": 75, "Commercial": 61, "Addition": 45, "Remodel": 25, "Other": 12}[category]
@@ -165,9 +194,8 @@ def normalize(cfg_key: str, raw: dict, today: date, cutoff: date) -> dict | None
         address = " ".join(str(raw.get(k) or "").strip() for k in ("main_address_line1", "main_address_line2")).strip()
         status = str(raw.get("permit_status") or "")
         valuation = number(raw.get("valuation"))
-        county = str(raw.get("district") or "").strip()
-        if county.lower() in ("<none>", "none", "unknown", "null"):
-            county = ""
+        # A council district is NOT a county; do not mislabel it.
+        county = ""
         direct_url = None
         units, sq_ft = None, None
     else:
@@ -206,9 +234,17 @@ def normalize(cfg_key: str, raw: dict, today: date, cutoff: date) -> dict | None
 
     if not permit_no or not issued or issued < cutoff or issued > today + timedelta(days=2):
         return None
-    if SKIP_TYPES.search(ptype) and not re.search(r"\b(building|construction)\b", ptype, re.IGNORECASE):
+    if re.search(r"\b(closed|finaled|final|complete|completed|voided|void|cancelled|canceled|"
+                 r"expired|suspended|hold|temporary occupancy|substantial completion|in plan review|"
+                 r"ready for issuance)\b", status, re.IGNORECASE):
         return None
     category = classify(ptype, work, description)
+    # This is a NEW BUILD + structural addition lead list, not a general permit dump.
+    if category not in ("Single-family", "Multifamily", "Commercial", "Addition"):
+        return None
+    # A source's $0 valuation generally means unreported, not a free project.
+    if valuation == 0:
+        valuation = None
     url = source_record_url(cfg, permit_no)
     return {
         "id": cfg_key + ":" + permit_no,

@@ -1,0 +1,662 @@
+{
+  "source_snapshot": "2026-11-18T16:36:03+00:00",
+  "total_records": 776,
+  "by_category": {
+    "Single-family": 541,
+    "Commercial": 102,
+    "Addition": 77,
+    "Multifamily": 56
+  },
+  "by_state": {
+    "MO": 481,
+    "KS": 295
+  },
+  "direct_record_count": 0,
+  "public_search_count": 776,
+  "issues_to_review": [],
+  "jurisdictions": {
+    "Kansas City, MO": {
+      "count": 391,
+      "earliest_issue": "2026-07-21",
+      "latest_issue": "2026-11-13",
+      "categories": {
+        "Single-family": 227,
+        "Commercial": 80,
+        "Addition": 49,
+        "Multifamily": 35
+      },
+      "statuses": {
+        "Issued": 383,
+        "Open-Active": 7,
+        "Issued - Subject To Conditions": 1
+      },
+      "link_kinds": {
+        "search": 391
+      },
+      "missing_address": 0,
+      "missing_valuation": 390,
+      "zero_valuation": 0,
+      "top_types": [
+        {
+          "permit_type": "CPPU - Building (Residential)",
+          "work_class": "Single Family - New",
+          "count": 227
+        },
+        {
+          "permit_type": "CPPU - Building (Commercial)",
+          "work_class": "New",
+          "count": 80
+        },
+        {
+          "permit_type": "CPPU - Building (Residential)",
+          "work_class": "Single Family - Addition",
+          "count": 36
+        },
+        {
+          "permit_type": "CPPU - Building (Residential)",
+          "work_class": "Townhouse - New",
+          "count": 35
+        },
+        {
+          "permit_type": "CPPU - Building (Commercial)",
+          "work_class": "Addition",
+          "count": 12
+        },
+        {
+          "permit_type": "CPPU - Building (Residential)",
+          "work_class": "Duplex - Addition",
+          "count": 1
+        }
+      ],
+      "samples_by_category": {
+        "Single-family": [
+          {
+            "permit": "CPBR-2026-02165",
+            "date": "2026-11-11",
+            "type": "CPPU - Building (Residential)",
+            "class": "Single Family - New",
+            "project": "City of KCMO Pre-Approved Housing Master Plan - 02, Tiny House ADA 500gsf",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "CPBR-2026-02830",
+            "date": "2026-11-12",
+            "type": "CPPU - Building (Residential)",
+            "class": "Single Family - New",
+            "project": "",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "CPBR-2026-02844",
+            "date": "2026-11-13",
+            "type": "CPPU - Building (Residential)",
+            "class": "Single Family - New",
+            "project": "",
+            "address_present": true,
+            "direct_record": false
+          }
+        ],
+        "Multifamily": [
+          {
+            "permit": "CPBR-2026-02603",
+            "date": "2026-10-20",
+            "type": "CPPU - Building (Residential)",
+            "class": "Townhouse - New",
+            "project": "Bristol North Townhouse 5 Unit",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "CPBR-2026-02604",
+            "date": "2026-10-20",
+            "type": "CPPU - Building (Residential)",
+            "class": "Townhouse - New",
+            "project": "Bristol North Townhouse 5 Unit",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "CPBR-2026-02584",
+            "date": "2026-10-21",
+            "type": "CPPU - Building (Residential)",
+            "class": "Townhouse - New",
+            "project": "Bristol North Townhouse 8 unit",
+            "address_present": true,
+            "direct_record": false
+          }
+        ],
+        "Commercial": [
+          {
+            "permit": "CPBC-2026-01142",
+            "date": "2026-11-11",
+            "type": "CPPU - Building (Commercial)",
+            "class": "New",
+            "project": "Promise Place",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "CPBC-2026-01143",
+            "date": "2026-11-11",
+            "type": "CPPU - Building (Commercial)",
+            "class": "New",
+            "project": "Promise Place",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "CPBC-2026-01144",
+            "date": "2026-11-11",
+            "type": "CPPU - Building (Commercial)",
+            "class": "New",
+            "project": "Promise Place",
+            "address_present": true,
+            "direct_record": false
+          }
+        ],
+        "Addition": [
+          {
+            "permit": "CPBR-2026-02399",
+            "date": "2026-11-11",
+            "type": "CPPU - Building (Residential)",
+            "class": "Single Family - Addition",
+            "project": "",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "CPBR-2026-02833",
+            "date": "2026-11-12",
+            "type": "CPPU - Building (Residential)",
+            "class": "Single Family - Addition",
+            "project": "",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "CPBR-2026-02681",
+            "date": "2026-11-13",
+            "type": "CPPU - Building (Residential)",
+            "class": "Single Family - Addition",
+            "project": "",
+            "address_present": true,
+            "direct_record": false
+          }
+        ],
+        "Remodel": [],
+        "Other": []
+      }
+    },
+    "Lee's Summit, MO": {
+      "count": 90,
+      "earliest_issue": "2026-07-22",
+      "latest_issue": "2026-11-16",
+      "categories": {
+        "Single-family": 77,
+        "Commercial": 7,
+        "Multifamily": 6
+      },
+      "statuses": {
+        "Issued": 89,
+        "Permit(s) Issued ": 1
+      },
+      "link_kinds": {
+        "search": 90
+      },
+      "missing_address": 0,
+      "missing_valuation": 90,
+      "zero_valuation": 0,
+      "top_types": [
+        {
+          "permit_type": "NEW SINGLE FAMILY",
+          "work_class": "(empty)",
+          "count": 77
+        },
+        {
+          "permit_type": "NEW COMMERCIAL",
+          "work_class": "(empty)",
+          "count": 6
+        },
+        {
+          "permit_type": "NEW DUPLEX",
+          "work_class": "(empty)",
+          "count": 5
+        },
+        {
+          "permit_type": "NEW MULTI-FAMILY",
+          "work_class": "(empty)",
+          "count": 1
+        },
+        {
+          "permit_type": "NEW SHELL BUILDING",
+          "work_class": "(empty)",
+          "count": 1
+        }
+      ],
+      "samples_by_category": {
+        "Single-family": [
+          {
+            "permit": "PRRES20264937",
+            "date": "2026-11-13",
+            "type": "NEW SINGLE FAMILY",
+            "class": "",
+            "project": "",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "PRRES20265245",
+            "date": "2026-11-16",
+            "type": "NEW SINGLE FAMILY",
+            "class": "",
+            "project": "",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "PRRES20264169",
+            "date": "2026-10-20",
+            "type": "NEW SINGLE FAMILY",
+            "class": "",
+            "project": "",
+            "address_present": true,
+            "direct_record": false
+          }
+        ],
+        "Multifamily": [
+          {
+            "permit": "PRRES20263714",
+            "date": "2026-08-21",
+            "type": "NEW DUPLEX",
+            "class": "",
+            "project": "",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "PRCOM20255577",
+            "date": "2026-09-01",
+            "type": "NEW MULTI-FAMILY",
+            "class": "",
+            "project": "",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "PRRES20263926",
+            "date": "2026-09-03",
+            "type": "NEW DUPLEX",
+            "class": "",
+            "project": "",
+            "address_present": true,
+            "direct_record": false
+          }
+        ],
+        "Commercial": [
+          {
+            "permit": "PRCOM20252284",
+            "date": "2026-08-24",
+            "type": "NEW COMMERCIAL",
+            "class": "",
+            "project": "",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "PRCOM20261770",
+            "date": "2026-08-27",
+            "type": "NEW COMMERCIAL",
+            "class": "",
+            "project": "",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "PRCOM20261509",
+            "date": "2026-08-28",
+            "type": "NEW COMMERCIAL",
+            "class": "",
+            "project": "",
+            "address_present": true,
+            "direct_record": false
+          }
+        ],
+        "Addition": [],
+        "Remodel": [],
+        "Other": []
+      }
+    },
+    "Olathe, KS": {
+      "count": 183,
+      "earliest_issue": "2026-07-22",
+      "latest_issue": "2026-11-13",
+      "categories": {
+        "Single-family": 162,
+        "Commercial": 11,
+        "Multifamily": 10
+      },
+      "statuses": {
+        "Issued": 183
+      },
+      "link_kinds": {
+        "search": 183
+      },
+      "missing_address": 0,
+      "missing_valuation": 0,
+      "zero_valuation": 0,
+      "top_types": [
+        {
+          "permit_type": "Building - Residential",
+          "work_class": "Single Family",
+          "count": 162
+        },
+        {
+          "permit_type": "Building - Commercial",
+          "work_class": "New Multi Family",
+          "count": 7
+        },
+        {
+          "permit_type": "Building - Commercial",
+          "work_class": "New Commercial",
+          "count": 4
+        },
+        {
+          "permit_type": "Building - Residential",
+          "work_class": "Duplex",
+          "count": 3
+        },
+        {
+          "permit_type": "Building - Commercial",
+          "work_class": "Footing/Foundation",
+          "count": 3
+        },
+        {
+          "permit_type": "Building - Commercial",
+          "work_class": "Building Shell",
+          "count": 2
+        },
+        {
+          "permit_type": "Building - Commercial",
+          "work_class": "New Warehouse / Industrial",
+          "count": 2
+        }
+      ],
+      "samples_by_category": {
+        "Single-family": [
+          {
+            "permit": "BR26-1367",
+            "date": "2026-10-27",
+            "type": "Building - Residential",
+            "class": "Single Family",
+            "project": "SFR",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "BR26-1326",
+            "date": "2026-11-13",
+            "type": "Building - Residential",
+            "class": "Single Family",
+            "project": "SFR",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "BR26-1352",
+            "date": "2026-11-13",
+            "type": "Building - Residential",
+            "class": "Single Family",
+            "project": "SFR",
+            "address_present": true,
+            "direct_record": false
+          }
+        ],
+        "Multifamily": [
+          {
+            "permit": "BC26-0058",
+            "date": "2026-09-10",
+            "type": "Building - Commercial",
+            "class": "New Multi Family",
+            "project": "NEW CONSTRUCTION - BELONGKC ",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "BR26-1096",
+            "date": "2026-09-17",
+            "type": "Building - Residential",
+            "class": "Duplex",
+            "project": "DUPLEX",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "BR26-1097",
+            "date": "2026-09-17",
+            "type": "Building - Residential",
+            "class": "Duplex",
+            "project": "DUPLEX",
+            "address_present": true,
+            "direct_record": false
+          }
+        ],
+        "Commercial": [
+          {
+            "permit": "BC26-0167",
+            "date": "2026-11-13",
+            "type": "Building - Commercial",
+            "class": "Building Shell",
+            "project": "SHELL - LONE ELM COMMERCE CENTER - BUILDING 6",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "BC26-0193",
+            "date": "2026-11-05",
+            "type": "Building - Commercial",
+            "class": "New Commercial",
+            "project": "NEW COMMERCIAL - BROGDEN COFFEE & CAR WASH",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "BC26-0174",
+            "date": "2026-08-25",
+            "type": "Building - Commercial",
+            "class": "Footing/Foundation",
+            "project": "FOOTING & FOUNDATION ONLY - FAITH TECHNOLOGIES - MECHANICAL BUILDING 1",
+            "address_present": true,
+            "direct_record": false
+          }
+        ],
+        "Addition": [],
+        "Remodel": [],
+        "Other": []
+      }
+    },
+    "Overland Park, KS": {
+      "count": 112,
+      "earliest_issue": "2026-07-22",
+      "latest_issue": "2026-11-16",
+      "categories": {
+        "Single-family": 75,
+        "Addition": 28,
+        "Multifamily": 5,
+        "Commercial": 4
+      },
+      "statuses": {
+        "Issued": 112
+      },
+      "link_kinds": {
+        "search": 112
+      },
+      "missing_address": 0,
+      "missing_valuation": 0,
+      "zero_valuation": 0,
+      "top_types": [
+        {
+          "permit_type": "Building (Residential)",
+          "work_class": "New Single Family",
+          "count": 75
+        },
+        {
+          "permit_type": "Building (Residential)",
+          "work_class": "Addition",
+          "count": 19
+        },
+        {
+          "permit_type": "Building (Residential)",
+          "work_class": "Addition + Remodel",
+          "count": 6
+        },
+        {
+          "permit_type": "Building (Residential)",
+          "work_class": "New Townhouse",
+          "count": 4
+        },
+        {
+          "permit_type": "Building (Commercial)",
+          "work_class": "Addition + Remodel",
+          "count": 3
+        },
+        {
+          "permit_type": "Building (Commercial)",
+          "work_class": "New Restaurant",
+          "count": 2
+        },
+        {
+          "permit_type": "Building (Commercial)",
+          "work_class": "New Retail",
+          "count": 2
+        },
+        {
+          "permit_type": "Building (Commercial)",
+          "work_class": "New Multi Family",
+          "count": 1
+        }
+      ],
+      "samples_by_category": {
+        "Single-family": [
+          {
+            "permit": "BLD-R-2026-01851",
+            "date": "2026-11-03",
+            "type": "Building (Residential)",
+            "class": "New Single Family",
+            "project": "SFR, Covered Porch and Unf Basement  (2024 IRC)",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "BLD-R-2026-02074",
+            "date": "2026-11-11",
+            "type": "Building (Residential)",
+            "class": "New Single Family",
+            "project": "SFR, Covered Poch and Unf Basement (2024 IRC)",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "BLD-R-2026-01895",
+            "date": "2026-11-12",
+            "type": "Building (Residential)",
+            "class": "New Single Family",
+            "project": "SFR, Covered Porch and Finished Basement (2024 IRC)",
+            "address_present": true,
+            "direct_record": false
+          }
+        ],
+        "Multifamily": [
+          {
+            "permit": "BLD-C-2025-00575",
+            "date": "2026-09-25",
+            "type": "Building (Commercial)",
+            "class": "New Multi Family",
+            "project": "Friends of JCDS Multi Family (FOOTINGS ONLY)",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "BLD-R-2026-01629",
+            "date": "2026-08-18",
+            "type": "Building (Residential)",
+            "class": "New Townhouse",
+            "project": "Townhome, Finished Basement, Screened Deck (2018 IRC)",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "BLD-R-2026-01630",
+            "date": "2026-08-18",
+            "type": "Building (Residential)",
+            "class": "New Townhouse",
+            "project": "Townhome, Finished Basement, Screened Deck (2018 IRC)",
+            "address_present": true,
+            "direct_record": false
+          }
+        ],
+        "Commercial": [
+          {
+            "permit": "BLD-C-2026-00156",
+            "date": "2026-08-25",
+            "type": "Building (Commercial)",
+            "class": "New Restaurant",
+            "project": "The Capital Grille (2018 IBC)",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "BLD-C-2026-00289",
+            "date": "2026-09-02",
+            "type": "Building (Commercial)",
+            "class": "New Retail",
+            "project": "Expedition 309 Shell Building",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "BLD-C-2026-00229",
+            "date": "2026-10-05",
+            "type": "Building (Commercial)",
+            "class": "New Restaurant",
+            "project": "Yard House (2018 IBC)",
+            "address_present": true,
+            "direct_record": false
+          }
+        ],
+        "Addition": [
+          {
+            "permit": "BLD-C-2026-00017",
+            "date": "2026-11-02",
+            "type": "Building (Commercial)",
+            "class": "Addition + Remodel",
+            "project": "Children's Mercy-5-Story MOB Addition (Shell), Lobby Expansion, and Parking Deck (2018 IBC)",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "BLD-C-2026-00258",
+            "date": "2026-11-10",
+            "type": "Building (Commercial)",
+            "class": "Addition + Remodel",
+            "project": "Jewish Community Center-Aquatic Expansion (2018)",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "BLD-R-2026-01029",
+            "date": "2026-10-23",
+            "type": "Building (Residential)",
+            "class": "Addition",
+            "project": "House Expansion & Renovation",
+            "address_present": true,
+            "direct_record": false
+          }
+        ],
+        "Remodel": [],
+        "Other": []
+      }
+    }
+  }
+}

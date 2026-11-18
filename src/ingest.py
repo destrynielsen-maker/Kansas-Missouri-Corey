@@ -138,7 +138,7 @@ def classify(ptype: str, work: str, description: str = "") -> str:
         return "Other"
     if re.search(r"\b(addition|expansion|expand)\b", wc):
         return "Addition"
-    if re.search(r"\b(remodel|renovat|tenant finish|interior alteration|alteration)\b", wc):
+    if re.search(r"\b(remodel|renovat\w*|tenant finish|interior alteration|alteration)\b", wc):
         return "Remodel"
     # Where work class is only 'New' or a 'Building Shell' it is interpreted with type.
     is_new = bool(re.search(r"\bnew\b", wc) or re.search(r"\bnew\b", kind))
@@ -150,7 +150,7 @@ def classify(ptype: str, work: str, description: str = "") -> str:
         return "Single-family"
     if re.search(r"\b(residential)\b", kind) and is_new and not attached:
         return "Single-family"
-    commercial = bool(re.search(r"\b(commercial|industrial|warehouse|business)\b", kind))
+    commercial = bool(re.search(r"\b(commercial|industrial|warehouse|business|new shell building)\b", kind))
     if is_new and commercial:
         return "Commercial"
     if commercial and re.search(r"\b(building shell|shell building)\b", wc):
@@ -194,9 +194,8 @@ def normalize(cfg_key: str, raw: dict, today: date, cutoff: date) -> dict | None
         address = " ".join(str(raw.get(k) or "").strip() for k in ("main_address_line1", "main_address_line2")).strip()
         status = str(raw.get("permit_status") or "")
         valuation = number(raw.get("valuation"))
-        county = str(raw.get("district") or "").strip()
-        if county.lower() in ("<none>", "none", "unknown", "null"):
-            county = ""
+        # A council district is NOT a county; do not mislabel it.
+        county = ""
         direct_url = None
         units, sq_ft = None, None
     else:

@@ -2,6 +2,7 @@
 
 const DATA_URL = "./data/permits.json";
 const COVERAGE_URL = "./data/coverage.json";
+const SOURCE_MONITOR_URL = "./data/source_health.json";
 const WORKFLOW_URL = "https://github.com/destrynielsen-maker/Kansas-Missouri-Corey/actions/workflows/refresh.yml";
 const els = {};
 const fields = ["search","state","city","category","days","score","sort","activity","followup","viewmode"];
@@ -289,7 +290,7 @@ function exportCsv(){
   const a=document.createElement("a");a.href=url;a.download="kc-metro-"+el("viewmode").value+"-leads-"+new Date().toISOString().slice(0,10)+".csv";
   document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);
 }
-function renderCoverage(data){
+function renderCoverage(data, monitor=null){
   const panel=el("coverage-grid");panel.replaceChildren();
   const statuses=new Map((snapshot?.sources||[]).map(function(s){return [s.key,s];}));
   for(const source of data.sources||[]){
@@ -305,6 +306,20 @@ function renderCoverage(data){
     const desc=document.createElement("p");
     desc.textContent=live ? (live.count+" recent records • latest issue "+(live.latest_issue||"unknown")) : source.note;
     box.appendChild(desc);
+    if(source.key==="kck" && monitor && monitor.jurisdiction==="Kansas City, KS / Wyandotte County"){
+      const m=document.createElement("p");
+      m.className="activity-note";
+      const count=monitor.catalogs&&Array.isArray(monitor.catalogs)
+        ? monitor.catalogs.reduce(function(n,c){return n+(Number.isInteger(c.services_checked)?c.services_checked:0);},0):0;
+      const stamp=typeof monitor.checked_at_utc==="string"?monitor.checked_at_utc.slice(0,10):"unknown";
+      const label=monitor.source_status==="no_permit_named_service_in_reviewed_public_catalogs"
+        ? "No permit-named API found in checked GIS folders"
+        : monitor.source_status==="candidate_service_names_require_validation"
+        ? "Possible GIS permit service requires validation"
+        : "Public GIS review incomplete";
+      m.textContent="GIS check "+stamp+": "+label+" ("+count+" services examined). Not an exhaustive search.";
+      box.appendChild(m);
+    }
     const links=document.createElement("div");links.className="coverage-links";
     for(const item of [["Official data",source.source_url],["Public search",source.portal_url]]){
       const url=safeLink(item[1]);if(!url)continue;
@@ -338,14 +353,20 @@ async function load(){
   }catch(err){
     snapshot=null;filtered=[];filteredPermits=[];siteRowsById=new Map();text("source-feed-count","—");status.textContent="Snapshot unavailable — no live results claimed.";
     text("resultcount","Unable to load published snapshot; check GitHub Actions.");
-    for(const id of ["metric-total","metric-homes","metric-multis","metric-priority"])text(id,"—");
+    for(const id of ["metric-total","metric-sites","metric-homes","metric-multis","metric-priority","metric-inspections"])text(id,"—");
     renderTable([]);el("export").disabled=true;
     toast("Could not load agency-data snapshot.");
   }
   try{
     const response=await fetch(COVERAGE_URL,{cache:"no-store"});
     if(!response.ok)throw new Error("Coverage registry unavailable");
-    renderCoverage(await response.json());
+    const info=await response.json();
+    let monitor=null;
+    try{
+      const result=await fetch(SOURCE_MONITOR_URL+"?v="+Date.now(),{cache:"no-store"});
+      if(result.ok)monitor=await result.json();
+    }catch(err){ /* Optional monitoring report; primary city results remain usable. */ }
+    renderCoverage(info,monitor);
   }catch(err){
     text("coverage-grid","Source registry could not be loaded.");
   }

@@ -6,7 +6,7 @@ Public-source construction permit leads for the Kansas City metro, covering Miss
 
 The default dashboard view groups permits only when issuing jurisdiction and exact normalized street address match (case, whitespace, periods and commas ignored; unit numbers preserved). This is a **same-address cluster**, not proof of the same project, developer, customer, or builder. Select **Individual permits** to see every original agency row. The count and list of related permits reflect current filters, while the full 120-day site count is retained in CSV exports. Site view exports one representative highest-scored permit per matching address; permit view exports all qualifying permits.
 
-See [`docs/source-audit.md`](docs/source-audit.md) for the pending Kansas City, KS, Lenexa and Shawnee integrations, and [Independence API evidence](docs/independence-api.md) for the verified fifth feed. **Portal-only jurisdictions are not counted as live feeds.**
+See [`docs/source-audit.md`](docs/source-audit.md) for pending Kansas City, KS, Lenexa and Shawnee integrations. Wyandotte’s four official public GIS catalog directories are now checked weekly without harvesting permit data; and [Independence API evidence](docs/independence-api.md) for the verified fifth feed. **Portal-only jurisdictions are not counted as live feeds.**
 
 ## Current coverage
 
@@ -58,3 +58,9 @@ See `docs/data/coverage.json` for verified portals and staged jurisdictions. For
 - Independence, MO: https://opendata.independencemo.gov/dataset?code=V1BUILDINGPERMITS
 
 Not affiliated with any of these municipalities.
+
+## Wyandotte/Kansas City, KS source-health tracking
+
+Run **Actions → Check Wyandotte public data catalogs → Run workflow**. The weekly job checks four public official UG ArcGIS service-name lists, documents whether any candidate permit-named service appeared, and updates `docs/data/source_health.json` on `main` only. The result is an API source discovery report, not issued permit records. A catalog request failure is labeled **incomplete** rather than falsely claiming no feed exists. The job never accesses login-gated service folders or Accela transactions.
+
+Current dashboard continues to count only five verified city feeds. Manual KCK building-permit search: https://aca-prod.accela.com/UG/Cap/CapHome.aspx?TabName=Home&module=Building.

@@ -14,7 +14,7 @@ for (const id of ["activity","followup","viewmode","source-feed-count","metric-i
 for (const header of ["Official activity","Other dates","Sales follow-up","Other permits at site","Raw source data"]) {
   assert.ok(html.includes(header),"Missing table column: "+header);
 }
-assert.ok(html.indexOf("<th>Permit record / search</th>") < html.indexOf("<th>Raw source row</th>"),
+assert.ok(html.indexOf("<th>Permit record / search</th>") < html.indexOf("<th>Raw source data</th>"),
           "Sales action must precede machine source link.");
 assert.ok(!/estimated.start.date/i.test(html),"Never describe estimated start date as reported fact");
 

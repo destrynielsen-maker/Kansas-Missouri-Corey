@@ -1,0 +1,41 @@
+{
+  "checked_at_utc": "2026-11-18T19:02:36+00:00",
+  "jurisdiction": "Kansas City, KS / Wyandotte County",
+  "method": "public_arcgis_service_catalog_names_only",
+  "source_status": "no_permit_named_service_in_reviewed_public_catalogs",
+  "verified_bulk_permit_feed": false,
+  "public_portal_url": "https://aca-prod.accela.com/UG/Cap/CapHome.aspx?TabName=Home&module=Building",
+  "public_gis_directory_url": "https://gisweb.wycokck.org/arcgis/rest/services/GISPUB",
+  "catalogs": [
+    {
+      "folder": "(root)",
+      "catalog_url": "https://gisweb.wycokck.org/arcgis/rest/services",
+      "result": "ok",
+      "services_checked": 2,
+      "matching_names": []
+    },
+    {
+      "folder": "GISPUB",
+      "catalog_url": "https://gisweb.wycokck.org/arcgis/rest/services/GISPUB",
+      "result": "ok",
+      "services_checked": 102,
+      "matching_names": []
+    },
+    {
+      "folder": "UGMAPS",
+      "catalog_url": "https://gisweb.wycokck.org/arcgis/rest/services/UGMAPS",
+      "result": "ok",
+      "services_checked": 16,
+      "matching_names": []
+    },
+    {
+      "folder": "GISPW",
+      "catalog_url": "https://gisweb.wycokck.org/arcgis/rest/services/GISPW",
+      "result": "ok",
+      "services_checked": 42,
+      "matching_names": []
+    }
+  ],
+  "candidate_services": [],
+  "review_notes": "Only four explicitly named public GIS catalogs were checked. The absence of a matching name does not prove no public permit API exists elsewhere. Accela permit lookup is publicly documented but was not harvested or automated. No permits are imported or inferred from these GIS catalog entries."
+}

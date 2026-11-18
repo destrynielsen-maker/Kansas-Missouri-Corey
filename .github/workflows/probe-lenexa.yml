@@ -1,0 +1,29 @@
+name: Probe Lenexa Official Permit Reports
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["research/lenexa-permit-reports-20261118"]
+    paths:
+      - "tools/probe_lenexa.py"
+      - "tests/test_lenexa_probe.py"
+      - ".github/workflows/probe-lenexa.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  source_probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Test bounded public-source checks
+        run: python -m unittest discover -s tests -p "test_lenexa_probe.py" -v
+      - name: Verify official Lenexa report PDFs and historical AIMS link
+        run: python tools/probe_lenexa.py

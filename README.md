@@ -10,6 +10,20 @@ The dashboard prioritizes new construction and additions, lets a salesperson fil
 
 No live permit counts are asserted until a successful ingestion run. Source data is official but may be delayed; permit issuance alone does not prove the project has started.
 
+## Construction timelines and sales follow-up
+
+The pipeline preserves available agency-reported **application**, **issuance**, **last-inspection**, **expiration**, and **finalization** dates. Missing inspection fields are explicitly different from empty ones.
+
+**No confirmed construction-start or completion date is invented.** Last-inspection date proves only that a record of an inspection date exists, not that construction began or reached a particular phase. Finalized or closed permits are excluded from the active leads. Dates with impossible chronology are withheld and flagged.
+
+The browser shows official-activity filters and clearly labeled **sales follow-up suggestions** based on permit age: 0–7, 8–30, 31–90, and 91+ days. These are sales cadence recommendations, not construction schedules. CSV exports include official dates, provenance and follow-up labels.
+
+## Public dashboard deployment
+
+The repo includes `.github/workflows/pages.yml` which deploys the static `docs/` site from `main`. If Pages is not enabled, its owner must go to **Settings → Pages → Build and deployment → Source: GitHub Actions** once. Expected site address: `https://destrynielsen-maker.github.io/Kansas-Missouri-Corey/` (not considered live until a successful Pages deployment).
+
+After setup, manually use **Actions → Publish construction lead dashboard → Run workflow** or let changes to `docs/` on `main` deploy. Source refresh jobs only commit to `main`; feature branches verify data without publishing.
+
 ## Operating
 
 - `python -m pip install -r requirements.txt`

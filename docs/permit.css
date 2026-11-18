@@ -1,0 +1,24 @@
+:root{color-scheme:light;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#f4f7fa;color:#19384a}
+*{box-sizing:border-box}body{margin:0}a{color:#087b85;text-decoration:none}a:hover{text-decoration:underline}
+.topbar{background:#112d43;color:#fff;display:flex;align-items:center;justify-content:space-between;padding:16px max(18px,calc((100vw - 1180px)/2));gap:10px;flex-wrap:wrap}
+.topbar a{color:#effbfe}.brand{font-size:13px;display:flex;align-items:center;gap:7px}.logo{display:inline-block;padding:8px;background:#0b7e87;border-radius:8px;font-weight:900;color:#fff}.return{font-size:13px}
+main{max-width:1200px;margin:auto;padding:30px 18px 45px}.breadcrumb{font-size:12px;color:#697f90;margin-bottom:17px}.breadcrumb a{font-weight:700}
+.hidden{display:none!important}.loading{text-align:center;background:white;padding:40px;border-radius:12px;border:1px solid #dbe6ed}
+.hero{background:linear-gradient(120deg,#fff,#e9f5f6);padding:28px;border-radius:16px;border:1px solid #dce8ec;margin-bottom:18px}
+.eyebrow{letter-spacing:1.5px;text-transform:uppercase;color:#17777b;font-size:11px;font-weight:850;margin:0}
+h1{font-size:clamp(24px,3vw,34px);margin:10px 0 5px;line-height:1.2}h2{margin:0 0 18px;font-size:17px;color:#183b50}.subhead{color:#516c7d;font-size:14px;margin:0}
+.chips{display:flex;gap:7px;margin:18px 0 0;flex-wrap:wrap}.chip{background:#dff1f1;color:#17666a;padding:6px 10px;border-radius:16px;font-size:12px;font-weight:750}.chip.caution{background:#fff2db;color:#885c15}
+.metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:22px}.metric{padding:16px;border-radius:11px;background:#fff;border:1px solid #e0e9ec;min-width:0}.metric span{font-size:11px;color:#607d8b}.metric strong{font-size:21px;display:block;margin-top:8px;overflow-wrap:anywhere}
+.layout{display:grid;grid-template-columns:minmax(0,1.52fr) minmax(290px,1fr);gap:17px}.panel{background:#fff;border:1px solid #e0e8ee;box-shadow:0 5px 21px #153e5a08;border-radius:13px;padding:23px;margin-bottom:17px;min-width:0}
+.data-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px 23px}.data-grid.single{grid-template-columns:1fr}.fieldname{color:#6a8190;font-size:11px;display:block;margin:0 0 6px}
+.data-grid strong{font-size:14px;font-weight:700;line-height:1.4;display:block;overflow-wrap:anywhere;white-space:pre-wrap}.data-grid strong.unavailable{font-weight:400;color:#8998a3}
+.scope{font-size:14px;line-height:1.65;color:#3c5867;white-space:pre-wrap;overflow-wrap:anywhere}
+hr{border:0;border-top:1px solid #e9eff2;margin:20px 0}.siteaddress,.business{font-size:20px;font-weight:830;overflow-wrap:anywhere}
+.business{color:#164a5b}.basis{font-weight:750;color:#246c73;font-size:12px;margin:8px 0}.note{font-size:12px;color:#647a88;line-height:1.7}
+.buttonrow{display:flex;flex-wrap:wrap;gap:9px;margin-top:16px}.action{font-family:inherit;font-size:12px;font-weight:780;background:#136b76;color:white;border:1px solid #136b76;border-radius:8px;padding:10px 12px;display:inline-flex;cursor:pointer;text-align:left}
+.action:hover{text-decoration:none;background:#0c5058;color:white}.action.light{background:#eff7f8;color:#186976;border-color:#d0e7e8}.action.light:hover{background:#dbeef1}
+.related{margin-top:19px;border-top:1px solid #e8edef;padding-top:15px}.related-items{display:flex;flex-wrap:wrap;gap:9px}.related-items a{font-weight:750;color:#126d78;background:#ebf5f7;padding:7px 9px;border-radius:8px;font-size:12px}.related-items span{font-size:12px;color:#7b8997}
+.link-stack{display:flex;flex-direction:column;align-items:stretch;gap:9px}.link-stack .action{justify-content:center}
+.disclaimer{background:#fff8eb;color:#87611c;padding:13px;border-radius:8px;font-size:12px;line-height:1.6;border:1px solid #f1e0b9;margin-bottom:0}
+footer{text-align:center;color:#82909f;font-size:12px;padding:22px}#error p{line-height:1.7}
+@media(max-width:850px){.layout{grid-template-columns:1fr}}@media(max-width:600px){main{padding:18px 10px}.panel,.hero{padding:19px}.metrics{grid-template-columns:1fr}.data-grid{grid-template-columns:1fr}h1{font-size:25px}}

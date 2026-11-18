@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Kansas–Missouri construction intelligence — sourced project and permit details">
+  <title>Permit Details | Kansas–Missouri Construction Intelligence</title>
+  <link rel="stylesheet" href="./permit.css">
+  <script defer src="./permit.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="./index.html#leads"><span class="logo">KM</span> Kansas–Missouri <b>Construction Intelligence</b></a>
+    <a class="return" href="./index.html#leads">← Back to permit explorer</a>
+  </header>
+  <main>
+    <div id="loading" class="loading" role="status">Loading the current official permit snapshot…</div>
+    <div id="error" class="panel hidden" role="alert">
+      <h1>Permit not found in the current snapshot</h1>
+      <p>The permit may have aged out of the 120-day window or been removed by the agency. No record details have been invented.</p>
+      <a class="action" href="./index.html#leads">Return to the construction leads</a>
+    </div>
+    <div id="page" class="hidden">
+      <nav class="breadcrumb"><a href="./index.html#leads">Construction leads</a><span> / </span><span id="crumb"></span></nav>
+      <section class="hero">
+        <p class="eyebrow" id="jurisdiction"></p>
+        <h1 id="heading"></h1>
+        <p class="subhead" id="location"></p>
+        <div class="chips"><span id="category" class="chip"></span><span id="status" class="chip"></span><span class="chip caution">Issued ≠ construction started</span></div>
+        <div class="metrics">
+          <div class="metric"><span>Permit number</span><strong id="permit"></strong></div>
+          <div class="metric"><span>Issued date</span><strong id="issued"></strong></div>
+          <div class="metric"><span>Published valuation</span><strong id="valuation"></strong></div>
+        </div>
+      </section>
+      <div class="layout">
+        <div>
+          <section class="panel">
+            <h2>Construction details</h2>
+            <div class="data-grid">
+              <div><span class="fieldname">Construction category</span><strong id="kind"></strong></div>
+              <div><span class="fieldname">Work class</span><strong id="workclass"></strong></div>
+              <div><span class="fieldname">Permit type</span><strong id="permittype"></strong></div>
+              <div><span class="fieldname">Project name</span><strong id="project"></strong></div>
+              <div><span class="fieldname">Units</span><strong id="units"></strong></div>
+              <div><span class="fieldname">Square feet</span><strong id="squarefeet"></strong></div>
+              <div><span class="fieldname">Parcel number</span><strong id="parcel"></strong></div>
+              <div><span class="fieldname">County</span><strong id="county"></strong></div>
+              <div><span class="fieldname">City permit status</span><strong id="statusfield"></strong></div>
+              <div><span class="fieldname">Permit relevance score</span><strong id="score"></strong></div>
+            </div>
+            <hr>
+            <span class="fieldname">Project scope / work description</span>
+            <p class="scope" id="description"></p>
+          </section>
+          <section class="panel">
+            <h2>Municipal project timeline</h2>
+            <p class="note">Only dates published by the issuing agency are shown; a recorded inspection is not proof of active construction or a particular building stage.</p>
+            <div class="data-grid">
+              <div><span class="fieldname">Application date</span><strong id="applied"></strong></div>
+              <div><span class="fieldname">Issued date</span><strong id="issue2"></strong></div>
+              <div><span class="fieldname">Last recorded inspection</span><strong id="inspection"></strong></div>
+              <div><span class="fieldname">Expiration date</span><strong id="expiry"></strong></div>
+              <div><span class="fieldname">Verified construction start</span><strong id="started"></strong></div>
+              <div><span class="fieldname">Inspection evidence</span><strong id="inspectionkind"></strong></div>
+            </div>
+          </section>
+          <section class="panel">
+            <h2>Project site and other permits</h2>
+            <div id="siteaddress" class="siteaddress"></div>
+            <div class="buttonrow">
+              <a id="maplink" class="action light hidden" target="_blank" rel="noopener noreferrer">Open address in Maps ↗</a>
+              <button id="copysummary" class="action light" type="button">Copy project summary</button>
+            </div>
+            <div class="related">
+              <span class="fieldname">Permits with the same recorded address</span>
+              <p id="groupnote" class="note"></p>
+              <div id="related" class="related-items"></div>
+            </div>
+          </section>
+        </div>
+        <div>
+          <section class="panel">
+            <h2>Builder / general contractor</h2>
+            <div class="business" id="builder"></div>
+            <div id="builderbasis" class="basis"></div>
+            <div id="builderqualification" class="note"></div>
+            <div class="buttonrow"><a id="builderlink" class="action light hidden" target="_blank" rel="noopener noreferrer">View builder evidence ↗</a></div>
+            <hr>
+            <div class="fieldname">Business phone / email / license</div>
+            <p class="note" id="buildercontacts">Not published in the selected permit feed. No private contacts or guessed builder identities are inserted.</p>
+          </section>
+          <section class="panel">
+            <h2>Official permit records</h2>
+            <p class="note">Open the city’s permit lookup first; some cities do not publish direct individual permit URLs. The raw source is kept separately for audit and verification.</p>
+            <div class="link-stack">
+              <a id="official" class="action" target="_blank" rel="noopener noreferrer">Open official permit search ↗</a>
+              <a id="raw" class="action light" target="_blank" rel="noopener noreferrer">Open original source record ↗</a>
+              <a id="origin" class="action light" target="_blank" rel="noopener noreferrer">View agency data source ↗</a>
+              <button id="copynumber" class="action light" type="button">Copy permit number</button>
+            </div>
+            <div id="sourcescope" class="note" style="margin-top:12px"></div>
+          </section>
+          <section class="panel">
+            <h2>Evidence and verification</h2>
+            <div class="data-grid single">
+              <div><span class="fieldname">Source jurisdiction</span><strong id="issuer"></strong></div>
+              <div><span class="fieldname">Data snapshot</span><strong id="snapshotdate"></strong></div>
+              <div><span class="fieldname">Builder match</span><strong id="builderverify"></strong></div>
+              <div><span class="fieldname">Site match basis</span><strong id="sitematch"></strong></div>
+            </div>
+            <p class="disclaimer">This page summarizes official-source permit data and separately sourced business research. An address match, home listing, or development announcement is not verification of a permit's prime contractor. Confirm the permit, builder and construction stage with the issuing authority.</p>
+          </section>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer>Kansas–Missouri Construction Intelligence · Independent permit research · Not affiliated with any government agency</footer>
+</body>
+</html>

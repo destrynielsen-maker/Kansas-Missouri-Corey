@@ -282,6 +282,8 @@ def normalize(cfg_key: str, raw: dict, today: date, cutoff: date) -> dict | None
         status = str(raw.get("permit_status") or "")
         valuation = number(raw.get("valuation"))
         # A council district is NOT a county; do not mislabel it.
+        # City Issued Permits includes a parcel identifier distinct from its address.
+        parcel_number = str(raw.get("main_parcel_number") or "").strip() or None
         county = ""
         direct_url = None
         units, sq_ft = None, None

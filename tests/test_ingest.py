@@ -184,5 +184,16 @@ class IngestionTests(unittest.TestCase):
         self.assertEqual(item["link_kind"],"search")
 
 
+    def test_kcmo_published_parcel_is_not_a_person_or_builder(self):
+        raw={"permit_number":"CPBR-2026-99999","issue_date":"2026-11-13",
+             "permit_type":"CPPU - Building (Residential)","work_class":"Single Family - New",
+             "main_address_line1":"123 Main St","permit_status":"Issued",
+             "main_parcel_number":"123456789012345"}
+        rec=ingest.normalize("kcmo",raw,TODAY,CUTOFF)
+        self.assertEqual(rec["parcel_number"],"123456789012345")
+        self.assertIsNone(rec["permit_fee"])
+        self.assertNotIn("builder",rec)
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -376,6 +376,74 @@ function exportCsv(){
   const a=document.createElement("a");a.href=url;a.download="kc-metro-"+el("viewmode").value+"-leads-"+new Date().toISOString().slice(0,10)+".csv";
   document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);
 }
+
+function reportEmpty(tbody,message,colspan){
+  const row=document.createElement("tr"),td=cell(row,message,"empty");
+  td.colSpan=colspan;tbody.appendChild(row);
+}
+function renderBuilderReport(rankings, coverage){
+  const leaders=el("builder-rankings"),fields=el("field-coverage");
+  leaders.replaceChildren();fields.replaceChildren();
+  if(!rankings || !coverage || rankings.source_snapshot!==snapshot?.generated_at ||
+     coverage.source_snapshot!==snapshot?.generated_at ||
+     !Array.isArray(rankings.builders) || !coverage.jurisdictions){
+    reportEmpty(leaders,"No matching, current builder report. The permit list remains available.",6);
+    reportEmpty(fields,"No current source-coverage report.",9);
+    text("builder-report-status","Coverage report unavailable or stale.");
+    text("builder-coverage-date","");return;
+  }
+  for(const company of rankings.builders){
+    const tr=document.createElement("tr");
+    const name=cell(tr,"");
+    const action=document.createElement("button");
+    action.type="button";action.className="builder-focus";action.textContent=company.builder;
+    action.title="Find this builder's sourced permit matches";
+    action.addEventListener("click",function(){
+      el("search").value=company.builder;
+      el("builderstatus").value="sourced";
+      el("days").value="120";
+      el("state").value="";setCityOptions();el("city").value="";
+      el("category").value="";el("score").value="0";el("activity").value="";el("followup").value="";
+      el("viewmode").value="permit";
+      applyFilters();el("leads").scrollIntoView({behavior:"smooth",block:"start"});
+    });
+    name.appendChild(action);
+    cell(tr,company.issued_last_30_days);
+    cell(tr,company.issued_last_90_days);
+    cell(tr,company.permit_count);
+    cell(tr,company.estimated_distinct_project_groups);
+    cell(tr,company.last_issued_date);
+    leaders.appendChild(tr);
+  }
+  if(!rankings.builders.length)reportEmpty(leaders,"No source-matched company names yet.",6);
+  for(const [city,entry] of Object.entries(coverage.jurisdictions).sort(function(a,b){return a[0].localeCompare(b[0]);})){
+    const tr=document.createElement("tr"),v=entry.fields_available||{};
+    cell(tr,city,"city");cell(tr,entry.permits);
+    for(const k of ["independent_builder_company","project_description","valuation","units","square_feet","last_inspection_date","parcel_number"]){
+      const count=Number.isInteger(v[k])?v[k]:0;
+      cell(tr,count.toLocaleString("en-US")+" / "+entry.permits);
+    }
+    fields.appendChild(tr);
+  }
+  text("builder-report-status",coverage.builder_research_matched_permits+
+       " of "+coverage.total_permits+" permits have a separately sourced company match · "+
+       rankings.builder_companies+" companies");
+  text("builder-coverage-date","Research last checked "+(coverage.research_reviewed_on||"unknown"));
+}
+async function loadSalesReports(){
+  if(!snapshot || !snapshot.generated_at)return;
+  let rankings=null,coverage=null;
+  try{
+    const responses=await Promise.all([
+      fetch(BUILDER_RANKINGS_URL+"?v="+Date.now(),{cache:"no-store"}),
+      fetch(SALES_COVERAGE_URL+"?v="+Date.now(),{cache:"no-store"})
+    ]);
+    if(responses[0].ok)rankings=await responses[0].json();
+    if(responses[1].ok)coverage=await responses[1].json();
+  }catch(err){ /* A missing summary must not prevent primary permit viewing. */ }
+  renderBuilderReport(rankings,coverage);
+}
+
 function renderCoverage(data, monitor=null){
   const panel=el("coverage-grid");panel.replaceChildren();
   const statuses=new Map((snapshot?.sources||[]).map(function(s){return [s.key,s];}));
@@ -437,6 +505,7 @@ async function load(){
     }
     setCityOptions();
     applyFilters();
+    await loadSalesReports();
   }catch(err){
     snapshot=null;filtered=[];filteredPermits=[];siteRowsById=new Map();builderResearch=new Map();builderResearchLoaded=false;text("source-feed-count","—");status.textContent="Snapshot unavailable — no live results claimed.";
     text("resultcount","Unable to load published snapshot; check GitHub Actions.");

@@ -8,7 +8,7 @@ const root = path.resolve(__dirname,"..");
 const html = fs.readFileSync(path.join(root,"docs","index.html"),"utf8");
 const code = fs.readFileSync(path.join(root,"docs","app.js"),"utf8");
 
-for (const id of ["activity","followup","viewmode","source-feed-count","metric-inspections","metric-sites","lenexa-planning","lenexa-search","lenexa-status","lenexa-category","lenexa-reviewed","lenexa-rows","export-lenexa","leadrows","builderstatus","score","sort","days","export"]) {
+for (const id of ["activity","followup","viewmode","source-feed-count","metric-inspections","metric-sites","lenexa-planning","lenexa-search","lenexa-status","lenexa-category","lenexa-reviewed","lenexa-rows","export-lenexa","leadrows","builderstatus","builder-research","builder-rankings","field-coverage","builder-report-status","score","sort","days","export"]) {
   assert.ok(html.includes('id="'+id+'"'),"Missing dashboard control: "+id);
 }
 for (const header of ["Official activity","Other dates","Sales follow-up","Other permits at site","Builder / GC","Raw source data"]) {
@@ -84,3 +84,8 @@ for(const item of builderOverlay.entries)assert.ok(knownIds.has(item.id),"Builde
 assert.ok(code.includes("builderStatus"),"Builder sourced/missing filter is functional");
 assert.ok(code.includes("builderCell(tr,item)"),"Builder column must be actually rendered");
 console.log("Builder and formatted detail navigation: PASS");
+
+assert.ok(html.includes("Official field coverage by city"),"Field-completeness table is visible");
+assert.ok(code.includes("loadSalesReports()"),"Field-coverage reports are requested");
+assert.ok(code.includes("renderBuilderReport(rankings,coverage)"),"Report rendering is wired");
+assert.ok(code.includes('el("builderstatus").value="sourced"'),"Clicking a builder should filter exact researched matches");

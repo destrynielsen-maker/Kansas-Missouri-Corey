@@ -86,6 +86,25 @@ def probe_documented_backend(session):
             print("DATASET_TOP_TYPE",type(payload).__name__,"length",len(buffer))
             if isinstance(payload,dict):
                 print("DATASET_KEYS",sorted(payload.keys())[:35])
+                print("DATASET_META",{"code":payload.get("dataSetCode"),"name":payload.get("dataSetName"),
+                      "status":payload.get("status"),"lastUpdated":payload.get("lastUpdated"),
+                      "currentDataStore_type":type(payload.get("currentDataStore")).__name__})
+                fields=payload.get("dataSetFields") or []
+                rows=payload.get("dataSetData") or []
+                print("FIELD_DEFS",[(i,f.get("title"),f.get("fieldType"),f.get("id")) for i,f in enumerate(fields) if isinstance(f,dict)])
+                print("ROW_WIDTHS",sorted({len(row) for row in rows if isinstance(row,list)}))
+                for field_idx,f in enumerate(fields):
+                    if not isinstance(f,dict):continue
+                    title=str(f.get("title") or "")
+                    if "date" in title.lower() or "issued" in title.lower():
+                        print("DATE_FIELD",field_idx,"sample",[(row[field_idx] if field_idx<len(row) else None) for row in rows[:4]],
+                              "tail",[(row[field_idx] if field_idx<len(row) else None) for row in rows[-3:]])
+                    elif "type" in title.lower() or "description" in title.lower():
+                        from collections import Counter
+                        count=Counter(str(row[field_idx])[:90] for row in rows if isinstance(row,list) and len(row)>field_idx)
+                        print("TYPE_FIELD",field_idx,"top_25",count.most_common(25))
+                    elif "permit" in title.lower() and "number" in title.lower():
+                        print("PERMIT_ID_SAMPLES",field_idx,[str(row[field_idx])[:45] for row in rows[:4] if isinstance(row,list) and len(row)>field_idx])
                 for k,v in payload.items():
                     if isinstance(v,list):
                         print("DATASET_LIST_KEY",k,"count",len(v))

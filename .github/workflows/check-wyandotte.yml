@@ -14,7 +14,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: metro-wyandotte-public-source-check
+  group: kc-metro-main-data-writes
   cancel-in-progress: false
 
 jobs:
@@ -42,5 +42,7 @@ jobs:
             echo "Source monitor unchanged"
           else
             git commit -m "data: Wyandotte public-source check [skip ci]"
-            git push
+            git fetch origin main
+            git rebase origin/main
+            git push origin HEAD:main
           fi

@@ -15,7 +15,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: kc-metro-permit-refresh
+  group: kc-metro-main-data-writes
   cancel-in-progress: false
 
 jobs:
@@ -53,5 +53,7 @@ jobs:
             echo "No snapshot change"
           else
             git commit -m "data: refresh KC metro permit snapshot [skip ci]"
-            git push
+            git fetch origin main
+            git rebase origin/main
+            git push origin HEAD:main
           fi

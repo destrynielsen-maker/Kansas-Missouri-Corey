@@ -47,9 +47,66 @@ def safe_get(session, url):
     return r
 
 
+def probe_documented_backend(session):
+    """The city's published JS explicitly GETs /api/config and uses apiBaseUrl."""
+    config_url="https://opendata.independencemo.gov/api/config"
+    try:
+        r=safe_get(session,config_url)
+        print("CONFIG_STATUS",r.status_code,"type",r.headers.get("content-type","?"))
+        if r.status_code!=200:return
+        conf=r.json()
+        if not isinstance(conf,dict):
+            print("CONFIG_UNEXPECTED_FORMAT");return
+        print("CONFIG_FIELDS",sorted(conf.keys()))
+        api=conf.get("apiBaseUrl")
+        if not isinstance(api,str) or not api.startswith("https://"):
+            print("CONFIG_NO_HTTPS_BACKEND");return
+        from urllib.parse import urlsplit
+        host=urlsplit(api).hostname or ""
+        print("BACKEND_ORIGIN",host,"base_path",urlsplit(api).path)
+        if not (host.endswith(".independencemo.gov") or host.endswith(".indepmo.org")):
+            print("BACKEND_DOMAIN_REQUIRES_MANUAL_VALIDATION");return
+        dataset_url=urljoin(api.rstrip("/")+"/","opendata/dataset?code=V1BUILDINGPERMITS")
+        try:
+            resp=session.get(dataset_url,headers={"Accept":"application/json"},timeout=(8,25),stream=True,allow_redirects=True)
+            if urlsplit(resp.url).hostname != host:
+                print("DATASET_UNEXPECTED_REDIRECT",urlsplit(resp.url).hostname);return
+            print("DATASET_RESPONSE",resp.status_code,resp.headers.get("content-type","?"),"size",resp.headers.get("content-length","?"))
+            if resp.status_code!=200:
+                print("DATASET_REJECTION",resp.text[:190]);return
+            buffer=bytearray()
+            for chunk in resp.iter_content(65536):
+                buffer.extend(chunk)
+                if len(buffer)>6_000_000:
+                    print("DATASET_TOO_LARGE_FOR_PROBE");return
+            try:
+                payload=__import__("json").loads(bytes(buffer))
+            except ValueError as e:
+                print("DATASET_INVALID_JSON",str(e)[:130]);return
+            print("DATASET_TOP_TYPE",type(payload).__name__,"length",len(buffer))
+            if isinstance(payload,dict):
+                print("DATASET_KEYS",sorted(payload.keys())[:35])
+                for k,v in payload.items():
+                    if isinstance(v,list):
+                        print("DATASET_LIST_KEY",k,"count",len(v))
+                        if v:
+                            print("DATASET_LIST_SAMPLE_TYPE",type(v[0]).__name__,"FIELDS",list(v[0].keys())[:40] if isinstance(v[0],dict) else "non-object")
+                    elif isinstance(v,dict):
+                        print("DATASET_OBJECT_KEY",k,"FIELDS",list(v.keys())[:30])
+            elif isinstance(payload,list):
+                print("DATASET_RECORD_COUNT",len(payload))
+                if payload and isinstance(payload[0],dict):
+                    print("DATASET_RECORD_KEYS",list(payload[0].keys())[:40])
+        except (requests.RequestException,ValueError) as e:
+            print("DATASET_ERROR",type(e).__name__,str(e)[:220])
+    except (requests.RequestException,ValueError) as e:
+        print("CONFIG_ERROR",type(e).__name__,str(e)[:200])
+
+
 def main():
     s=requests.Session()
     s.headers.update({"User-Agent":"Kansas-Missouri-Construction-Intelligence/SourceAudit (public metadata only)"})
+    probe_documented_backend(s)
     for url in PAGES:
         try:
             r=safe_get(s,url)

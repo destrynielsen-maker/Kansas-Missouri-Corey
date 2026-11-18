@@ -1,0 +1,50 @@
+name: Refresh permit data
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 13 * * *"
+  push:
+    paths:
+      - "src/**"
+      - "tests/**"
+      - "requirements.txt"
+      - ".github/workflows/refresh.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kc-metro-permit-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install requirements
+        run: python -m pip install -r requirements.txt
+      - name: Test source adapters and URL safety
+        run: python -m unittest discover -s tests -v
+      - name: Load and validate all four official feeds
+        run: python src/ingest.py --days 120
+      - name: Commit dated snapshot only after successful validation
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/data/permits.json
+          if git diff --staged --quiet; then
+            echo "No snapshot change"
+          else
+            git commit -m "data: refresh KC metro permit snapshot [skip ci]"
+            git push
+          fi

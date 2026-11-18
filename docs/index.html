@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Kansas City metro building permit intelligence sourced from municipal open data.">
+  <title>Kansas–Missouri Construction Intelligence | Kansas City Metro</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script defer src="./app.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="./index.html" aria-label="Construction Intelligence Home"><span class="logo">KM</span><span>Kansas–Missouri <b>Construction Intelligence</b></span></a>
+    <div class="toplinks"><a href="#coverage">Sources</a><a href="https://github.com/destrynielsen-maker/Kansas-Missouri-Corey/actions/workflows/refresh.yml" target="_blank" rel="noopener">Open run controls ↗</a></div>
+  </header>
+  <main class="shell">
+    <section class="hero">
+      <div>
+        <div class="eyebrow"><span class="dot"></span> PUBLIC PERMIT INTELLIGENCE • KANSAS CITY METRO</div>
+        <h1>Know where the next<br><em>build is happening.</em></h1>
+        <p>Construction leads from official city permit records. Prioritized for new homes, multifamily developments, commercial construction and additions across Missouri and Kansas.</p>
+        <div class="heroactions">
+          <a class="primarylink" href="#leads">Explore construction leads ↓</a>
+          <span class="muted" id="snapshot-status" role="status">Checking latest data snapshot…</span>
+        </div>
+      </div>
+      <div class="hero-card" aria-label="Service coverage">
+        <div class="section-kicker">COVERAGE • FIRST RELEASE</div>
+        <strong>4</strong><span>automated city feeds configured</span>
+        <div class="state-badges"><span>MISSOURI</span><span>KANSAS</span></div>
+        <p>More jurisdictions are tracked in the source registry below.</p>
+      </div>
+    </section>
+
+    <section class="metrics" aria-label="Snapshot overview">
+      <div class="metric"><span>Leads in selected window</span><strong id="metric-total">—</strong><small id="metric-total-sub">Awaiting refresh</small></div>
+      <div class="metric"><span>Single-family builds</span><strong id="metric-homes">—</strong><small>New-home opportunities</small></div>
+      <div class="metric"><span>Multifamily projects</span><strong id="metric-multis">—</strong><small>Attached / apartment permits</small></div>
+      <div class="metric"><span>High-priority leads</span><strong id="metric-priority">—</strong><small>Opportunity score 75+</small></div>
+    </section>
+
+    <section class="panel" id="leads">
+      <div class="panelhead">
+        <div><div class="section-kicker">CONSTRUCTION LEADS</div><h2>Permit explorer</h2><p>Open the permit record or public search first. The raw government source is in the adjacent column.</p></div>
+        <div class="buttons"><button id="reload" class="subtle" type="button">↻ Reload snapshot</button><button id="export" class="darkbtn" type="button" disabled>Export filtered CSV ↓</button></div>
+      </div>
+      <div class="filterbar">
+        <label class="search-field">Search <input type="search" id="search" placeholder="Address, permit number, project, city…" autocomplete="off"></label>
+        <label>State <select id="state"><option value="">Both states</option><option value="MO">Missouri</option><option value="KS">Kansas</option></select></label>
+        <label>City <select id="city"><option value="">All cities</option></select></label>
+        <label>Type <select id="category"><option value="">All building types</option><option>Single-family</option><option>Multifamily</option><option>Commercial</option><option>Addition</option><option>Remodel</option><option>Other</option></select></label>
+        <label>Issued <select id="days"><option value="7">Last 7 days</option><option value="30">Last 30 days</option><option value="90" selected>Last 90 days</option><option value="120">Last 120 days</option></select></label>
+        <label>Score <select id="score"><option value="0">Any score</option><option value="50">50+</option><option value="75">75+</option><option value="90">90+</option></select></label>
+        <label>Sort <select id="sort"><option value="score">Highest opportunity</option><option value="newest">Newest issued</option><option value="value">Highest valuation</option></select></label>
+      </div>
+      <div class="resultbar"><span id="resultcount">Waiting for an official data snapshot.</span><span>Score estimates lead relevance, not permit approval or project start.</span></div>
+      <div class="tablewrap">
+        <table><thead><tr><th>Score</th><th>Issued</th><th>Permit / project</th><th>Site address</th><th>Jurisdiction</th><th>Building type</th><th>Valuation</th><th>Permit record / search</th><th>Raw source row</th></tr></thead><tbody id="leadrows"><tr><td colspan="9" class="empty">No live snapshot published yet. The first verified ingestion run will populate this view.</td></tr></tbody></table>
+      </div>
+      <div class="tablefoot"><span id="row-limit"></span><span>Dates are municipal issue dates. Some sources do not publish contractor or direct-record links.</span></div>
+    </section>
+
+    <section class="panel secondary" id="coverage">
+      <div class="panelhead"><div><div class="section-kicker">SOURCE REGISTRY</div><h2>Jurisdiction coverage</h2><p>Official agency links, live-feed readiness, and additional public portals planned for integration.</p></div></div>
+      <div id="coverage-grid" class="coverage-grid"></div>
+    </section>
+
+    <footer>
+      <div><b>Kansas–Missouri Construction Intelligence</b><p>Independent sales research dashboard. Not affiliated with any city or county.</p></div>
+      <div><p>Issued permits do not confirm construction has begun, is ongoing, or is complete. Official data can be delayed or corrected.</p><p>Manual refresh: GitHub Actions → Refresh permit data → Run workflow.</p></div>
+    </footer>
+  </main>
+  <div class="toast" role="status" aria-live="polite" id="toast"></div>
+</body>
+</html>

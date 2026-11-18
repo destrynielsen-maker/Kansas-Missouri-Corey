@@ -1,0 +1,59 @@
+{
+  "last_reviewed": "2026-11-18",
+  "sources": [
+    {
+      "key": "kcmo",
+      "name": "Kansas City, MO",
+      "region": "Jackson, Clay, Platte and Cass counties (city limits only)",
+      "mode": "automated",
+      "note": "Active Open Data KC building permits; CompassKC public permit search.",
+      "source_url": "https://data.kcmo.org/d/w8jz-wjgn",
+      "portal_url": "https://compasskc.kcmo.org/"
+    },
+    {
+      "key": "overland_park",
+      "name": "Overland Park, KS",
+      "region": "Johnson County",
+      "mode": "automated",
+      "note": "Official Building Permit Report ArcGIS layer; only its defined permit/status coverage.",
+      "source_url": "https://maps.opkansas.org/mapping/rest/services/MixedInfo/Building_Permit_Report/MapServer/0",
+      "portal_url": "https://overlandparkks.tylerportico.com/portal/"
+    },
+    {
+      "key": "olathe",
+      "name": "Olathe, KS",
+      "region": "Johnson County",
+      "mode": "automated",
+      "note": "Official Olathe development ArcGIS building permit layer; public permitting portal.",
+      "source_url": "https://arcgis.olatheks.org/arcgis/rest/services/Planning/Development/MapServer/0",
+      "portal_url": "https://energov.olatheks.org/"
+    },
+    {
+      "key": "lees_summit",
+      "name": "Lee's Summit, MO",
+      "region": "Jackson / Cass counties",
+      "mode": "automated",
+      "note": "Official Development Public map of open permits; CityView public portal.",
+      "source_url": "https://maps.cityofls.net/arcgis/rest/services/Development_Public/MapServer/29",
+      "portal_url": "https://cityview2.iharriscomputer.com/leessummitmoportal/"
+    },
+    {
+      "key": "kck",
+      "name": "Kansas City, KS",
+      "region": "Wyandotte County",
+      "mode": "portal",
+      "note": "Accela public building-permit search verified; no approved bulk adapter yet.",
+      "source_url": "https://aca-prod.accela.com/UG/Cap/CapHome.aspx?TabName=Home&module=Building",
+      "portal_url": "https://aca-prod.accela.com/UG/Cap/CapHome.aspx?TabName=Home&module=Building"
+    },
+    {
+      "key": "lenexa",
+      "name": "Lenexa, KS",
+      "region": "Johnson County",
+      "mode": "portal",
+      "note": "Public Accela permit and planning search verified; no bulk adapter yet.",
+      "source_url": "https://aca-prod.accela.com/LENEXA/Welcome.aspx",
+      "portal_url": "https://aca-prod.accela.com/LENEXA/Welcome.aspx"
+    }
+  ]
+}

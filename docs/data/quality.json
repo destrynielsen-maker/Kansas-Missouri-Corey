@@ -1,23 +1,23 @@
 {
-  "source_snapshot": "2026-11-21T13:20:25+00:00",
-  "total_records": 799,
+  "source_snapshot": "2026-11-22T13:20:13+00:00",
+  "total_records": 809,
   "site_stats": {
-    "unique_sites": 780,
+    "unique_sites": 790,
     "multiple_permit_sites": 7,
     "permits_on_multiple_permit_sites": 26
   },
   "by_category": {
-    "Single-family": 549,
-    "Commercial": 104,
-    "Addition": 90,
+    "Single-family": 558,
+    "Commercial": 103,
+    "Addition": 92,
     "Multifamily": 56
   },
   "by_state": {
-    "MO": 509,
-    "KS": 290
+    "MO": 522,
+    "KS": 287
   },
   "direct_record_count": 0,
-  "public_search_count": 799,
+  "public_search_count": 809,
   "issues_to_review": [],
   "jurisdictions": {
     "Independence, MO": {
@@ -202,60 +202,60 @@
       }
     },
     "Kansas City, MO": {
-      "unique_sites": 361,
+      "unique_sites": 373,
       "multiple_permit_sites": 7,
       "permits_on_multiple_permit_sites": 26,
       "inspection_evidence": {
-        "date_not_reported": 207,
-        "inspection_recorded": 173
+        "date_not_reported": 203,
+        "inspection_recorded": 189
       },
       "timeline_dates": {
-        "application_date": 380,
-        "last_inspection_date": 173,
+        "application_date": 392,
+        "last_inspection_date": 189,
         "expiration_date": 0,
         "finaled_date": 0,
         "warnings": 0
       },
-      "count": 380,
-      "earliest_issue": "2026-07-24",
-      "latest_issue": "2026-11-13",
+      "count": 392,
+      "earliest_issue": "2026-07-27",
+      "latest_issue": "2026-11-20",
       "categories": {
-        "Single-family": 221,
-        "Commercial": 78,
-        "Addition": 48,
-        "Multifamily": 33
+        "Single-family": 231,
+        "Commercial": 77,
+        "Addition": 50,
+        "Multifamily": 34
       },
       "statuses": {
-        "Issued": 372,
+        "Issued": 384,
         "Open-Active": 7,
         "Issued - Subject To Conditions": 1
       },
       "link_kinds": {
-        "search": 380
+        "search": 392
       },
       "missing_address": 0,
-      "missing_valuation": 379,
+      "missing_valuation": 391,
       "zero_valuation": 0,
       "top_types": [
         {
           "permit_type": "CPPU - Building (Residential)",
           "work_class": "Single Family - New",
-          "count": 221
+          "count": 231
         },
         {
           "permit_type": "CPPU - Building (Commercial)",
           "work_class": "New",
-          "count": 78
+          "count": 77
         },
         {
           "permit_type": "CPPU - Building (Residential)",
           "work_class": "Single Family - Addition",
-          "count": 35
+          "count": 37
         },
         {
           "permit_type": "CPPU - Building (Residential)",
           "work_class": "Townhouse - New",
-          "count": 33
+          "count": 34
         },
         {
           "permit_type": "CPPU - Building (Commercial)",
@@ -271,17 +271,8 @@
       "samples_by_category": {
         "Single-family": [
           {
-            "permit": "CPBR-2026-02570",
-            "date": "2026-10-13",
-            "type": "CPPU - Building (Residential)",
-            "class": "Single Family - New",
-            "project": "SINGLE FAMILY",
-            "address_present": true,
-            "direct_record": false
-          },
-          {
-            "permit": "CPBR-2026-02610",
-            "date": "2026-10-22",
+            "permit": "CPBR-2026-02738",
+            "date": "2026-11-16",
             "type": "CPPU - Building (Residential)",
             "class": "Single Family - New",
             "project": "",
@@ -289,8 +280,17 @@
             "direct_record": false
           },
           {
-            "permit": "CPBR-2026-02652",
-            "date": "2026-10-23",
+            "permit": "CPBR-2026-02749",
+            "date": "2026-11-16",
+            "type": "CPPU - Building (Residential)",
+            "class": "Single Family - New",
+            "project": "",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "CPBR-2026-02766",
+            "date": "2026-11-16",
             "type": "CPPU - Building (Residential)",
             "class": "Single Family - New",
             "project": "",
@@ -299,6 +299,15 @@
           }
         ],
         "Multifamily": [
+          {
+            "permit": "CPBR-2026-02838",
+            "date": "2026-11-20",
+            "type": "CPPU - Building (Residential)",
+            "class": "Townhouse - New",
+            "project": "Bristol North Townhouse 4 Unit",
+            "address_present": true,
+            "direct_record": false
+          },
           {
             "permit": "CPBR-2026-02650",
             "date": "2026-10-23",
@@ -316,27 +325,9 @@
             "project": "Monarch Townhouse 4 Unit Slab Master Plan",
             "address_present": true,
             "direct_record": false
-          },
-          {
-            "permit": "CPBR-2026-02689",
-            "date": "2026-10-28",
-            "type": "CPPU - Building (Residential)",
-            "class": "Townhouse - New",
-            "project": "Monarch Townhouse 4 Unit Slab Master Plan",
-            "address_present": true,
-            "direct_record": false
           }
         ],
         "Commercial": [
-          {
-            "permit": "CPBC-2026-01086",
-            "date": "2026-10-22",
-            "type": "CPPU - Building (Commercial)",
-            "class": "New",
-            "project": "Brighton Vehicle Logistics Center",
-            "address_present": true,
-            "direct_record": false
-          },
           {
             "permit": "CPBC-2026-01072",
             "date": "2026-10-23",
@@ -354,33 +345,42 @@
             "project": "Better Carwash #5 at Tremont Square",
             "address_present": true,
             "direct_record": false
+          },
+          {
+            "permit": "CPBC-2026-01061",
+            "date": "2026-10-26",
+            "type": "CPPU - Building (Commercial)",
+            "class": "New",
+            "project": "Better Carwash #5 at Tremont Square",
+            "address_present": true,
+            "direct_record": false
           }
         ],
         "Addition": [
+          {
+            "permit": "CPBC-2026-01165",
+            "date": "2026-11-17",
+            "type": "CPPU - Building (Commercial)",
+            "class": "Addition",
+            "project": "The Ethans Apartments Decks Building 8",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "CPBR-2026-02807",
+            "date": "2026-11-18",
+            "type": "CPPU - Building (Residential)",
+            "class": "Single Family - Addition",
+            "project": "",
+            "address_present": true,
+            "direct_record": false
+          },
           {
             "permit": "CPBC-2026-01070",
             "date": "2026-10-26",
             "type": "CPPU - Building (Commercial)",
             "class": "Addition",
             "project": "Edged Energy KC Building Addition",
-            "address_present": true,
-            "direct_record": false
-          },
-          {
-            "permit": "CPBR-2026-02717",
-            "date": "2026-10-28",
-            "type": "CPPU - Building (Residential)",
-            "class": "Single Family - Addition",
-            "project": "",
-            "address_present": true,
-            "direct_record": false
-          },
-          {
-            "permit": "CPBR-2026-02703",
-            "date": "2026-10-30",
-            "type": "CPPU - Building (Residential)",
-            "class": "Single Family - Addition",
-            "project": "",
             "address_present": true,
             "direct_record": false
           }
@@ -390,42 +390,42 @@
       }
     },
     "Lee's Summit, MO": {
-      "unique_sites": 91,
+      "unique_sites": 92,
       "multiple_permit_sites": 0,
       "permits_on_multiple_permit_sites": 0,
       "inspection_evidence": {
-        "field_not_published": 91
+        "field_not_published": 92
       },
       "timeline_dates": {
         "application_date": 0,
         "last_inspection_date": 0,
-        "expiration_date": 91,
+        "expiration_date": 92,
         "finaled_date": 0,
         "warnings": 0
       },
-      "count": 91,
+      "count": 92,
       "earliest_issue": "2026-07-27",
-      "latest_issue": "2026-11-19",
+      "latest_issue": "2026-11-20",
       "categories": {
-        "Single-family": 79,
+        "Single-family": 80,
         "Multifamily": 6,
         "Commercial": 6
       },
       "statuses": {
-        "Issued": 90,
+        "Issued": 91,
         "Permit(s) Issued ": 1
       },
       "link_kinds": {
-        "search": 91
+        "search": 92
       },
       "missing_address": 0,
-      "missing_valuation": 91,
+      "missing_valuation": 92,
       "zero_valuation": 0,
       "top_types": [
         {
           "permit_type": "NEW SINGLE FAMILY",
           "work_class": "(empty)",
-          "count": 79
+          "count": 80
         },
         {
           "permit_type": "NEW COMMERCIAL",
@@ -537,11 +537,11 @@
       }
     },
     "Olathe, KS": {
-      "unique_sites": 175,
+      "unique_sites": 173,
       "multiple_permit_sites": 0,
       "permits_on_multiple_permit_sites": 0,
       "inspection_evidence": {
-        "field_not_published": 175
+        "field_not_published": 173
       },
       "timeline_dates": {
         "application_date": 0,
@@ -550,19 +550,19 @@
         "finaled_date": 0,
         "warnings": 0
       },
-      "count": 175,
-      "earliest_issue": "2026-07-24",
+      "count": 173,
+      "earliest_issue": "2026-07-27",
       "latest_issue": "2026-11-13",
       "categories": {
-        "Single-family": 155,
-        "Multifamily": 10,
-        "Commercial": 10
+        "Single-family": 154,
+        "Commercial": 10,
+        "Multifamily": 9
       },
       "statuses": {
-        "Issued": 175
+        "Issued": 173
       },
       "link_kinds": {
-        "search": 175
+        "search": 173
       },
       "missing_address": 0,
       "missing_valuation": 0,
@@ -571,12 +571,12 @@
         {
           "permit_type": "Building - Residential",
           "work_class": "Single Family",
-          "count": 155
+          "count": 154
         },
         {
           "permit_type": "Building - Commercial",
           "work_class": "New Multi Family",
-          "count": 7
+          "count": 6
         },
         {
           "permit_type": "Building - Commercial",
@@ -698,34 +698,34 @@
       }
     },
     "Overland Park, KS": {
-      "unique_sites": 115,
+      "unique_sites": 114,
       "multiple_permit_sites": 0,
       "permits_on_multiple_permit_sites": 0,
       "inspection_evidence": {
-        "inspection_recorded": 90,
+        "inspection_recorded": 89,
         "date_not_reported": 25
       },
       "timeline_dates": {
-        "application_date": 115,
-        "last_inspection_date": 90,
-        "expiration_date": 115,
+        "application_date": 114,
+        "last_inspection_date": 89,
+        "expiration_date": 114,
         "finaled_date": 0,
         "warnings": 0
       },
-      "count": 115,
-      "earliest_issue": "2026-07-24",
+      "count": 114,
+      "earliest_issue": "2026-07-29",
       "latest_issue": "2026-11-19",
       "categories": {
-        "Single-family": 75,
+        "Single-family": 74,
         "Addition": 31,
         "Multifamily": 5,
         "Commercial": 4
       },
       "statuses": {
-        "Issued": 115
+        "Issued": 114
       },
       "link_kinds": {
-        "search": 115
+        "search": 114
       },
       "missing_address": 0,
       "missing_valuation": 0,
@@ -734,7 +734,7 @@
         {
           "permit_type": "Building (Residential)",
           "work_class": "New Single Family",
-          "count": 75
+          "count": 74
         },
         {
           "permit_type": "Building (Residential)",

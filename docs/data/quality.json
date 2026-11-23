@@ -1,23 +1,23 @@
 {
-  "source_snapshot": "2026-11-22T13:20:13+00:00",
-  "total_records": 809,
+  "source_snapshot": "2026-11-23T13:22:32+00:00",
+  "total_records": 811,
   "site_stats": {
-    "unique_sites": 790,
+    "unique_sites": 792,
     "multiple_permit_sites": 7,
     "permits_on_multiple_permit_sites": 26
   },
   "by_category": {
-    "Single-family": 558,
+    "Single-family": 561,
     "Commercial": 103,
-    "Addition": 92,
+    "Addition": 91,
     "Multifamily": 56
   },
   "by_state": {
     "MO": 522,
-    "KS": 287
+    "KS": 289
   },
   "direct_record_count": 0,
-  "public_search_count": 809,
+  "public_search_count": 811,
   "issues_to_review": [],
   "jurisdictions": {
     "Independence, MO": {
@@ -309,17 +309,17 @@
             "direct_record": false
           },
           {
-            "permit": "CPBR-2026-02650",
-            "date": "2026-10-23",
+            "permit": "CPBR-2026-02308",
+            "date": "2026-10-26",
             "type": "CPPU - Building (Residential)",
             "class": "Townhouse - New",
-            "project": "Bristol North Townhouse 5 Unit",
+            "project": "Monarch Townhouse 4 Unit Slab Master Plan",
             "address_present": true,
             "direct_record": false
           },
           {
-            "permit": "CPBR-2026-02308",
-            "date": "2026-10-26",
+            "permit": "CPBR-2026-02689",
+            "date": "2026-10-28",
             "type": "CPPU - Building (Residential)",
             "class": "Townhouse - New",
             "project": "Monarch Townhouse 4 Unit Slab Master Plan",
@@ -328,15 +328,6 @@
           }
         ],
         "Commercial": [
-          {
-            "permit": "CPBC-2026-01072",
-            "date": "2026-10-23",
-            "type": "CPPU - Building (Commercial)",
-            "class": "New",
-            "project": "Parade Park Building 1N and 1S",
-            "address_present": true,
-            "direct_record": false
-          },
           {
             "permit": "CPBC-2026-01050",
             "date": "2026-10-26",
@@ -352,6 +343,15 @@
             "type": "CPPU - Building (Commercial)",
             "class": "New",
             "project": "Better Carwash #5 at Tremont Square",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "CPBC-2026-01093",
+            "date": "2026-10-26",
+            "type": "CPPU - Building (Commercial)",
+            "class": "New",
+            "project": "Carport/Solar Martin City Elementary School",
             "address_present": true,
             "direct_record": false
           }
@@ -504,15 +504,6 @@
         ],
         "Commercial": [
           {
-            "permit": "PRCOM20252284",
-            "date": "2026-08-24",
-            "type": "NEW COMMERCIAL",
-            "class": "",
-            "project": "",
-            "address_present": true,
-            "direct_record": false
-          },
-          {
             "permit": "PRCOM20261770",
             "date": "2026-08-27",
             "type": "NEW COMMERCIAL",
@@ -529,6 +520,15 @@
             "project": "",
             "address_present": true,
             "direct_record": false
+          },
+          {
+            "permit": "PRCOM20261129",
+            "date": "2026-09-04",
+            "type": "NEW COMMERCIAL",
+            "class": "",
+            "project": "",
+            "address_present": true,
+            "direct_record": false
           }
         ],
         "Addition": [],
@@ -537,11 +537,11 @@
       }
     },
     "Olathe, KS": {
-      "unique_sites": 173,
+      "unique_sites": 175,
       "multiple_permit_sites": 0,
       "permits_on_multiple_permit_sites": 0,
       "inspection_evidence": {
-        "field_not_published": 173
+        "field_not_published": 175
       },
       "timeline_dates": {
         "application_date": 0,
@@ -550,19 +550,19 @@
         "finaled_date": 0,
         "warnings": 0
       },
-      "count": 173,
+      "count": 175,
       "earliest_issue": "2026-07-27",
-      "latest_issue": "2026-11-13",
+      "latest_issue": "2026-11-18",
       "categories": {
-        "Single-family": 154,
+        "Single-family": 156,
         "Commercial": 10,
         "Multifamily": 9
       },
       "statuses": {
-        "Issued": 173
+        "Issued": 175
       },
       "link_kinds": {
-        "search": 173
+        "search": 175
       },
       "missing_address": 0,
       "missing_valuation": 0,
@@ -571,7 +571,7 @@
         {
           "permit_type": "Building - Residential",
           "work_class": "Single Family",
-          "count": 154
+          "count": 156
         },
         {
           "permit_type": "Building - Commercial",
@@ -607,6 +607,15 @@
       "samples_by_category": {
         "Single-family": [
           {
+            "permit": "BR26-1418",
+            "date": "2026-11-18",
+            "type": "Building - Residential",
+            "class": "Single Family",
+            "project": "SFR",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
             "permit": "BR26-1367",
             "date": "2026-10-27",
             "type": "Building - Residential",
@@ -616,17 +625,8 @@
             "direct_record": false
           },
           {
-            "permit": "BR26-0996",
-            "date": "2026-08-26",
-            "type": "Building - Residential",
-            "class": "Single Family",
-            "project": "SFR",
-            "address_present": true,
-            "direct_record": false
-          },
-          {
-            "permit": "BR26-1058",
-            "date": "2026-08-26",
+            "permit": "BR26-1395",
+            "date": "2026-10-30",
             "type": "Building - Residential",
             "class": "Single Family",
             "project": "SFR",
@@ -702,22 +702,22 @@
       "multiple_permit_sites": 0,
       "permits_on_multiple_permit_sites": 0,
       "inspection_evidence": {
-        "inspection_recorded": 89,
-        "date_not_reported": 25
+        "inspection_recorded": 91,
+        "date_not_reported": 23
       },
       "timeline_dates": {
         "application_date": 114,
-        "last_inspection_date": 89,
+        "last_inspection_date": 91,
         "expiration_date": 114,
         "finaled_date": 0,
         "warnings": 0
       },
       "count": 114,
       "earliest_issue": "2026-07-29",
-      "latest_issue": "2026-11-19",
+      "latest_issue": "2026-11-20",
       "categories": {
-        "Single-family": 74,
-        "Addition": 31,
+        "Single-family": 75,
+        "Addition": 30,
         "Multifamily": 5,
         "Commercial": 4
       },
@@ -734,12 +734,12 @@
         {
           "permit_type": "Building (Residential)",
           "work_class": "New Single Family",
-          "count": 74
+          "count": 75
         },
         {
           "permit_type": "Building (Residential)",
           "work_class": "Addition",
-          "count": 20
+          "count": 19
         },
         {
           "permit_type": "Building (Residential)",
@@ -880,11 +880,11 @@
             "direct_record": false
           },
           {
-            "permit": "BLD-R-2026-01029",
-            "date": "2026-10-23",
+            "permit": "BLD-R-2026-02150",
+            "date": "2026-11-16",
             "type": "Building (Residential)",
             "class": "Addition",
-            "project": "House Expansion & Renovation",
+            "project": "Second Story Closet Addition (2024 IRC)",
             "address_present": true,
             "direct_record": false
           }

@@ -1,23 +1,23 @@
 {
-  "source_snapshot": "2026-11-23T13:22:32+00:00",
-  "total_records": 811,
+  "source_snapshot": "2026-11-24T13:20:59+00:00",
+  "total_records": 814,
   "site_stats": {
-    "unique_sites": 792,
+    "unique_sites": 795,
     "multiple_permit_sites": 7,
     "permits_on_multiple_permit_sites": 26
   },
   "by_category": {
-    "Single-family": 561,
-    "Commercial": 103,
+    "Single-family": 565,
+    "Commercial": 102,
     "Addition": 91,
     "Multifamily": 56
   },
   "by_state": {
     "MO": 522,
-    "KS": 289
+    "KS": 292
   },
   "direct_record_count": 0,
-  "public_search_count": 811,
+  "public_search_count": 814,
   "issues_to_review": [],
   "jurisdictions": {
     "Independence, MO": {
@@ -271,8 +271,8 @@
       "samples_by_category": {
         "Single-family": [
           {
-            "permit": "CPBR-2026-02738",
-            "date": "2026-11-16",
+            "permit": "CPBR-2026-02511",
+            "date": "2026-11-18",
             "type": "CPPU - Building (Residential)",
             "class": "Single Family - New",
             "project": "",
@@ -280,8 +280,8 @@
             "direct_record": false
           },
           {
-            "permit": "CPBR-2026-02749",
-            "date": "2026-11-16",
+            "permit": "CPBR-2026-02811",
+            "date": "2026-11-18",
             "type": "CPPU - Building (Residential)",
             "class": "Single Family - New",
             "project": "",
@@ -289,8 +289,8 @@
             "direct_record": false
           },
           {
-            "permit": "CPBR-2026-02766",
-            "date": "2026-11-16",
+            "permit": "CPBR-2026-02834",
+            "date": "2026-11-18",
             "type": "CPPU - Building (Residential)",
             "class": "Single Family - New",
             "project": "",
@@ -446,15 +446,6 @@
       "samples_by_category": {
         "Single-family": [
           {
-            "permit": "PRRES20265245",
-            "date": "2026-11-16",
-            "type": "NEW SINGLE FAMILY",
-            "class": "",
-            "project": "",
-            "address_present": true,
-            "direct_record": false
-          },
-          {
             "permit": "PRRES20265268",
             "date": "2026-11-17",
             "type": "NEW SINGLE FAMILY",
@@ -465,6 +456,15 @@
           },
           {
             "permit": "PRRES20265269",
+            "date": "2026-11-18",
+            "type": "NEW SINGLE FAMILY",
+            "class": "",
+            "project": "",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "PRRES20265406",
             "date": "2026-11-18",
             "type": "NEW SINGLE FAMILY",
             "class": "",
@@ -537,11 +537,11 @@
       }
     },
     "Olathe, KS": {
-      "unique_sites": 175,
+      "unique_sites": 178,
       "multiple_permit_sites": 0,
       "permits_on_multiple_permit_sites": 0,
       "inspection_evidence": {
-        "field_not_published": 175
+        "field_not_published": 178
       },
       "timeline_dates": {
         "application_date": 0,
@@ -550,19 +550,19 @@
         "finaled_date": 0,
         "warnings": 0
       },
-      "count": 175,
+      "count": 178,
       "earliest_issue": "2026-07-27",
-      "latest_issue": "2026-11-18",
+      "latest_issue": "2026-11-23",
       "categories": {
-        "Single-family": 156,
-        "Commercial": 10,
-        "Multifamily": 9
+        "Single-family": 160,
+        "Multifamily": 9,
+        "Commercial": 9
       },
       "statuses": {
-        "Issued": 175
+        "Issued": 178
       },
       "link_kinds": {
-        "search": 175
+        "search": 178
       },
       "missing_address": 0,
       "missing_valuation": 0,
@@ -571,7 +571,7 @@
         {
           "permit_type": "Building - Residential",
           "work_class": "Single Family",
-          "count": 156
+          "count": 160
         },
         {
           "permit_type": "Building - Commercial",
@@ -579,13 +579,13 @@
           "count": 6
         },
         {
-          "permit_type": "Building - Commercial",
-          "work_class": "New Commercial",
-          "count": 4
-        },
-        {
           "permit_type": "Building - Residential",
           "work_class": "Duplex",
+          "count": 3
+        },
+        {
+          "permit_type": "Building - Commercial",
+          "work_class": "New Commercial",
           "count": 3
         },
         {
@@ -683,11 +683,11 @@
             "direct_record": false
           },
           {
-            "permit": "BC26-0174",
-            "date": "2026-08-25",
+            "permit": "BC26-0175",
+            "date": "2026-08-27",
             "type": "Building - Commercial",
             "class": "Footing/Foundation",
-            "project": "FOOTING & FOUNDATION ONLY - FAITH TECHNOLOGIES - MECHANICAL BUILDING 1",
+            "project": "FOOTING & FOUNDATION ONLY - FAITH TECHNOLOGIES - MECHANICAL BUILDING 2 ",
             "address_present": true,
             "direct_record": false
           }
@@ -702,12 +702,12 @@
       "multiple_permit_sites": 0,
       "permits_on_multiple_permit_sites": 0,
       "inspection_evidence": {
-        "inspection_recorded": 91,
-        "date_not_reported": 23
+        "inspection_recorded": 94,
+        "date_not_reported": 20
       },
       "timeline_dates": {
         "application_date": 114,
-        "last_inspection_date": 91,
+        "last_inspection_date": 94,
         "expiration_date": 114,
         "finaled_date": 0,
         "warnings": 0
@@ -758,12 +758,12 @@
         },
         {
           "permit_type": "Building (Commercial)",
-          "work_class": "New Restaurant",
+          "work_class": "New Retail",
           "count": 2
         },
         {
           "permit_type": "Building (Commercial)",
-          "work_class": "New Retail",
+          "work_class": "New Restaurant",
           "count": 2
         },
         {
@@ -784,20 +784,20 @@
             "direct_record": false
           },
           {
-            "permit": "BLD-R-2026-01791",
-            "date": "2026-11-16",
+            "permit": "BLD-R-2026-01279",
+            "date": "2026-11-18",
             "type": "Building (Residential)",
             "class": "New Single Family",
-            "project": "SFR, Covered Porch and Unf Basement (2024 IRC)",
+            "project": "SFR, Covered Porch and Finished Basement ( 2018 IRC)",
             "address_present": true,
             "direct_record": false
           },
           {
-            "permit": "BLD-R-2026-01875",
-            "date": "2026-11-16",
+            "permit": "BLD-R-2026-02077",
+            "date": "2026-11-19",
             "type": "Building (Residential)",
             "class": "New Single Family",
-            "project": "SFR, Covered Porch and Finished Basement (2024 IRC)",
+            "project": "SFR, Covered Porch and  Unf Basement (2024 Code)",
             "address_present": true,
             "direct_record": false
           }
@@ -833,15 +833,6 @@
         ],
         "Commercial": [
           {
-            "permit": "BLD-C-2026-00156",
-            "date": "2026-08-25",
-            "type": "Building (Commercial)",
-            "class": "New Restaurant",
-            "project": "The Capital Grille (2018 IBC)",
-            "address_present": true,
-            "direct_record": false
-          },
-          {
             "permit": "BLD-C-2026-00289",
             "date": "2026-09-02",
             "type": "Building (Commercial)",
@@ -856,6 +847,15 @@
             "type": "Building (Commercial)",
             "class": "New Restaurant",
             "project": "Yard House (2018 IBC)",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "BLD-C-2025-00246",
+            "date": "2026-08-06",
+            "type": "Building (Commercial)",
+            "class": "New Retail",
+            "project": "Bluhawk Shell Building 3B - two story retail / restaurant",
             "address_present": true,
             "direct_record": false
           }
@@ -880,11 +880,11 @@
             "direct_record": false
           },
           {
-            "permit": "BLD-R-2026-02150",
-            "date": "2026-11-16",
+            "permit": "BLD-R-2026-02160",
+            "date": "2026-11-18",
             "type": "Building (Residential)",
-            "class": "Addition",
-            "project": "Second Story Closet Addition (2024 IRC)",
+            "class": "Addition + Remodel",
+            "project": "Remodel with addition ",
             "address_present": true,
             "direct_record": false
           }

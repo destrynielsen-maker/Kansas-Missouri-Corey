@@ -1,31 +1,31 @@
 {
-  "source_snapshot": "2026-11-26T13:22:23+00:00",
-  "total_records": 806,
+  "source_snapshot": "2026-11-27T13:20:57+00:00",
+  "total_records": 787,
   "site_stats": {
-    "unique_sites": 787,
-    "multiple_permit_sites": 7,
-    "permits_on_multiple_permit_sites": 26
+    "unique_sites": 771,
+    "multiple_permit_sites": 6,
+    "permits_on_multiple_permit_sites": 22
   },
   "by_category": {
-    "Single-family": 553,
-    "Commercial": 104,
-    "Addition": 94,
+    "Single-family": 540,
+    "Commercial": 100,
+    "Addition": 92,
     "Multifamily": 55
   },
   "by_state": {
-    "MO": 508,
-    "KS": 298
+    "MO": 493,
+    "KS": 294
   },
   "direct_record_count": 0,
-  "public_search_count": 806,
+  "public_search_count": 787,
   "issues_to_review": [],
   "jurisdictions": {
     "Independence, MO": {
-      "unique_sites": 36,
+      "unique_sites": 34,
       "multiple_permit_sites": 0,
       "permits_on_multiple_permit_sites": 0,
       "inspection_evidence": {
-        "field_not_published": 36
+        "field_not_published": 34
       },
       "timeline_dates": {
         "application_date": 0,
@@ -34,20 +34,20 @@
         "finaled_date": 0,
         "warnings": 0
       },
-      "count": 36,
-      "earliest_issue": "2026-07-29",
+      "count": 34,
+      "earliest_issue": "2026-07-30",
       "latest_issue": "2026-11-24",
       "categories": {
-        "Single-family": 17,
+        "Single-family": 15,
         "Addition": 12,
         "Commercial": 6,
         "Multifamily": 1
       },
       "statuses": {
-        "Status not published": 36
+        "Status not published": 34
       },
       "link_kinds": {
-        "search": 36
+        "search": 34
       },
       "missing_address": 0,
       "missing_valuation": 0,
@@ -56,7 +56,7 @@
         {
           "permit_type": "Residential",
           "work_class": "Single Family New Construction",
-          "count": 17
+          "count": 15
         },
         {
           "permit_type": "Residential",
@@ -87,15 +87,6 @@
       "samples_by_category": {
         "Single-family": [
           {
-            "permit": "2026-02988",
-            "date": "2026-08-28",
-            "type": "Residential",
-            "class": "Single Family New Construction",
-            "project": "",
-            "address_present": true,
-            "direct_record": false
-          },
-          {
             "permit": "2026-02989",
             "date": "2026-08-31",
             "type": "Residential",
@@ -107,6 +98,15 @@
           {
             "permit": "2026-03769",
             "date": "2026-09-24",
+            "type": "Residential",
+            "class": "Single Family New Construction",
+            "project": "",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "2026-04179",
+            "date": "2026-10-09",
             "type": "Residential",
             "class": "Single Family New Construction",
             "project": "",
@@ -165,8 +165,8 @@
             "direct_record": false
           },
           {
-            "permit": "2026-04964",
-            "date": "2026-11-19",
+            "permit": "2026-04188",
+            "date": "2026-11-04",
             "type": "Residential",
             "class": "Addition",
             "project": "",
@@ -174,8 +174,8 @@
             "direct_record": false
           },
           {
-            "permit": "2026-04188",
-            "date": "2026-11-04",
+            "permit": "2026-04191",
+            "date": "2026-11-09",
             "type": "Residential",
             "class": "Addition",
             "project": "",
@@ -188,55 +188,55 @@
       }
     },
     "Kansas City, MO": {
-      "unique_sites": 362,
-      "multiple_permit_sites": 7,
-      "permits_on_multiple_permit_sites": 26,
+      "unique_sites": 355,
+      "multiple_permit_sites": 6,
+      "permits_on_multiple_permit_sites": 22,
       "inspection_evidence": {
-        "date_not_reported": 202,
-        "inspection_recorded": 179
+        "date_not_reported": 197,
+        "inspection_recorded": 174
       },
       "timeline_dates": {
-        "application_date": 381,
-        "last_inspection_date": 179,
+        "application_date": 371,
+        "last_inspection_date": 174,
         "expiration_date": 0,
         "finaled_date": 0,
         "warnings": 0
       },
-      "count": 381,
-      "earliest_issue": "2026-07-29",
+      "count": 371,
+      "earliest_issue": "2026-07-30",
       "latest_issue": "2026-11-20",
       "categories": {
-        "Single-family": 221,
-        "Commercial": 77,
-        "Addition": 49,
+        "Single-family": 216,
+        "Commercial": 73,
+        "Addition": 48,
         "Multifamily": 34
       },
       "statuses": {
-        "Issued": 373,
+        "Issued": 363,
         "Open-Active": 7,
         "Issued - Subject To Conditions": 1
       },
       "link_kinds": {
-        "search": 381
+        "search": 371
       },
       "missing_address": 0,
-      "missing_valuation": 380,
+      "missing_valuation": 370,
       "zero_valuation": 0,
       "top_types": [
         {
           "permit_type": "CPPU - Building (Residential)",
           "work_class": "Single Family - New",
-          "count": 221
+          "count": 216
         },
         {
           "permit_type": "CPPU - Building (Commercial)",
           "work_class": "New",
-          "count": 77
+          "count": 73
         },
         {
           "permit_type": "CPPU - Building (Residential)",
           "work_class": "Single Family - Addition",
-          "count": 37
+          "count": 36
         },
         {
           "permit_type": "CPPU - Building (Residential)",
@@ -257,8 +257,8 @@
       "samples_by_category": {
         "Single-family": [
           {
-            "permit": "CPBR-2026-02762",
-            "date": "2026-11-19",
+            "permit": "CPBR-2026-02854",
+            "date": "2026-11-20",
             "type": "CPPU - Building (Residential)",
             "class": "Single Family - New",
             "project": "",
@@ -266,8 +266,8 @@
             "direct_record": false
           },
           {
-            "permit": "CPBR-2026-02763",
-            "date": "2026-11-19",
+            "permit": "CPBR-2026-02886",
+            "date": "2026-11-20",
             "type": "CPPU - Building (Residential)",
             "class": "Single Family - New",
             "project": "",
@@ -275,11 +275,11 @@
             "direct_record": false
           },
           {
-            "permit": "CPBR-2026-02764",
-            "date": "2026-11-19",
+            "permit": "CPBR-2026-02570",
+            "date": "2026-10-13",
             "type": "CPPU - Building (Residential)",
             "class": "Single Family - New",
-            "project": "",
+            "project": "SINGLE FAMILY",
             "address_present": true,
             "direct_record": false
           }
@@ -376,43 +376,43 @@
       }
     },
     "Lee's Summit, MO": {
-      "unique_sites": 91,
+      "unique_sites": 88,
       "multiple_permit_sites": 0,
       "permits_on_multiple_permit_sites": 0,
       "inspection_evidence": {
-        "field_not_published": 91
+        "field_not_published": 88
       },
       "timeline_dates": {
         "application_date": 0,
         "last_inspection_date": 0,
-        "expiration_date": 90,
+        "expiration_date": 87,
         "finaled_date": 0,
         "warnings": 0
       },
-      "count": 91,
-      "earliest_issue": "2026-07-29",
+      "count": 88,
+      "earliest_issue": "2026-07-31",
       "latest_issue": "2026-11-24",
       "categories": {
-        "Single-family": 78,
+        "Single-family": 75,
         "Commercial": 7,
         "Multifamily": 6
       },
       "statuses": {
-        "Issued": 89,
+        "Issued": 86,
         "Issued - Partial": 1,
         "Permit(s) Issued ": 1
       },
       "link_kinds": {
-        "search": 91
+        "search": 88
       },
       "missing_address": 0,
-      "missing_valuation": 91,
+      "missing_valuation": 88,
       "zero_valuation": 0,
       "top_types": [
         {
           "permit_type": "NEW SINGLE FAMILY",
           "work_class": "(empty)",
-          "count": 78
+          "count": 75
         },
         {
           "permit_type": "NEW COMMERCIAL",
@@ -433,15 +433,6 @@
       "samples_by_category": {
         "Single-family": [
           {
-            "permit": "PRRES20265267",
-            "date": "2026-11-19",
-            "type": "NEW SINGLE FAMILY",
-            "class": "",
-            "project": "",
-            "address_present": true,
-            "direct_record": false
-          },
-          {
             "permit": "PRRES20264924",
             "date": "2026-11-24",
             "type": "NEW SINGLE FAMILY",
@@ -452,6 +443,15 @@
           },
           {
             "permit": "PRRES20265222",
+            "date": "2026-11-24",
+            "type": "NEW SINGLE FAMILY",
+            "class": "",
+            "project": "",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "PRRES20265393",
             "date": "2026-11-24",
             "type": "NEW SINGLE FAMILY",
             "class": "",
@@ -500,8 +500,8 @@
             "direct_record": false
           },
           {
-            "permit": "PRCOM20261509",
-            "date": "2026-08-28",
+            "permit": "PRCOM20261129",
+            "date": "2026-09-04",
             "type": "NEW COMMERCIAL",
             "class": "",
             "project": "",
@@ -509,8 +509,8 @@
             "direct_record": false
           },
           {
-            "permit": "PRCOM20261129",
-            "date": "2026-09-04",
+            "permit": "PRCOM20260909",
+            "date": "2026-09-08",
             "type": "NEW COMMERCIAL",
             "class": "",
             "project": "",
@@ -524,11 +524,11 @@
       }
     },
     "Olathe, KS": {
-      "unique_sites": 178,
+      "unique_sites": 175,
       "multiple_permit_sites": 0,
       "permits_on_multiple_permit_sites": 0,
       "inspection_evidence": {
-        "field_not_published": 178
+        "field_not_published": 175
       },
       "timeline_dates": {
         "application_date": 0,
@@ -537,19 +537,19 @@
         "finaled_date": 0,
         "warnings": 0
       },
-      "count": 178,
-      "earliest_issue": "2026-07-29",
+      "count": 175,
+      "earliest_issue": "2026-07-30",
       "latest_issue": "2026-11-25",
       "categories": {
-        "Single-family": 159,
+        "Single-family": 156,
         "Commercial": 10,
         "Multifamily": 9
       },
       "statuses": {
-        "Issued": 178
+        "Issued": 175
       },
       "link_kinds": {
-        "search": 178
+        "search": 175
       },
       "missing_address": 0,
       "missing_valuation": 0,
@@ -558,7 +558,7 @@
         {
           "permit_type": "Building - Residential",
           "work_class": "Single Family",
-          "count": 159
+          "count": 156
         },
         {
           "permit_type": "Building - Commercial",
@@ -594,15 +594,6 @@
       "samples_by_category": {
         "Single-family": [
           {
-            "permit": "BR26-1367",
-            "date": "2026-10-27",
-            "type": "Building - Residential",
-            "class": "Single Family",
-            "project": "SFR",
-            "address_present": true,
-            "direct_record": false
-          },
-          {
             "permit": "BR26-1395",
             "date": "2026-10-30",
             "type": "Building - Residential",
@@ -614,6 +605,15 @@
           {
             "permit": "BR26-1418",
             "date": "2026-11-18",
+            "type": "Building - Residential",
+            "class": "Single Family",
+            "project": "SFR",
+            "address_present": true,
+            "direct_record": false
+          },
+          {
+            "permit": "BR26-1222",
+            "date": "2026-11-23",
             "type": "Building - Residential",
             "class": "Single Family",
             "project": "SFR",
@@ -685,34 +685,34 @@
       }
     },
     "Overland Park, KS": {
-      "unique_sites": 120,
+      "unique_sites": 119,
       "multiple_permit_sites": 0,
       "permits_on_multiple_permit_sites": 0,
       "inspection_evidence": {
-        "inspection_recorded": 98,
+        "inspection_recorded": 97,
         "date_not_reported": 22
       },
       "timeline_dates": {
-        "application_date": 120,
-        "last_inspection_date": 98,
-        "expiration_date": 120,
+        "application_date": 119,
+        "last_inspection_date": 97,
+        "expiration_date": 119,
         "finaled_date": 0,
         "warnings": 0
       },
-      "count": 120,
-      "earliest_issue": "2026-07-29",
+      "count": 119,
+      "earliest_issue": "2026-07-30",
       "latest_issue": "2026-11-25",
       "categories": {
         "Single-family": 78,
-        "Addition": 33,
+        "Addition": 32,
         "Multifamily": 5,
         "Commercial": 4
       },
       "statuses": {
-        "Issued": 120
+        "Issued": 119
       },
       "link_kinds": {
-        "search": 120
+        "search": 119
       },
       "missing_address": 0,
       "missing_valuation": 0,
@@ -740,17 +740,17 @@
         },
         {
           "permit_type": "Building (Commercial)",
-          "work_class": "Addition + Remodel",
-          "count": 3
-        },
-        {
-          "permit_type": "Building (Commercial)",
           "work_class": "New Retail",
           "count": 2
         },
         {
           "permit_type": "Building (Commercial)",
           "work_class": "New Restaurant",
+          "count": 2
+        },
+        {
+          "permit_type": "Building (Commercial)",
+          "work_class": "Addition + Remodel",
           "count": 2
         },
         {
@@ -771,17 +771,17 @@
             "direct_record": false
           },
           {
-            "permit": "BLD-R-2026-02077",
-            "date": "2026-11-19",
+            "permit": "BLD-R-2026-02057",
+            "date": "2026-11-20",
             "type": "Building (Residential)",
             "class": "New Single Family",
-            "project": "SFR, Covered Porch and  Unf Basement (2024 Code)",
+            "project": "SFR, Covered Porch and Finished Basement (2024 IRC)",
             "address_present": true,
             "direct_record": false
           },
           {
-            "permit": "BLD-R-2026-02057",
-            "date": "2026-11-20",
+            "permit": "BLD-R-2026-01463",
+            "date": "2026-11-24",
             "type": "Building (Residential)",
             "class": "New Single Family",
             "project": "SFR, Covered Porch and Finished Basement (2024 IRC)",
